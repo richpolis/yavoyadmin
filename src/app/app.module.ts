@@ -22,6 +22,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
 
 // services
 import { GlobalsService } from './services/globals.service';
@@ -46,6 +47,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -64,7 +66,8 @@ import { ChartsModule } from 'ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -72,12 +75,14 @@ import { ChartsModule } from 'ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecoverPasswordComponent
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }, GlobalsService, AuthService],
+  entryComponents: [RecoverPasswordComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

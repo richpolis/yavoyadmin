@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { GlobalsService } from '../../services/globals.service';
 import { Router } from '@angular/router';
-import { RoleI } from '../../models/role';
 import { RolesService } from '../../services/roles.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { RecoverPasswordComponent } from '../recover-password/recover-password.component';
 declare const Swal: any;
 
 @Component({
@@ -15,13 +16,15 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   public formSubmitAttempt: boolean;
   roles: any;
+  public modalRef: BsModalRef;
 
   constructor(
     private authService: AuthService,
     private globalsService: GlobalsService,
     private rolesService: RolesService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
     this.formLogin = this.fb.group({
@@ -78,6 +81,13 @@ export class LoginComponent implements OnInit {
       });
     }
     this.formSubmitAttempt = true;
+  }
+
+  openFormRecoverPassword(): void {
+    this.modalRef = this.modalService.show(RecoverPasswordComponent);
+        this.modalRef.content.onClose.subscribe(result => {
+            console.log('results', result);
+        });
   }
 
   onRegister(): void {
