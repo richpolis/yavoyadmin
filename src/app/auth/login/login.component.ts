@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.formLogin = this.fb.group({
       username: new FormControl('', [Validators.required, Validators.email ]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z]|[^ ]){6,16}$/)])
     });
     this.roles = this.globalsService.getRoles();
     if (this.roles === null) {
@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  get f() { return this.formLogin.controls; }
 
   isFieldInvalid(field: string) {
     return (

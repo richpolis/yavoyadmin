@@ -13,19 +13,21 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" formControlName="username" placeholder="Usuario" autocomplete="username" required>
-                    <div class="invalid-feedback" *ngIf="isFieldInvalid('username')">
-                      Usuario es requerido
-                    </div>
+                    <input type="text" class="form-control" formControlName="username" placeholder="Usuario" autocomplete="username" required  [ngClass]="{'is-invalid': formSubmitAttempt && f.username.errors }">
+                    <div *ngIf="formSubmitAttempt && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">Usuario es requerido</div>
+                      <div *ngIf="f.username.errors.email">Debes de ingresar un email valido</div>
+                  </div>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña" autocomplete="current-password" required>
-                    <div class="invalid-feedback" *ngIf="isFieldInvalid('password')">
-                      Contraseña es requerido
-                    </div>
+                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña" autocomplete="current-password" required   [ngClass]="{'is-invalid': formSubmitAttempt && f.password.errors }">
+                    <div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password es requerido</div>
+                      <div *ngIf="f.password.errors.pattern">Debe de ingresar una contraseña valida</div>
+                  </div>
                   </div>
                   <div class="row">
                     <div class="col-6">
