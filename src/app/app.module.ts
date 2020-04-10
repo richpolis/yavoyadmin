@@ -24,6 +24,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
 
+// Loading router
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+
 // services
 import { GlobalsService } from './services/globals.service';
 import { AuthService } from './services/auth.service';
@@ -67,7 +72,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     ChartsModule,
     HttpClientModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule
   ],
   declarations: [
     AppComponent,

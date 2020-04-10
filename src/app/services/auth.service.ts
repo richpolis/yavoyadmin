@@ -46,8 +46,7 @@ export class AuthService {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'X-Parse-Application-Id': environment.PARSE_APP_ID,
-        'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY,
-        'X-Parse-Revocable-Session': '1'
+        'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY
       }),
       params: new HttpParams().set('username', user.username).set('password', user.password)
     };

@@ -85,9 +85,11 @@ export class LoginComponent implements OnInit {
 
   openFormRecoverPassword(): void {
     this.modalRef = this.modalService.show(RecoverPasswordComponent);
-        this.modalRef.content.onClose.subscribe(result => {
-            console.log('results', result);
-        });
+    const username = this.formLogin.get('username').value;
+    this.modalRef.content.email = username;
+    this.modalRef.content.onClose.subscribe(result => {
+      console.log('results', result);
+    });
   }
 
   onRegister(): void {

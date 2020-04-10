@@ -35,6 +35,28 @@ export class RecoverPasswordComponent implements OnInit {
 
   get f() { return this.formRecoverPassword.controls; }
 
+  onRecoverPassword1(): void {
+    this.submitted = true;
+
+    if (this.formRecoverPassword.invalid) {
+      return;
+    }
+    const Parse = this.globalsService.getParseObject();
+    Parse.User.requestPasswordReset(this.formRecoverPassword.get('email').value).then(res => {
+      console.log(res);
+      this.onClose.next(true);
+      this.bsModalRef.hide();
+    }).catch((error) => {
+      console.log('Error while creating request to reset user password', error);
+      // show alert to user
+      Swal.fire({
+        title: 'Error',
+        html: error.message,
+        type: 'error'
+      });
+    });
+  }
+
   onRecoverPassword(): void {
     this.submitted = true;
 
@@ -43,6 +65,7 @@ export class RecoverPasswordComponent implements OnInit {
     }
 
     this.authService.recoverPassword(this.formRecoverPassword.get('email').value).subscribe(res => {
+      console.log(res);
       this.onClose.next(true);
       this.bsModalRef.hide();
     }, error => {
