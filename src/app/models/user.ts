@@ -3,7 +3,7 @@ export interface User {
     username: string;
     firstName: string;
     lastName: string;
-    birthday: Date;
+    birthday: any;
     email: string;
     password: string;
     sessionToken: string;
@@ -19,4 +19,6 @@ export interface User {
     approved: boolean;
     request: boolean;
     selected: boolean;
+    city: string;
+    phone: string;
 }

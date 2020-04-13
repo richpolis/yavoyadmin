@@ -5,7 +5,9 @@ import { NgModule } from '@angular/core';
 
 // Users Routing
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent } from './users.component';
+import { UsersComponent } from './volunteers/users.component';
+import { AdminsComponent } from './admins/admins.component';
+import { BeneficiariesComponent } from './beneficiaries/beneficiaries.component';
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import { UsersComponent } from './users.component';
     UsersRoutingModule
   ],
   declarations: [
-    UsersComponent
+    UsersComponent,
+    AdminsComponent,
+    BeneficiariesComponent
   ]
 })
 export class UsersModule { }

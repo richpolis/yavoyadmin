@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users.service';
-import { GlobalsService } from '../../services/globals.service';
+import { UsersService } from '../../../services/users.service';
+import { GlobalsService } from '../../../services/globals.service';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { RolesService } from '../../services/roles.service';
+import { User } from '../../../models/user';
+import { RolesService } from '../../../services/roles.service';
 declare const Swal: any;
 
 @Component({
@@ -63,6 +63,7 @@ export class UsersComponent implements OnInit {
     const roleVoluntario = this.roles.find(role => role.name === 'Voluntario');
     const where = JSON.stringify({'role': {'__type': 'Pointer', 'className': '_Role', 'objectId': roleVoluntario.objectId}});
     this.usersService.getUsers(where).subscribe(res => {
+      console.log(res.results);
       this.users = res.results;
       this.users.forEach((user, index, users) => {
         users[index].approved = user.status === 'approved';
