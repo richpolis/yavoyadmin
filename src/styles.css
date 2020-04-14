@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-@font-face {
-    font-family: "Circular bold";
+
+/* @font-face {
+    font-family: "Montserrat";
     src: url("assets/fonts/CircularStd-Bold.otf");
-}
+} */
 
 
 /* VARIABLES */
@@ -12,29 +13,12 @@
     --height-header: 90px;
     --primary-color: #E83A49;
     --secondary-color: #f28b2d;
-    --tertiary-color: #005a9b;
+    --tertiary-color: #F98F5F;
     --aux-color: #bbb;
 }
 
 
 /* BOTONES */
-
-.btn-nike {
-    color: #fff;
-    padding: 10px;
-}
-
-.btn-nike-primary {
-    background: var(--primary-color);
-}
-
-.btn-nike-secondary {
-    background: var(--secondary-color);
-}
-
-.btn-nike-tertiary {
-    background: var(--tertiary-color);
-}
 
 html,
 body {
@@ -43,7 +27,7 @@ body {
 
 body {
     margin: 0;
-    font-family: "Circular bold", sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .cursor {
@@ -53,17 +37,73 @@ body {
 
 /* INPUT PERSONALIZADO  */
 
-.input-nike {
+.form-control.input-rounded {
+    border-radius: 22px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 50px;
     padding: 10px;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
     outline: 0;
-    border: 1px solid #bbb;
-    border-radius: 3px;
-    height: 45px;
+    background: white;
+}
+
+
+/* input[type="text"]:valid,
+input[type="email"]:valid,
+input[type="password"]:valid {
+    background: url(/assets/images/icons/icon_correct.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background: #f3f8ed;
+    border: 1px solid #f3f8ed;
+}
+
+input[type="text"]:invalid,
+input[type="email"]:invalid,
+input[type="password"]:invalid {
+    background: url(/assets/images/icons/icon_incorrect.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background: #efdee0;
+    border: 1px solid #efdee0;
+} */
+
+input[type="text"]:invalid.is-invalid,
+input[type="email"]:invalid.is-invalid,
+input[type="password"]:invalid.is-invalid {
+    /*background: #efdee0 url(/assets/images/icons/icon_incorrect.png) no-repeat center right;*/
+    background-image: url(/assets/images/icons/icon_incorrect.png);
+    background-position-x: 95%;
+    background-position-y: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    /*background-color: #efdee0;*/
+    border: 1px solid red;
+}
+
+input[type="text"]:valid,
+input[type="email"]:valid,
+input[type="password"]:valid {
+    /*background: #f3f8ed url(/assets/images/icons/icon_correct.png) no-repeat center right;*/
+    background-image: url(/assets/images/icons/icon_correct.png);
+    background-position-x: 95%;
+    background-position-y: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    /*background-color: rgb(243, 248, 237);*/
+    border: 1px solid green;
 }
 
 .input-nike::placeholder {
     color: #000;
-    font-family: "Circular bold";
+    font-family: "Montserrat";
 }
 
 .input100 {
@@ -101,7 +141,6 @@ body {
     padding: 5px;
     padding-left: 40px;
     color: #9b9b9b;
-
 }
 
 
@@ -121,7 +160,7 @@ body {
     padding: 10px;
     font-weight: bold;
     font-size: 100%;
-    font-family: "Circular bold", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 .select100 {
@@ -248,4 +287,4 @@ input:checked+.slider:before {
         max-width: 340px;
         right: 0px;
     }
-  }
+}

@@ -70,11 +70,13 @@ export class LoginComponent implements OnInit {
         }
       }, error => {
         // show alert to user
-        Swal.fire({
-          title: 'Error',
-          html: 'Error en login',
-          type: 'error'
-        });
+        if (error !== undefined && error.message !== undefined) {
+          Swal.fire({
+            title: 'Error',
+            html: error.message,
+            type: 'error'
+          });
+        }
       });
     }
     this.formSubmitAttempt = true;
@@ -90,12 +92,13 @@ export class LoginComponent implements OnInit {
         type: 'success'
       });
     }).catch((error) => {
-      console.log(error)
-      Swal.fire({
-        title: 'Error',
-        html: error.message,
-        type: 'error'
-      });
+      if (error !== undefined && error.message !== undefined) {
+        Swal.fire({
+          title: 'Error',
+          html: error.message,
+          type: 'error'
+        });
+      }
     });
 
   }
