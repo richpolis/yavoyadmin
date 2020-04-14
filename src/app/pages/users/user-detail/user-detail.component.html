@@ -1,0 +1,233 @@
+<div class="container">
+
+    <div class="header">
+        <h3 class="header-title">
+            Detalle Usuaria
+        </h3>
+    </div>
+
+    <!-- ============
+         INICIA INFORMACION DEL MEMBER 
+        ================= -->
+
+    <div class="event-info">
+        <!-- FILA DE DATOS 1  -->
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="row">
+                    <div class="data">
+                        <span class="data-title">Nombre:</span>
+                        <span>{{ member?.name }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Correo:</span>
+                        <span>{{ member?.email }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Edad:</span>
+                        <span>{{ member?.age }} años</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Registro:</span>
+                        <span>{{ member?.createdAt|date: "d MMM y"}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="row medical-record">
+                    <div class="data">
+                        <span class="data-title">Padecimientos:</span>
+                        <span class="tag" *ngFor="let s of member?.medicalRecord?.suffering">{{ s }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Alergias:</span>
+                        <span class="tag" *ngFor="let a of member?.medicalRecord?.allergy">{{ a }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Otros:</span>
+                        <span class="tag" *ngFor="let o of member?.medicalRecord?.other">{{ o }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Contacto:</span>
+                        <span>{{ member?.medicalRecord?.contactName }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Teléfono:</span>
+                        <span>{{ member?.medicalRecord?.contactPhone }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="row">
+                    <div class="data" *ngIf="member?.status">
+                        <span class="data-title">Estatus:</span>
+                        <span>{{ getMemberStatus() }}</span>
+                    </div>
+                    <div class="data" *ngIf="member?.status === 'approved'">
+                        <button class="btn btn-cancel" (click)="onDelete()">Dar de baja</button>
+                    </div>
+                    <div class="data" *ngIf="member?.status === 'denied'">
+                        <button class="btn btn-search" (click)="onApproved()">Dar acceso</button>
+                    </div>
+                    <div class="data">
+                        <button class="btn btn-search" (click)="onReturn()">Regresar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============
+         TERMINA INFORMACION DEL MEMBER 
+        ================= -->
+
+    <!-- ============
+         INICIA LAS ACCIONES 
+        ================= -->
+    <div class="actions">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <div class="row">
+                    <!--div class="col-md-4">
+                            
+                        </div-->
+                    <div class="col-md-6">
+                        <div class="data">
+                            <span class="data-title">Registros</span>
+                        </div>
+                        <div class="data">
+                            <span class="data-count">{{ viewRegister.cientos}}</span>
+                            <span class="data-count">{{ viewRegister.decenas}}</span>
+                            <span class="data-count">{{ viewRegister.unidades}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-select">
+                        <select class="select-nike" [(ngModel)]="view" name="view" (change)="onChangeView($event)">
+                            <option value="events" selected>Eventos registrada</option>
+                            <option value="attendances">Asistencias a eventos</option>
+                            <option value="services-requests">Solicitudes de servicios</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-action">
+                <div class="input-icon">
+                    <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsMember.q" name="q" (search)="onSearchRegisters($event)">
+                    <img src="assets/images/icons/icon_search.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============
+         TERMINA LAS ACCIONES 
+        ================= -->
+
+    <!-- ============
+         INICIA LA TABLA DE INVITACIONES 
+        ================= -->
+    <div class="" *ngIf="view !== 'services-requests'">
+        <table class="table table-event-detail table-responsive-sm">
+            <thead>
+                <tr>
+                    <!--th scope="col"></th-->
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Lugar</th>
+                    <th scope="col">Deporte</th>
+                    <th scope="col">Tipo de evento</th>
+                    <th scope="col">Cupo</th>
+                    <th scope="col">Registrados</th>
+                    <th class="text-center" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ARREGLO DE EVENTOS  -->
+                <tr *ngFor="let attendance of attendances; let i = index">
+                    <!--th class="text-center" scope="row">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="{{i}}">
+                              </div>
+                            </th-->
+                    <td>{{ attendance.event.name }}</td>
+                    <td>{{ attendance.event.eventDate|date: "d MMM y" }}</td>
+                    <td>{{ attendance.event.eventDate|date: "H:mm a" }}</td>
+                    <td>{{ attendance.event.place }}</td>
+                    <td>{{ getCategoryName(attendance.event.category) }}</td>
+                    <td>{{ getEventTypeString(attendance.event) }}</td>
+                    <td>{{ attendance.event.quota }}</td>
+                    <td>{{ attendance.event.registered }}</td>
+                    <td class="text-center">
+                        <img class="mx-2 cursor" (click)="onDetailEvent(attendance.event)" src="assets/images/icons/icon_eye.svg" alt="">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="" *ngIf="view === 'services-requests'">
+        <table class="table table-event-detail table-responsive-sm">
+            <thead>
+                <tr>
+                    <!--th scope="col"></th-->
+                    <th scope="col">Servicio</th>
+                    <th scope="col">Fecha solicitada</th>
+                    <th scope="col">Talla</th>
+                    <th scope="col">Fecha programada</th>
+                    <th scope="col">Mensaje</th>
+                    <th class="text-center" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ARREGLO DE SERVICE REQUESTS  -->
+                <tr *ngFor="let sr of serviceRequests; let i = index">
+                    <td>{{ sr.service.name }}</td>
+                    <td>{{ sr.requestAt|date: "d MMM y" }} {{ sr.requestAt|date: "HH:mm a" }}</td>
+                    <td>{{ sr.size }}</td>
+                    <td>{{ sr.scheduleAt|date: "d MMM y" }} {{ sr.scheduleAt|date: "HH:mm a" }}</td>
+                    <td>{{ sr.reason }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-search" (click)="openModalScheduleServiceRequest(sr)" *ngIf="sr.status == 'request'">Programar</button>
+                        <button class="btn btn-search" (click)="openModalAttendanceServiceRequest(sr)" *ngIf="sr.status == 'schedule'">Resultado</button> &nbsp;
+                        <button class="btn btn-cancel" (click)="openModalCancelServiceRequest(sr)" *ngIf="sr.status != 'attendance'">Cancelar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- ============
+         TERMINA LA TABLA DE INVITACIONES 
+        ================= -->
+
+    <!-- ============
+        INICIA PAGINADOR
+       ================= -->
+    <div class="paginator">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" [ngClass]="{isDisabled: !hasPreviousPage}" (click)="loadPage(page-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item" *ngFor="let num of pages" [ngClass]="{active: page===num, isDisabled: page===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage(num)">{{ num + 1 }}</a></li>
+
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }" (click)="loadPage(page+1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ============
+            TERMINA EL PAGINADOR 
+           ================= -->
+
+
+</div>

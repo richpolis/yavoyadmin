@@ -1,0 +1,6 @@
+<ngx-loading-bar [color]="'#e73a49'" [height]="'3px'"></ngx-loading-bar>
+<app-loader-screen></app-loader-screen>
+<router-outlet></router-outlet>
+<div class="alert alert-danger botom-fixed" *ngIf="!isConnected">
+    <strong>Sin conexción a internet.</strong>
+</div>

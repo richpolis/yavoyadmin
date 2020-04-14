@@ -31,6 +31,4 @@ export class RolesService {
   errorHandler(error: HttpErrorResponse) {
     return throwError(error);
   }
-
-
 }

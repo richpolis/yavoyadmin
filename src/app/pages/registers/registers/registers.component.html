@@ -1,0 +1,105 @@
+<div class="container animated fadeIn">
+    <div class="header">
+        <h3 class="header-title">
+            Aprobación de registros
+        </h3>
+    </div>
+
+    <!-- ============
+    INICIA ACCIONES DISPONIBLES 
+   ================= -->
+
+    <div class="actions row no-gutters rw-reverse">
+        <div class="col-lg-6 col-sm-12">
+            <!--select class="select-nike">
+                <option>Acciones de selección</option>
+            </select-->
+            <select class="select-nike" [(ngModel)]="paramsMembers.status" name="status" (change)="onSearchMembers($event)">
+                    <option value="r|d">Todas</option>
+                    <option value="request">Sin aprobar</option>
+                    <option value="denied">Denegados</option>
+                </select>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-action">
+            <div class="input-icon">
+                <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsMembers.q" name="q" (search)="onSearchMembers($event)">
+                <img src="assets/images/icons/icon_search.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- ============
+     TERMINA ACCIONES DISPONIBLES
+   ================= -->
+    <!-- ============
+    INICIA LA TABLA DE REGISTROS 
+   ================= -->
+
+    <div class="">
+        <table class="table table-users table-responsive-sm">
+            <thead>
+                <tr>
+                    <!--th scope="col"></th-->
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Fecha de petición</th>
+                    <th class="text-center" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ARREGLO DE EVENTOS  -->
+                <tr *ngFor="let member of members; let i = index">
+                    <!--th class="text-center" scope="row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{member._id}}" name="selected-{{i}}" id="{{i}}" [checked]="member.selected" ([ngModel])="member.selected">
+                        </div>
+                    </th-->
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.age }} años</td>
+                    <td>{{ member.createdAt|date:"d MMMM, yyyy" }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-action mr-1" (click)="onApproved(member)" [disabled]="member.status == 'request' || member.status == 'denied'? '' : 'disabled'">Aprobar</button>
+                        <button class="btn btn-action" (click)="onDelete(member)" [disabled]="member.status == 'denied'? 'disabled' : ''">Rechazar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-info" *ngIf="noFoundData">
+            <strong>No hay informaci&oacute;n que mostrar</strong>
+        </div>
+    </div>
+
+    <!-- ============
+    TERMINA LA TABLA DE REGISTROS 
+   ================= -->
+
+    <!-- ============
+        INICIA PAGINADOR
+       ================= -->
+       <div class="paginator">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous"  [ngClass]="{isDisabled: !hasPreviousPage}" (click)="loadPage(page-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item" *ngFor="let num of pages" [ngClass]="{active: page===num, isDisabled: page===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage(num)">{{ num + 1 }}</a></li>
+                
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }"  (click)="loadPage(page+1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ============
+        TERMINA EL PAGINADOR 
+       ================= -->
+
+</div>

@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { GlobalsService } from '../../services/globals.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { GlobalsService } from 'src/app/services/globals.service';
 import { Router } from '@angular/router';
-import { RolesService } from '../../services/roles.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { RecoverPasswordComponent } from '../recover-password/recover-password.component';
-declare const Swal: any;
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RecoverPasswordModalComponent } from 'src/app/components/recover-password-modal/recover-password-modal.component';
+import Swal from 'sweetalert2';
+import { RoleI } from 'src/app/models/role';
+import { RolesService } from 'src/app/services/roles.service';
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   public formSubmitAttempt: boolean;
-  roles: any;
-  public modalRef: BsModalRef;
+  public roles: RoleI[];
 
   constructor(
     private authService: AuthService,
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
     private rolesService: RolesService,
     private router: Router,
     private fb: FormBuilder,
-    private modalService: BsModalService) { }
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.formLogin = this.fb.group({
@@ -48,13 +50,6 @@ export class LoginComponent implements OnInit {
   }
 
   get f() { return this.formLogin.controls; }
-
-  isFieldInvalid(field: string) {
-    return (
-      (!this.formLogin.get(field).valid && this.formLogin.get(field).touched) ||
-      (this.formLogin.get(field).untouched && this.formSubmitAttempt)
-    );
-  }
 
 
   onLogin(): void {
@@ -86,17 +81,23 @@ export class LoginComponent implements OnInit {
   }
 
   openFormRecoverPassword(): void {
-    this.modalRef = this.modalService.show(RecoverPasswordComponent);
-    const username = this.formLogin.get('username').value;
-    this.modalRef.content.email = username;
-    this.modalRef.content.onClose.subscribe(result => {
-      console.log('results', result);
+    const recoverPasswordModal = this.modalService.open(RecoverPasswordModalComponent);
+    recoverPasswordModal.componentInstance.email = this.formLogin.get('username').value;
+    recoverPasswordModal.result.then( res => {
+      Swal.fire({
+        title: 'Exitoso',
+        html: 'Se ha enviado un password a su correo',
+        type: 'success'
+      });
+    }).catch((error) => {
+      console.log(error)
+      Swal.fire({
+        title: 'Error',
+        html: error.message,
+        type: 'error'
+      });
     });
-  }
 
-  onRegister(): void {
-    this.router.navigate(['/register']);
   }
 
 }
-

@@ -1,0 +1,58 @@
+<div class="modal-body">
+
+    <div class="header">
+        <h3 class="header-title">{{ title }}</h3>
+        <hr>
+    </div>
+
+    <div class="data">
+
+        <!-- ============
+             INICIA FORMULARIO 
+            ================= -->
+        <form class="form">
+            <div class="form-group" [ngClass]="{ 'd-none': !showDateTime }">
+                <label for="dp">Fecha</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="scheduleDate" ngbDatepicker #d="ngbDatepicker" readonly="readonly">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                          <img class="mx-2 cursor" src="assets/images/icons/icon_calendar.png" alt="" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'd-none': !showDateTime }">
+                <label for="reason">Hora</label>
+                <ngb-timepicker [(ngModel)]="scheduleTime" [meridian]="scheduleTimeMeridian" name="tp"></ngb-timepicker>
+                <!--button class="btn btn-sm btn-outline-{{scheduleTimeMeridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
+                      Meridian - {{meridian ? "ON" : "OFF"}}
+                </button-->
+            </div>
+            <div class="form-group">
+                <label for="reason">{{ labelReason }}</label>
+                <textarea class="form-control rounded-5" id="reason" name="reason" [(ngModel)]="reason" rows="3" maxlength="140" placeholder=""></textarea>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <button (click)="closeModal()" class="btn btn-cancel">Cancelar</button>
+                    </div>
+                    <div class="col">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                    <div class="col">
+                        <button (click)="onScheduleServiceRequest()" class="btn btn-create">{{ btnLabelAccept }}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- ============
+             TERMINA FORMULARIO 
+            ================= -->
+
+    </div>
+
+
+
+</div>

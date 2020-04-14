@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component } from '@angular/core';
+import { ConnectionService } from 'ng-connection-service';
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'body',
-  template: `
-    <ngx-loading-bar [color]="'#20a8d8'" [height]="'3px'"></ngx-loading-bar>
-    <router-outlet></router-outlet>
-  `
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+export class AppComponent {
+  title = 'yavoyadmin';
+  status = 'ONLINE';
+  isConnected = true;
 
-  ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
+  constructor(private connectionService: ConnectionService) {
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+      if (this.isConnected) {
+        this.status = "ONLINE";
       }
-      window.scrollTo(0, 0);
-    });
+      else {
+        this.status = "OFFLINE";
+      }
+    })
   }
+  
 }

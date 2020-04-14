@@ -1,0 +1,251 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: "Circular bold";
+    src: url("assets/fonts/CircularStd-Bold.otf");
+}
+
+
+/* VARIABLES */
+
+:root {
+    --height-header: 90px;
+    --primary-color: #E83A49;
+    --secondary-color: #f28b2d;
+    --tertiary-color: #005a9b;
+    --aux-color: #bbb;
+}
+
+
+/* BOTONES */
+
+.btn-nike {
+    color: #fff;
+    padding: 10px;
+}
+
+.btn-nike-primary {
+    background: var(--primary-color);
+}
+
+.btn-nike-secondary {
+    background: var(--secondary-color);
+}
+
+.btn-nike-tertiary {
+    background: var(--tertiary-color);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Circular bold", sans-serif;
+}
+
+.cursor {
+    cursor: pointer !important;
+}
+
+
+/* INPUT PERSONALIZADO  */
+
+.input-nike {
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    height: 45px;
+}
+
+.input-nike::placeholder {
+    color: #000;
+    font-family: "Circular bold";
+}
+
+.input100 {
+    width: 100%;
+}
+
+
+/* TERMINA INPUT PERSONALIZADO */
+
+
+/* INPUT CON ICONO */
+
+.input-icon {
+    position: relative;
+    max-width: 70%;
+    flex-grow: 8;
+    right: -8px;
+}
+
+.input-icon img {
+    position: absolute;
+    left: 18px;
+    top: 30%;
+    width: 18px;
+    height: 18px;
+}
+
+
+/* TERMINA INPUT CON ICONO */
+
+.input-search {
+    border: 1px solid #bbb;
+    height: 45px;
+    width: calc(100% - 18px);
+    padding: 5px;
+    padding-left: 40px;
+    color: #9b9b9b;
+
+}
+
+
+/* SELECT PERSONALIZADO */
+
+.select-nike {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0 !important;
+    background: transparent;
+    background-image: url("assets/images/icons/icon_arrow_down.svg");
+    background-repeat: no-repeat;
+    background-position-x: 97%;
+    background-position-y: 75%;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 100%;
+    font-family: "Circular bold", sans-serif;
+}
+
+.select100 {
+    width: 100%;
+}
+
+
+/* TERMINA SELECT PERSONALIZADO */
+
+
+/* SLIDE TOGGLE PERSONALIZADO */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #76ee26;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #76ee26;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* TERMINA EL SLIDER PERSONALIZADO */
+
+
+/* INICIA BOTON DE UPLOAD FILE */
+
+.file {
+    position: relative;
+}
+
+.pickFile {
+    height: 25%;
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.pickFileButton {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.pickFileButton:hover {
+    text-decoration: none;
+}
+
+.uploadButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.isDisabled {
+    color: gray;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .input-icon {
+        position: relative;
+        max-width: 340px;
+        right: 0px;
+    }
+  }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height='20' viewBox='0 0 24 24' width='20' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 14 0 14 25 0 25"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1_clases_pantalla_Semanas" transform="translate(-900.000000, -382.000000)">
+            <g id="Group-7" transform="translate(491.000000, 362.000000)">
+                <g id="Group-3" transform="translate(421.500000, 27.000000) rotate(90.000000) translate(-421.500000, -27.000000) translate(414.500000, 14.500000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M0.296881625,22.8816883 C2.8451635,20.3794849 10.2074963,12.7433133 10.5798628,12.3482704 C7.58393164,9.40730709 0.883763569,2.56758021 0.296881625,1.98972066 C-0.0981506355,1.60103659 -0.0997696201,0.729080706 0.296881625,0.340396634 C0.759101749,-0.113465545 1.79444245,-0.113465545 2.25666257,0.340396634 C5.92366286,3.94188443 9.65623203,7.54814135 13.35885,11.1472446 C14.2225783,11.9874063 14.2080074,12.8005429 13.3491361,13.6407046 C9.95007774,16.9679674 5.0008416,21.7990958 2.07047934,24.6764708 C1.72482611,25.0174635 0.839241491,25.2519457 0.259644977,24.5119358 C-0.112721498,24.0350228 -0.0244868328,23.1980405 0.296881625,22.8816883" id="Fill-1" fill="#241F20" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

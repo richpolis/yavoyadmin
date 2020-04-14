@@ -1,0 +1,86 @@
+.header {
+    padding-top: 7%;
+    margin-bottom: 3%;
+}
+
+/* ESTILOS PARA LAS ACCIONES */
+
+
+.actions {
+    width: 100%;
+    padding: 20px 0px;
+    margin-bottom: 0px;
+    display: flex;
+    margin-left: 0;
+    margin-right: 0px;
+    align-items: center;
+}
+
+.btn-action {
+    background: var(--secondary-color);
+    color: #fff;
+    width: 150px;
+    height: 45px;
+}
+
+.select-nike {
+    border-radius: 0;
+    border: 1px solid #bbbb;
+    height: 45px;
+    width: 319px;
+}
+
+.col-action {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    margin: 10px 0;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+
+/* ESTILOS PARA LA TABLA */
+
+.table-users {
+    border: 1px solid #bbb;
+}
+
+tbody tr, tbody th {
+   line-height: 50px;
+}
+
+
+.form-check-input {
+    position: relative;
+}
+
+.paginator {
+    width: 100%;
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.page-link {
+    color: #000 !important;
+}
+
+.page-item.active .page-link {
+    background-color: var(--secondary-color) !important;
+    color: #fff !important;
+    border: 1px solid var(--secondary-color);
+
+}
+
+
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column-reverse !important; 
+    }
+    .col-action {
+        display: flex;
+        justify-content: flex-start;
+    }
+  }

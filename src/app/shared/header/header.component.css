@@ -1,0 +1,107 @@
+.bg-nike {
+    background: #fff;
+}
+#navbar-desk {
+    display: none;
+}
+
+.navbar {
+    z-index: 101;
+    top: 0;
+/*     height: 60px;
+ */    border-bottom: 1px solid #f2f2f2;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14),
+    0 1px 1px -1px rgba(0,0,0,0.12),
+    0 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.links a {
+    font-size: 16px;
+    color: #000;
+    width: 12%;
+    padding: 31px 40px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    flex: 1 1;
+    border-bottom: 5px solid transparent;
+    -webkit-transition: border 0.5s; /* For Safari 3.1 to 6.0 */
+     transition: border 0.5s;
+}
+
+.notification {
+    position: relative;
+}
+
+/*   
+  .notification:hover {
+    background: red;
+  }
+   */
+.notification .badge {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 15px;
+    right: 25px;
+    width: 26px;
+    height: 26px;
+    font-size: 70%;
+    border-radius: 100%;
+    background: red;
+    color: white;
+}
+
+
+
+.links a:hover {
+    border-bottom: 5px solid #005A9B;
+}
+
+.links a.link-active {
+    border-bottom: 5px solid #005A9B;
+}
+
+.links a .img-logout {
+    height: 24px;
+}
+
+.logo {
+    width: 125px;
+    height: 40px;
+}
+
+
+
+
+
+@media screen and (min-width: 320px) { }
+@media screen and (min-width: 480px) { }
+@media screen and (min-width: 768px) { }
+@media screen and (min-width: 1023px) { 
+   
+    #navbar-desk {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: var(--height-header);
+        flex-wrap: nowrap;
+    }
+    #navbar-movil {
+        display: none;
+    }
+}

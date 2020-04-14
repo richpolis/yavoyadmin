@@ -1,0 +1,109 @@
+<div class="container animated fadeIn">
+
+    <div class="header">
+        <h3 class="header-title">
+            Gestionar usuarios
+        </h3>
+    </div>
+
+    <!-- ============
+    INICIA ACCIONES DISPONIBLES 
+   ================= -->
+
+    <div class="actions row no-gutters">
+        <div class="col-lg-6 col-sm-12">
+            <!--select class="select-nike">
+                <option>Acciones de selección</option>
+            </select-->
+            <select class="select-nike" [(ngModel)]="paramsMembers.origin" name="origin" (change)="onChangeOrigin($event)">
+                    <option value="CN">Casa Nike</option>
+                    <option value="DLC">Desata la Ciudad</option>
+                </select>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-action">
+            <div class="input-icon">
+                <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsMembers.q" name="q" (search)="onSearchMembers($event)">
+                <img src="assets/images/icons/icon_search.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- ============
+     TERMINA ACCIONES DISPONIBLES
+   ================= -->
+
+    <!-- ============
+    INICIA LA TABLA DE USUARIAS 
+   ================= -->
+
+    <div class="">
+        <table class="table table-users table-responsive-sm">
+            <thead>
+                <tr>
+                    <!--th scope="col"></th-->
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Servicios</th>
+                    <th class="text-center" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ARREGLO DE EVENTOS  -->
+                <tr *ngFor="let member of members; let i = index">
+                    <!--th class="text-center" scope="row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{member._id}}" name="selected-{{i}}" id="{{i}}" [checked]="member.selected" ([ngModel])="member.selected">
+                        </div>
+                    </th-->
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.email }}</td>
+                    <td *ngIf="member.age; else spaceBlank">{{ member.age }} años</td>
+                    <td *ngIf="paramsMembers.origin === 'CN'; else spaceBlank">{{ 2 }}</td>
+                    <ng-template #spaceBlank>
+                        <td>&nbsp;</td>
+                    </ng-template>
+                    <td class="text-center">
+                        <img class="mx-2 cursor" (click)="onDetail(member)" src="assets/images/icons/icon_eye.svg" alt="">
+                        <img class="mx-2 cursor" *ngIf="member.origin == 'CN'" (click)="onDelete(member)" src="assets/images/icons/icon_delete.svg" alt="">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ============
+        TERMINA LA TABLA DE USUARIAS 
+       ================= -->
+
+    <!-- ============
+        INICIA PAGINADOR
+       ================= -->
+    <div class="paginator">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" [ngClass]="{isDisabled: !hasPreviousPage}" (click)="loadPage(page-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item" *ngFor="let num of totalPages" [ngClass]="{active: (page + 1) === num, isDisabled: (page + 1)===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage((num - 1))">{{ num}}</a></li>
+
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }" (click)="loadPage(page+1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ============
+        TERMINA EL PAGINADOR 
+       ================= -->
+
+</div>
+<ng-template #userloggedOut>
+    Hello User, Login
+</ng-template>
