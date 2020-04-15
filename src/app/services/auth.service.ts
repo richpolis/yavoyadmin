@@ -37,7 +37,7 @@ export class AuthService {
         'X-Parse-Revocable-Session': '1'
       })
     };
-     return this.httpClient.post<any>(`${this.AUTH_SERVER}/users`, user, httpOptions)
+    return this.httpClient.post<any>(`${this.AUTH_SERVER}/users`, user, httpOptions)
                                                  .pipe(catchError(this.errorHandler));
   }
 

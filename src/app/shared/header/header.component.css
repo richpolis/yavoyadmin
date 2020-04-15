@@ -1,6 +1,7 @@
-.bg-nike {
+.bg-yavoy {
     background: #fff;
 }
+
 #navbar-desk {
     display: none;
 }
@@ -8,19 +9,18 @@
 .navbar {
     z-index: 101;
     top: 0;
-/*     height: 60px;
- */    border-bottom: 1px solid #f2f2f2;
+    /*     height: 60px;
+ */
+    border-bottom: 1px solid #f2f2f2;
     position: fixed;
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14),
-    0 1px 1px -1px rgba(0,0,0,0.12),
-    0 1px 1px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-.links{
+.links {
     display: flex;
     align-items: center;
     margin-left: 10px;
@@ -38,19 +38,22 @@
     text-align: center;
     flex: 1 1;
     border-bottom: 5px solid transparent;
-    -webkit-transition: border 0.5s; /* For Safari 3.1 to 6.0 */
-     transition: border 0.5s;
+    -webkit-transition: border 0.5s;
+    /* For Safari 3.1 to 6.0 */
+    transition: border 0.5s;
 }
 
 .notification {
     position: relative;
 }
 
+
 /*   
   .notification:hover {
     background: red;
   }
    */
+
 .notification .badge {
     position: absolute;
     display: flex;
@@ -65,8 +68,6 @@
     background: red;
     color: white;
 }
-
-
 
 .links a:hover {
     border-bottom: 5px solid #005A9B;
@@ -85,15 +86,13 @@
     height: 40px;
 }
 
+@media screen and (min-width: 320px) {}
 
+@media screen and (min-width: 480px) {}
 
+@media screen and (min-width: 768px) {}
 
-
-@media screen and (min-width: 320px) { }
-@media screen and (min-width: 480px) { }
-@media screen and (min-width: 768px) { }
-@media screen and (min-width: 1023px) { 
-   
+@media screen and (min-width: 1023px) {
     #navbar-desk {
         display: flex;
         align-items: center;

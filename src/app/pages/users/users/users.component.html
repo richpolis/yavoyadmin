@@ -12,17 +12,17 @@
 
     <div class="actions row no-gutters">
         <div class="col-lg-6 col-sm-12">
-            <!--select class="select-nike">
+            <!--select class="select-yavoy">
                 <option>Acciones de selección</option>
             </select-->
-            <select class="select-nike" [(ngModel)]="paramsMembers.origin" name="origin" (change)="onChangeOrigin($event)">
-                    <option value="CN">Casa Nike</option>
+            <select class="select-yavoy" [(ngModel)]="paramsUsers.origin" name="origin" (change)="onChangeOrigin($event)">
+                    <option value="CN">Casa yavoy</option>
                     <option value="DLC">Desata la Ciudad</option>
                 </select>
         </div>
         <div class="col-lg-6 col-sm-12 col-action">
             <div class="input-icon">
-                <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsMembers.q" name="q" (search)="onSearchMembers($event)">
+                <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsUsers.q" name="q" (search)="onSearchUsers($event)">
                 <img src="assets/images/icons/icon_search.svg" alt="">
             </div>
         </div>
@@ -59,7 +59,7 @@
                     <td>{{ member.name }}</td>
                     <td>{{ member.email }}</td>
                     <td *ngIf="member.age; else spaceBlank">{{ member.age }} años</td>
-                    <td *ngIf="paramsMembers.origin === 'CN'; else spaceBlank">{{ 2 }}</td>
+                    <td *ngIf="paramsUsers.origin === 'CN'; else spaceBlank">{{ 2 }}</td>
                     <ng-template #spaceBlank>
                         <td>&nbsp;</td>
                     </ng-template>

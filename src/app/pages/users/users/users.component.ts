@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit, OnChanges {
   public hasPreviousPage: boolean;
   public roles: RoleI[];
 
-  public paramsMembers: any = { origin: 'CN', status: 'a|e', q: '', page: 0 };
+  public paramsUsers: any = { origin: 'CN', status: 'a|e', q: '', page: 0 };
   public users: Array<User>;
 
   constructor(
@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit, OnChanges {
  }
 
   getUsersRequest(params:any = null): void {
-    params = params || this.paramsMembers;
+    params = params || this.paramsUsers;
     this.usersService.getUsers(params).subscribe(res => {
       this.users = res.data.users;
       this.page = Math.ceil(res.data.page);
@@ -134,23 +134,23 @@ export class UsersComponent implements OnInit, OnChanges {
 
   loadPage(page) {
     if (page >= 0 && page <= this.pages.length - 1) {
-      const params  = JSON.parse(JSON.stringify(this.paramsMembers));
+      const params  = JSON.parse(JSON.stringify(this.paramsUsers));
       params.page = page;
-      this.paramsMembers.page = page;
+      this.paramsUsers.page = page;
       this.getUsersRequest(params);
     }
   }
 
   public onChangeOrigin(event: any) {
-    const params  = JSON.parse(JSON.stringify(this.paramsMembers));
+    const params  = JSON.parse(JSON.stringify(this.paramsUsers));
     this.getUsersRequest(params);
   }
 
-  public onSearchMembers(event: any): void {
+  public onSearchUsers(event: any): void {
     let search = true;
     /*if (event.target.value.length >= 3) {
       search = true;
-    } else if (this.paramsMembers.q.length > 0) {
+    } else if (this.paramsUsers.q.length > 0) {
       search = true;
     }*/
     if (search) {

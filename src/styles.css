@@ -101,7 +101,7 @@ input[type="password"]:valid {
     border: 1px solid green;
 }
 
-.input-nike::placeholder {
+.input-yavoy::placeholder {
     color: #000;
     font-family: "Montserrat";
 }
@@ -146,7 +146,7 @@ input[type="password"]:valid {
 
 /* SELECT PERSONALIZADO */
 
-.select-nike {
+.select-yavoy {
     -webkit-appearance: none;
     -moz-appearance: none;
     outline: 0 !important;

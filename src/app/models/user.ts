@@ -21,4 +21,8 @@ export interface User {
     selected: boolean;
     city: string;
     phone: string;
+    location: any;
+    description: string;
+    schedules: [];
+    schedule: string;
 }

@@ -1,7 +1,7 @@
 <div class="container animated fadeIn">
     <div class="header">
         <h3 class="header-title">
-            Aprobación de registros
+            Listado de voluntarios
         </h3>
     </div>
 
@@ -11,18 +11,16 @@
 
     <div class="actions row no-gutters rw-reverse">
         <div class="col-lg-6 col-sm-12">
-            <!--select class="select-nike">
-                <option>Acciones de selección</option>
-            </select-->
-            <select class="select-nike" [(ngModel)]="paramsMembers.status" name="status" (change)="onSearchMembers($event)">
-                    <option value="r|d">Todas</option>
+            <select class="select-yavoy" [(ngModel)]="paramsUsers.status" name="status" (change)="onSearchUsers($event)">
+                    <option value="">Todas</option>
                     <option value="request">Sin aprobar</option>
+                    <option value="approved">Aprobados</option>
                     <option value="denied">Denegados</option>
                 </select>
         </div>
         <div class="col-lg-6 col-sm-12 col-action">
             <div class="input-icon">
-                <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsMembers.q" name="q" (search)="onSearchMembers($event)">
+                <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsUsers.q" name="q" (search)="onSearchUsers($event)">
                 <img src="assets/images/icons/icon_search.svg" alt="">
             </div>
         </div>
@@ -41,27 +39,38 @@
                 <tr>
                     <!--th scope="col"></th-->
                     <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Teléfono</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Fecha de petición</th>
-                    <th class="text-center" scope="col">Acciones</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Tipo de afiliación</th>
+                    <th class="text-center" colspan="2" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- ARREGLO DE EVENTOS  -->
-                <tr *ngFor="let member of members; let i = index">
-                    <!--th class="text-center" scope="row">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{member._id}}" name="selected-{{i}}" id="{{i}}" [checked]="member.selected" ([ngModel])="member.selected">
-                        </div>
-                    </th-->
-                    <td>{{ member.name }}</td>
-                    <td>{{ member.email }}</td>
-                    <td>{{ member.age }} años</td>
-                    <td>{{ member.createdAt|date:"d MMMM, yyyy" }}</td>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
+                    <td *ngIf="user.birthday.iso === undefined ">{{ user.birthday|date: "d MMM y" }}</td>
+                    <td *ngIf="user.birthday.iso !== undefined ">{{ user.birthday.iso|date: "d MMM y" }}</td>
+                    <td>{{ user.city }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <span *ngIf="user.status == 'approved'" class="badge badge-success">Aprobado</span>
+                        <span *ngIf="user.status == 'request'" class="badge badge-info">Solicitud</span>
+                        <span *ngIf="user.status == 'deleted'" class="badge badge-danger">Borrado</span>
+                    </td>
+                    <td>
+                        <span *ngIf="user.circle !== undefined" class="badge badge-success">Circulo</span>
+                        <span *ngIf="user.circle === undefined" class="badge badge-info">Individual</span>
+                    </td>
                     <td class="text-center">
-                        <button class="btn btn-action mr-1" (click)="onApproved(member)" [disabled]="member.status == 'request' || member.status == 'denied'? '' : 'disabled'">Aprobar</button>
-                        <button class="btn btn-action" (click)="onDelete(member)" [disabled]="member.status == 'denied'? 'disabled' : ''">Rechazar</button>
+                        <button class="btn btn-action" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'">Aprobar</button>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-action" (click)="onDelete(user)" [disabled]="user.status == 'denied'? 'disabled' : ''">Rechazar</button>
                     </td>
                 </tr>
             </tbody>
@@ -78,19 +87,19 @@
     <!-- ============
         INICIA PAGINADOR
        ================= -->
-       <div class="paginator">
+    <div class="paginator">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)" aria-label="Previous"  [ngClass]="{isDisabled: !hasPreviousPage}" (click)="loadPage(page-1)">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" [ngClass]="{isDisabled: !hasPreviousPage}" (click)="loadPage(page-1)">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
 
                 <li class="page-item" *ngFor="let num of pages" [ngClass]="{active: page===num, isDisabled: page===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage(num)">{{ num + 1 }}</a></li>
-                
+
                 <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }"  (click)="loadPage(page+1)">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }" (click)="loadPage(page+1)">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

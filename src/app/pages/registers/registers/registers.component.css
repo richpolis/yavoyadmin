@@ -3,6 +3,7 @@
     margin-bottom: 3%;
 }
 
+
 /* ESTILOS PARA LAS ACCIONES */
 
 .actions {
@@ -22,7 +23,7 @@
     height: 45px;
 }
 
-.select-nike {
+.select-yavoy {
     border-radius: 0;
     border: 1px solid #bbbb;
     height: 45px;
@@ -36,16 +37,17 @@
     margin: 10px 0;
 }
 
+
 /* ESTILOS PARA LA TABLA */
 
 .table-users {
     border: 1px solid #bbb;
 }
 
-tbody tr, tbody th {
-   line-height: 50px;
+tbody tr,
+tbody th {
+    line-height: 50px;
 }
-
 
 .form-check-input {
     position: relative;
@@ -53,7 +55,7 @@ tbody tr, tbody th {
 
 .paginator {
     width: 100%;
-    display: flex; 
+    display: flex;
     justify-content: flex-end;
 }
 
@@ -65,17 +67,14 @@ tbody tr, tbody th {
     background-color: var(--secondary-color) !important;
     color: #fff !important;
     border: 1px solid var(--secondary-color);
-
 }
-
 
 @media (max-width: 768px) {
     .actions {
-        flex-direction: column-reverse !important; 
+        flex-direction: column-reverse !important;
     }
     .col-action {
         display: flex;
         justify-content: flex-start;
     }
-  }
-
+}
