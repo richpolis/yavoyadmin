@@ -12,18 +12,18 @@ export class GlobalsService {
   urlBase = environment.serverURL;
 
   user: User = null;
-  roles: RoleI[];
+  roles: RoleI[] = [];
   origin: string;
   eventType: string;
 
   constructor() {}
 
   getUser(): User {
-    if (!this.user) {
-      if (!localStorage.getItem('user_yavoy') === null) {
-        this.user = JSON.parse(localStorage.getItem('user_yavoy'));
-      } else {
+    if (this.user === null) {
+      if (localStorage.getItem('user_yavoy') === null) {
         return null;
+      } else {
+        this.user = JSON.parse(localStorage.getItem('user_yavoy'));
       }
     }
     return this.user;
@@ -52,11 +52,11 @@ export class GlobalsService {
   }
 
   getRoles() {
-    if (!this.roles) {
-      if (!localStorage.getItem('roles_yavoy') === null) {
-        this.roles = JSON.parse(localStorage.getItem('roles_yavoy'));
-      } else {
+    if (this.roles.length === 0) {
+      if (localStorage.getItem('roles_yavoy') === null) {
         return null;
+      } else {
+        this.roles = JSON.parse(localStorage.getItem('roles_yavoy'));
       }
     }
     return this.roles;
