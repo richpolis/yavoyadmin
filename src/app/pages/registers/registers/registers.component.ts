@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { RoleI } from 'src/app/models/role';
 import { RolesService } from 'src/app/services/roles.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registers',
@@ -24,7 +25,11 @@ export class RegistersComponent implements OnInit {
 
   public noFoundData: boolean;
 
-  constructor(private userService: UsersService, private globalsService: GlobalsService, private rolesService: RolesService) {}
+  constructor(
+    private userService: UsersService, 
+    private globalsService: GlobalsService, 
+    private rolesService: RolesService,
+    private router: Router) {}
 
   ngOnInit() {
     this.roles = this.globalsService.getRoles();
@@ -51,7 +56,7 @@ export class RegistersComponent implements OnInit {
     params = params || this.paramsUsers;
     const roleVoluntario = this.roles.find(role => role.name === 'Voluntario');
     // const where = JSON.stringify({'role': {'__type': 'Pointer', 'className': '_Role', 'objectId': roleVoluntario.objectId}});
-    const where = {role: {__type: 'Pointer', className: '_Role', objectId: roleVoluntario.objectId}};
+    const where = {role: 'voluntario'};
     if (params.q.length > 0) {
       if (isNaN(params.q)) {
         where['$or'] = [
@@ -184,6 +189,10 @@ export class RegistersComponent implements OnInit {
       this.paramsUsers.skip = page * this.paramsUsers.limit;
       this.getUsersRequest(params);
     }
+  }
+
+  onEdit(user: User): void {
+    this.router.navigate(['/dashboard/registers/edit', user.objectId]);
   }
 
   public onSearchUsers(event: any): void {

@@ -102,6 +102,40 @@ export class UsersService {
                                                  .pipe(catchError(this.errorHandler));
   }
 
+  updateUser(other: any, objectId: string): Observable<any> {
+    const user = this.globalsService.getUser();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-Parse-Application-Id': environment.PARSE_APP_ID,
+        'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY,
+        'X-Parse-Session-Token': user.sessionToken
+      })
+    };
+    const params = {
+      username: other.username,
+      email: other.email,
+      firstName: other.firstName,
+      lastName: other.lastName,
+      description: other.description,
+      birthday: other.birthday,
+      city: other.city,
+      phone: other.phone,
+      schedule: other.schedule,
+      status: other.status,
+      circle: other.circle || null,
+      schedules: other.schedules,
+      location: other.location,
+      role: other.role,
+      contact: other.contact,
+      isRepresentativeCircle: other.isRepresentativeCircle || false,
+    };
+    console.log('parametros');
+    console.log(params);
+    return this.httpClient.put<any>(`${this.URL_BASE}/users/${objectId}`, params, httpOptions)
+                                                 .pipe(catchError(this.errorHandler));
+  }
+
   getStatusString(user: User): string {
     if (user.status === 'request') {
       return 'Solicitud';

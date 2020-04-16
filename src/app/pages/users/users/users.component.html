@@ -1,8 +1,8 @@
-<div class="container animated fadeIn">
+<div class="container animated fadeIn font-family-yavoy">
 
     <div class="header">
         <h3 class="header-title">
-            Gestionar usuarios
+            Listado de beneficiarios
         </h3>
     </div>
 
@@ -10,14 +10,12 @@
     INICIA ACCIONES DISPONIBLES 
    ================= -->
 
-    <div class="actions row no-gutters">
+    <div class="actions row no-gutters rw-reverse">
         <div class="col-lg-6 col-sm-12">
-            <!--select class="select-yavoy">
-                <option>Acciones de selección</option>
-            </select-->
-            <select class="select-yavoy" [(ngModel)]="paramsUsers.origin" name="origin" (change)="onChangeOrigin($event)">
-                    <option value="CN">Casa yavoy</option>
-                    <option value="DLC">Desata la Ciudad</option>
+            <select class="select-yavoy" [(ngModel)]="paramsUsers.status" name="status" (change)="onSearchUsers($event)">
+                    <option value="">Todas</option>
+                    <option value="active">Activos</option>
+                    <option value="inactive">Inactivos</option>
                 </select>
         </div>
         <div class="col-lg-6 col-sm-12 col-action">
@@ -31,50 +29,61 @@
     <!-- ============
      TERMINA ACCIONES DISPONIBLES
    ================= -->
-
     <!-- ============
-    INICIA LA TABLA DE USUARIAS 
+    INICIA LA TABLA DE REGISTROS 
    ================= -->
 
-    <div class="">
-        <table class="table table-users table-responsive-sm">
-            <thead>
-                <tr>
-                    <!--th scope="col"></th-->
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Servicios</th>
-                    <th class="text-center" scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- ARREGLO DE EVENTOS  -->
-                <tr *ngFor="let member of members; let i = index">
-                    <!--th class="text-center" scope="row">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{member._id}}" name="selected-{{i}}" id="{{i}}" [checked]="member.selected" ([ngModel])="member.selected">
-                        </div>
-                    </th-->
-                    <td>{{ member.name }}</td>
-                    <td>{{ member.email }}</td>
-                    <td *ngIf="member.age; else spaceBlank">{{ member.age }} años</td>
-                    <td *ngIf="paramsUsers.origin === 'CN'; else spaceBlank">{{ 2 }}</td>
-                    <ng-template #spaceBlank>
-                        <td>&nbsp;</td>
-                    </ng-template>
-                    <td class="text-center">
-                        <img class="mx-2 cursor" (click)="onDetail(member)" src="assets/images/icons/icon_eye.svg" alt="">
-                        <img class="mx-2 cursor" *ngIf="member.origin == 'CN'" (click)="onDelete(member)" src="assets/images/icons/icon_delete.svg" alt="">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-users table-responsive-sm">
+                <thead>
+                    <tr>
+                        <!--th scope="col"></th-->
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de nacimiento</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Tipo de afiliación</th>
+                        <th class="text-center" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ARREGLO DE EVENTOS  -->
+                    <tr *ngFor="let user of users; let i = index">
+                        <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
+                        <td *ngIf="user.birthday.iso === undefined ">{{ user.birthday|date: "d MMM y" }}</td>
+                        <td *ngIf="user.birthday.iso !== undefined ">{{ user.birthday.iso|date: "d MMM y" }}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            <span *ngIf="user.status == 'approved'" class="badge badge-success">Aprobado</span>
+                            <span *ngIf="user.status == 'request'" class="badge badge-info">Solicitud</span>
+                            <span *ngIf="user.status == 'deleted'" class="badge badge-danger">Borrado</span>
+                        </td>
+                        <td>
+                            <span *ngIf="user.circle !== undefined" class="badge badge-success">Circulo</span>
+                            <span *ngIf="user.circle === undefined" class="badge badge-info">Individual</span>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'" *ngIf="user.status == 'request'">Aprobar</button>
+                            <button class="btn btn-action mr-1" (click)="onDelete(user)" [disabled]="user.status == 'denied'? 'disabled' : ''" *ngIf="user.status == 'approved'">Rechazar</button>
+                            <button class="btn btn-action" (click)="onEdit(user)">Ver</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-info" *ngIf="noFoundData">
+                <strong>No hay informaci&oacute;n que mostrar</strong>
+            </div>
+        </div>
     </div>
 
     <!-- ============
-        TERMINA LA TABLA DE USUARIAS 
-       ================= -->
+    TERMINA LA TABLA DE REGISTROS 
+   ================= -->
 
     <!-- ============
         INICIA PAGINADOR
@@ -88,7 +97,7 @@
                     </a>
                 </li>
 
-                <li class="page-item" *ngFor="let num of totalPages" [ngClass]="{active: (page + 1) === num, isDisabled: (page + 1)===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage((num - 1))">{{ num}}</a></li>
+                <li class="page-item" *ngFor="let num of pages" [ngClass]="{active: page===num, isDisabled: page===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage(num)">{{ num + 1 }}</a></li>
 
                 <li class="page-item">
                     <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }" (click)="loadPage(page+1)">
@@ -104,6 +113,3 @@
        ================= -->
 
 </div>
-<ng-template #userloggedOut>
-    Hello User, Login
-</ng-template>

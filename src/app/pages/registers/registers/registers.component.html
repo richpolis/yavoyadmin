@@ -1,4 +1,4 @@
-<div class="container animated fadeIn">
+<div class="container animated fadeIn font-family-yavoy">
 
     <div class="header">
         <h3 class="header-title">
@@ -34,48 +34,51 @@
     INICIA LA TABLA DE REGISTROS 
    ================= -->
 
-    <div class="table-responsive-sm">
-        <table class="table table-users">
-            <thead>
-                <tr>
-                    <!--th scope="col"></th-->
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha de nacimiento</th>
-                    <th scope="col">Ciudad</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Estatus</th>
-                    <th scope="col">Tipo de afiliación</th>
-                    <th class="text-center" scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- ARREGLO DE EVENTOS  -->
-                <tr *ngFor="let user of users; let i = index">
-                    <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                    <td *ngIf="user.birthday.iso === undefined ">{{ user.birthday|date: "d MMM y" }}</td>
-                    <td *ngIf="user.birthday.iso !== undefined ">{{ user.birthday.iso|date: "d MMM y" }}</td>
-                    <td>{{ user.city }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>
-                        <span *ngIf="user.status == 'approved'" class="badge badge-success">Aprobado</span>
-                        <span *ngIf="user.status == 'request'" class="badge badge-info">Solicitud</span>
-                        <span *ngIf="user.status == 'deleted'" class="badge badge-danger">Borrado</span>
-                    </td>
-                    <td>
-                        <span *ngIf="user.circle !== undefined" class="badge badge-success">Circulo</span>
-                        <span *ngIf="user.circle === undefined" class="badge badge-info">Individual</span>
-                    </td>
-                    <td class="text-center">
-                        <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'">Aprobar</button>
-                        <button class="btn btn-action" (click)="onDelete(user)" [disabled]="user.status == 'denied'? 'disabled' : ''">Rechazar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="alert alert-info" *ngIf="noFoundData">
-            <strong>No hay informaci&oacute;n que mostrar</strong>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-users table-responsive-sm">
+                <thead>
+                    <tr>
+                        <!--th scope="col"></th-->
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de nacimiento</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Tipo de afiliación</th>
+                        <th class="text-center" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ARREGLO DE EVENTOS  -->
+                    <tr *ngFor="let user of users; let i = index">
+                        <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
+                        <td *ngIf="user.birthday.iso === undefined ">{{ user.birthday|date: "d MMM y" }}</td>
+                        <td *ngIf="user.birthday.iso !== undefined ">{{ user.birthday.iso|date: "d MMM y" }}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            <span *ngIf="user.status == 'approved'" class="badge badge-success">Aprobado</span>
+                            <span *ngIf="user.status == 'request'" class="badge badge-info">Solicitud</span>
+                            <span *ngIf="user.status == 'deleted'" class="badge badge-danger">Borrado</span>
+                        </td>
+                        <td>
+                            <span *ngIf="user.circle !== undefined" class="badge badge-success">Circulo</span>
+                            <span *ngIf="user.circle === undefined" class="badge badge-info">Individual</span>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'" *ngIf="user.status == 'request'">Aprobar</button>
+                            <button class="btn btn-action mr-1" (click)="onDelete(user)" [disabled]="user.status == 'denied'? 'disabled' : ''" *ngIf="user.status == 'approved'">Rechazar</button>
+                            <button class="btn btn-action" (click)="onEdit(user)">Ver</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-info" *ngIf="noFoundData">
+                <strong>No hay informaci&oacute;n que mostrar</strong>
+            </div>
         </div>
     </div>
 

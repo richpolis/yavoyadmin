@@ -1,19 +1,19 @@
 <a (click)="openSideBar()" class="navbar-brand cursor">
     <img src="assets/images/icons/icon_hamburger.png" alt="">
 </a>
-<div (click)="closeSideBar()" #background class="background hide">
+<div (click)="closeSideBar()" #background class="background hide font-family-yavoy">
     <div #sidebar class="sidebar-perfil animated faster content">
         <!--   SESION INICIADA    -->
         <div (click)="closeSideBar()" class="icon-close">&times;</div>
         <ul>
             <li>
                 <a class="notification" [routerLink]="['/dashboard/registers']" routerLinkActive="link-active">
-                    <span>Registros</span>
-                    <span class="badge">1</span>
+                    <span>Voluntarios</span>
+                    <!--span class="badge">1</span-->
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/dashboard/users']" routerLinkActive="link-active">Usuarios</a>
+                <a [routerLink]="['/dashboard/users']" routerLinkActive="link-active">Beneficiarios</a>
             </li>
             <hr>
             <li>

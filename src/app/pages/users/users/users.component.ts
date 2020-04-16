@@ -12,27 +12,24 @@ import { RolesService } from 'src/app/services/roles.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit, OnChanges {
+export class UsersComponent implements OnInit {
 
-  // ======= MAX SHOW NUMBERS PAGE ========
-  private MAX_PAGES_DISPLAY = 8;
-  public page: number;
+  public paramsUsers: any = {status: 'request', q: '', order: 'email', limit: 10, skip: 0};
+  public users: Array<User> = [];
+  public page = 1;
   public pages = [];
-  public totalPages;
-  public from: number;
-  public to: number;
   public hasNextPage: boolean;
   public hasPreviousPage: boolean;
   public roles: RoleI[];
+  public count: number;
 
-  public paramsUsers: any = { origin: 'CN', status: 'a|e', q: '', page: 0 };
-  public users: Array<User>;
+  public noFoundData: boolean;
 
   constructor(
-    private usersService: UsersService,
-    private globalsService: GlobalsService,
-    private router: Router,
-    private rolesService: RolesService) { }
+    private userService: UsersService, 
+    private globalsService: GlobalsService, 
+    private rolesService: RolesService,
+    private router: Router) {}
 
   ngOnInit() {
     this.roles = this.globalsService.getRoles();
@@ -54,131 +51,158 @@ export class UsersComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const paginadorActualizado = changes['pages'];
-    if (paginadorActualizado.previousValue) {
-       this.initPaginator();
-    }
- }
-
-  getUsersRequest(params:any = null): void {
+  getUsersRequest(params: any = null): void {
+    this.noFoundData = false;
     params = params || this.paramsUsers;
-    this.usersService.getUsers(params).subscribe(res => {
-      this.users = res.data.users;
-      this.page = Math.ceil(res.data.page);
-      const pageCeil = Math.ceil(res.data.pages);
+    const roleVoluntario = this.roles.find(role => role.name === 'Voluntario');
+    // const where = JSON.stringify({'role': {'__type': 'Pointer', 'className': '_Role', 'objectId': roleVoluntario.objectId}});
+    const where = {role: 'beneficiario'};
+    if (params.q.length > 0) {
+      if (isNaN(params.q)) {
+        where['$or'] = [
+            { firstName: { $regex: params.q, $options: 'i' } },
+            { lastName: { $regex: params.q, $options: 'i' } },
+            { phone: { $regex: params.q, $options: 'i' } },
+            { email: { $regex: params.q, $options: 'i' } }
+        ];
+      }
+    }
+    if (params.status.length > 0) {
+      if (isNaN(params.status)) {
+        where['status'] = params.status;
+      }
+    }
+    console.log(where);
+    this.userService.getUsers(where, params.order, params.limit, params.skip).subscribe(res => {
+      console.log(res);
+      this.users = res.results;
+      this.count = Math.ceil(res.count);
+      const pageCeil = Math.ceil(this.count / this.paramsUsers.limit);
       this.pages = [];
+      if (this.paramsUsers.skip > 0){
+        this.page = this.paramsUsers.skip / this.paramsUsers.limit;
+      } else {
+        this.page = 0;
+      }
       for (let cont = 0; cont < pageCeil; cont++) {
         this.pages.push(cont);
       }
       this.hasNextPage = this.page < this.pages.length - 1;
       this.hasPreviousPage = this.page > 0;
+      this.noFoundData = this.users.length === 0;
       this.users.forEach((user, index, users) => {
         users[index].approved = user.status === 'approved';
         users[index].selected = false;
       });
-      this.initPaginator();
     }, error => {
       // show alert to user
       Swal.fire({
         title: 'Error',
-        html: error.message,
+        html: error.error.message,
         type: 'error'
       });
     });
   }
 
-  getStatus(user: User): string {
-    return this.usersService.getStatusString(user);
+  CalculateAge(user): number {
+    if (user.birthday) {
+        const timeDiff = Math.abs(Date.now() -  user.birthday as any);
+        return Math.ceil((timeDiff / (1000 * 3600 * 24)) / 365);
+    } else {
+        return 0;
+    }
   }
 
-  onDetail(user: User): void {
-    this.router.navigate(['/dashboard/users/detail', user.objectId]);
-  }
-
-  onDelete(user: User): void {
-    if ( user.status !== 'deleted') {
+  onApproved(user: User): void {
+    if ( user.status !== 'active') {
       Swal.fire({
         title: '¿Está seguro?',
-        text: `Favor de confirmar que se niega el acceso a: ${user.firstName} ${user.lastName} - ${user.email}.`,
+        text: `Favor de confirmar que se reactiva el acceso a: ${user.firstName} ${user.lastName} - ${user.email}.`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, negar acceso',
+        confirmButtonText: 'Sí, activar acceso',
         cancelButtonText: 'No, cancelar',
       }).then((result) => {
         if (result.value) {
-          this.usersService.changeStatus(user, 'denied').subscribe(res => {
-            if (res.success) {
-              Swal.fire({
-                title: 'Listo',
-                html: 'Se ha procesado la solicitud',
-                type: 'success'
-              }).then( () => {
-                this.getUsersRequest();
-              });
-            } else {
-              // show alert to user
-              Swal.fire({
-                title: 'Error',
-                html: res.message,
-                type: 'error'
-              });
-            }
+          this.userService.changeStatus(user, 'active').subscribe(res => {
+            Swal.fire({
+              title: 'Listo',
+              html: 'Se ha procesado la solicitud',
+              type: 'success'
+            }).then( () => {
+              this.getUsersRequest();
+            });
+          }, error => {
+            // show alert to user
+            Swal.fire({
+              title: 'Error',
+              html: error.message,
+              type: 'error'
+            });
           });
         }
-      })
+      });
+    }
+  }
+
+  onDelete(user: User): void {
+    if ( user.status !== 'inactive') {
+      Swal.fire({
+        title: '¿Está seguro?',
+        text: `Favor de confirmar que se inactiva el acceso a: ${user.firstName} ${user.lastName} - ${user.email}.`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deactivar acceso',
+        cancelButtonText: 'No, cancelar',
+      }).then((result) => {
+        if (result.value) {
+          this.userService.changeStatus(user, 'inactive').subscribe(res => {
+            Swal.fire({
+              title: 'Listo',
+              html: 'Se ha procesado la solicitud',
+              type: 'success'
+            }).then( () => {
+              this.getUsersRequest();
+            });
+          }, error => {
+            // show alert to user
+            Swal.fire({
+              title: 'Error',
+              html: error.message,
+              type: 'error'
+            });
+          });
+        }
+      });
     }
   }
 
   loadPage(page) {
     if (page >= 0 && page <= this.pages.length - 1) {
       const params  = JSON.parse(JSON.stringify(this.paramsUsers));
-      params.page = page;
-      this.paramsUsers.page = page;
+      this.page = page;
+      params.skip = page * this.paramsUsers.limit;
+      this.paramsUsers.skip = page * this.paramsUsers.limit;
       this.getUsersRequest(params);
     }
   }
 
-  public onChangeOrigin(event: any) {
-    const params  = JSON.parse(JSON.stringify(this.paramsUsers));
-    this.getUsersRequest(params);
+  onEdit(user: User): void {
+    this.router.navigate(['/dashboard/registers/edit', user.objectId]);
   }
 
   public onSearchUsers(event: any): void {
-    let search = true;
-    /*if (event.target.value.length >= 3) {
-      search = true;
-    } else if (this.paramsUsers.q.length > 0) {
-      search = true;
-    }*/
+    const search = true;
+    this.paramsUsers.skip = 0;
+    this.page = 0;
     if (search) {
-      this.onChangeOrigin(event);
+      const params  = JSON.parse(JSON.stringify(this.paramsUsers));
+      this.getUsersRequest(params);
     }
-  }
-
-  onEditMember(user: User): void {
-
-  }
-
-  private initPaginator() {
-
-    //  OBTENEMOS EL MAXIMO Y EL MINIMO DE PAGINAS A MOSTRAR
-    this.from = Math.min( Math.max(1, this.page - (this.MAX_PAGES_DISPLAY - 2)), this.pages.length - (this.MAX_PAGES_DISPLAY - 1));
-    this.to = Math.max( Math.min(this.pages.length, this.page + (this.MAX_PAGES_DISPLAY - 2)), this.MAX_PAGES_DISPLAY);
-
-    if (this.pages.length > (this.MAX_PAGES_DISPLAY - 1)) {
-      this.totalPages = new Array(this.to - this.from + 1)
-        .fill(0)
-          .map((value, index) => index + this.from);
-
-    } else {
-      this.totalPages = new Array(this.pages.length)
-        .fill(0)
-          .map((value, index) => index + 1);
-    }
-
   }
 
 }
