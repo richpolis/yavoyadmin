@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.globalsService.setUser(res);
         const roleAdmin = this.roles.find(role => role.name === 'Admin');
-        if (res.role.objectId === roleAdmin.objectId) {
+        if (res.role === 'administrador') {
           this.router.navigate(['/dashboard']);
         } else {
           Swal.fire({
