@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 
 const routes: Routes = [
   { path: '', component: UsersComponent },
-  { path: 'detail/:userId', component: UserDetailComponent, data: { child: true } },
+  { path: 'edit/:userId', component: UserEditComponent, data: { child: true } },
 ];
 
 @NgModule({

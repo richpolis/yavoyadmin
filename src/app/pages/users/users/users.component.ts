@@ -14,7 +14,7 @@ import { RolesService } from 'src/app/services/roles.service';
 })
 export class UsersComponent implements OnInit {
 
-  public paramsUsers: any = {status: 'request', q: '', order: 'email', limit: 10, skip: 0};
+  public paramsUsers: any = {status: '', q: '', order: 'birthday', limit: 10, skip: 0};
   public users: Array<User> = [];
   public page = 1;
   public pages = [];
@@ -63,7 +63,8 @@ export class UsersComponent implements OnInit {
             { firstName: { $regex: params.q, $options: 'i' } },
             { lastName: { $regex: params.q, $options: 'i' } },
             { phone: { $regex: params.q, $options: 'i' } },
-            { email: { $regex: params.q, $options: 'i' } }
+            { email: { $regex: params.q, $options: 'i' } },
+            { schedule: { $regex: params.q, $options: 'i' } }
         ];
       }
     }
@@ -113,7 +114,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  onApproved(user: User): void {
+  onActivate(user: User): void {
     if ( user.status !== 'active') {
       Swal.fire({
         title: '¿Está seguro?',
@@ -147,7 +148,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  onDelete(user: User): void {
+  onInactivate(user: User): void {
     if ( user.status !== 'inactive') {
       Swal.fire({
         title: '¿Está seguro?',
@@ -192,7 +193,15 @@ export class UsersComponent implements OnInit {
   }
 
   onEdit(user: User): void {
-    this.router.navigate(['/dashboard/registers/edit', user.objectId]);
+    this.router.navigate(['/dashboard/users/edit', user.objectId]);
+  }
+
+  getHorarioString(user: User): string {
+    if (user.schedule !== undefined){
+      return user.schedule.toUpperCase();
+    } else {
+      return '';
+    }
   }
 
   public onSearchUsers(event: any): void {

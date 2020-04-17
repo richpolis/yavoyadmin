@@ -38,6 +38,11 @@ body {
     cursor: pointer !important;
 }
 
+img.icons {
+    height: 24px;
+    width: 24px;
+}
+
 
 /* INPUT PERSONALIZADO  */
 

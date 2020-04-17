@@ -33,12 +33,13 @@ import { LoaderScreenComponent } from './components/loader-screen/loader-screen.
 // services
 import { AuthService } from './services/auth.service';
 import { GlobalsService } from './services/globals.service';
+import { UsersService } from './services/users.service';
 
 import { LoaderScreenInterceptorService } from './services/loader-screen-interceptor.service';
 
 import { ServiceRequestScheduleComponent } from './components/service-request-schedule/service-request-schedule.component';
 import { ScheduleEventModalComponent } from './components/schedule-event-modal/schedule-event-modal.component';
-import { UsersService } from './services/users.service';
+
 
 export const interceptorProviders = [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
