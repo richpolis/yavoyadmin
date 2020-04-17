@@ -11,10 +11,12 @@
 
 :root {
     --height-header: 90px;
-    --primary-color: #E83A49;
+    --primary-color: #7E42AD;
     --secondary-color: #f28b2d;
     --tertiary-color: #F98F5F;
     --aux-color: #bbb;
+    --btn-save-color: #9B9B9B;
+    --btn-return-color: #7E42AD;
 }
 
 
@@ -46,11 +48,34 @@ img.icons {
 
 /* INPUT PERSONALIZADO  */
 
-.form-control.input-rounded {
+input.form-control.input-rounded {
     border-radius: 22px;
     box-sizing: border-box;
     font-size: 16px;
     height: 50px;
+    padding: 10px;
+}
+
+.select-wrapper {
+    border-radius: 22px;
+    /*display: inline-block;*/
+    overflow: hidden;
+    background: #cccccc;
+    border: 1px solid #cccccc;
+}
+
+select.form-control.select-rounded {
+    font-size: 16px;
+    height: 50px;
+    padding: 10px;
+    border: 0px;
+    outline: none;
+}
+
+textarea.form-control.textarea-rounded {
+    border-radius: 22px;
+    box-sizing: border-box;
+    font-size: 16px;
     padding: 10px;
 }
 
@@ -61,31 +86,9 @@ form input[type="password"]:focus {
     background: white;
 }
 
-
-/* input[type="text"]:valid,
-input[type="email"]:valid,
-input[type="password"]:valid {
-    background: url(/assets/images/icons/icon_correct.png);
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: center right;
-    background: #f3f8ed;
-    border: 1px solid #f3f8ed;
-}
-
-input[type="text"]:invalid,
-input[type="email"]:invalid,
-input[type="password"]:invalid {
-    background: url(/assets/images/icons/icon_incorrect.png);
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: center right;
-    background: #efdee0;
-    border: 1px solid #efdee0;
-} */
-
 input[type="text"]:invalid.is-invalid,
 input[type="email"]:invalid.is-invalid,
+input[type="tel"]:invalid.is-invalid,
 input[type="password"]:invalid.is-invalid {
     /*background: #efdee0 url(/assets/images/icons/icon_incorrect.png) no-repeat center right;*/
     background-image: url(/assets/images/icons/icon_incorrect.png);
@@ -99,6 +102,7 @@ input[type="password"]:invalid.is-invalid {
 
 input[type="text"]:valid,
 input[type="email"]:valid,
+input[type="tel"]:valid,
 input[type="password"]:valid {
     /*background: #f3f8ed url(/assets/images/icons/icon_correct.png) no-repeat center right;*/
     background-image: url(/assets/images/icons/icon_correct.png);

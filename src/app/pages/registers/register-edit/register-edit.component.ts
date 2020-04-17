@@ -7,6 +7,8 @@ import { GlobalsService } from 'src/app/services/globals.service';
 import Swal from 'sweetalert2';
 import { UsersService } from '../../../services/users.service';
 import { User } from 'src/app/models/user';
+import { CirclesService } from '../../../services/circles.service';
+import { CircleI } from 'src/app/models/circle';
 
 @Component({
   selector: 'app-register-edit',
@@ -30,6 +32,7 @@ export class RegisterEditComponent implements OnInit {
     {key: 'tarde', name: 'Tarde'},
     {key: 'noche', name: 'Noche'}
   ]
+  public circles: CircleI[];
 
   constructor(
     private router: Router,
@@ -38,6 +41,7 @@ export class RegisterEditComponent implements OnInit {
     private modalService: NgbModal,
     private globalsService: GlobalsService,
     private usersService: UsersService,
+    private circlesService: CirclesService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -53,54 +57,58 @@ export class RegisterEditComponent implements OnInit {
       status: new FormControl('', [Validators.required, Validators.minLength(3)]),
       circle: new FormControl(null),
       birthdayDateStruct: new FormControl(this.calendar.getToday(), Validators.required),
-      phone: new FormControl(''),
-      email: new FormControl('', [Validators.email]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       schedule: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
 
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.usersService.getUser(params.get('userId')).subscribe(res => {
-        console.log(res);
-        if (res) {
-          this.user = res;
-          this.formRegister.get('firstName').setValue(this.user.firstName);
-          this.formRegister.get('lastName').setValue(this.user.lastName);
-          this.formRegister.get('description').setValue(this.user.description);
-          this.formRegister.get('city').setValue(this.user.city);
-          this.formRegister.get('status').setValue(this.user.status);
-          this.formRegister.get('phone').setValue(this.user.phone);
-          this.formRegister.get('email').setValue(this.user.username);
-          this.formRegister.get('schedule').setValue(this.user.schedule);
-          this.formRegister.get('circle').setValue(null);
-          const birthdayDate = moment(this.user.birthday.iso).tz('America/Mexico_City');
+    this.circlesService.getCircles().subscribe(circles => {
+      this.circles = circles.results;
+      this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+        this.usersService.getUser(params.get('userId')).subscribe(res => {
+          console.log(res);
+          if (res) {
+            this.user = res;
+            const circle = this.user.circle || { objectId: '' };
+            this.formRegister.get('firstName').setValue(this.user.firstName);
+            this.formRegister.get('lastName').setValue(this.user.lastName);
+            this.formRegister.get('description').setValue(this.user.description);
+            this.formRegister.get('city').setValue(this.user.city);
+            this.formRegister.get('status').setValue(this.user.status);
+            this.formRegister.get('phone').setValue(this.user.phone);
+            this.formRegister.get('email').setValue(this.user.username);
+            this.formRegister.get('schedule').setValue(this.user.schedule);
+            this.formRegister.get('circle').setValue(circle.objectId);
+            const birthdayDate = moment(this.user.birthday.iso).tz('America/Mexico_City');
 
-          this.formRegister.get('birthdayDateStruct').setValue({
-            year: birthdayDate.year(),
-            month: birthdayDate.month() + 1,
-            day: birthdayDate.date()
-          });
+            this.formRegister.get('birthdayDateStruct').setValue({
+              year: birthdayDate.year(),
+              month: birthdayDate.month() + 1,
+              day: birthdayDate.date()
+            });
 
-          this.onChangeDate(null);
+            this.onChangeDate(null);
 
-          this.userEnabled = true;
+            this.userEnabled = true;
 
-        } else {
+          } else {
+            // show alert to user
+            Swal.fire({
+              title: 'Error',
+              html: 'Error al recuperar datos',
+              type: 'error'
+            });
+            this.userEnabled = false;
+          }
+        }, error => {
           // show alert to user
           Swal.fire({
             title: 'Error',
-            html: 'Error al recuperar datos',
+            html: error.message,
             type: 'error'
           });
           this.userEnabled = false;
-        }
-      }, error => {
-        // show alert to user
-        Swal.fire({
-          title: 'Error',
-          html: error.message,
-          type: 'error'
         });
-        this.userEnabled = false;
       });
     });
 
@@ -120,7 +128,6 @@ export class RegisterEditComponent implements OnInit {
       return;
     }
 
-
     if (this.formRegister.valid) {
       const params = {
         username: this.formRegister.get('email').value,
@@ -136,12 +143,21 @@ export class RegisterEditComponent implements OnInit {
           __type: 'Date',
           iso: this._birthdayDate.format(),
         },
+        circle: null,
         schedules: this.user.schedules,
         location: this.user.location,
         role: this.user.role,
         contact: this.user.contact,
         isRepresentativeCircle: this.user.isRepresentativeCircle
       };
+
+      if (this.formRegister.get('circle').value.length > 0) {
+        params.circle = {
+          __type: 'Pointer',
+          className: 'Circle',
+          objectId: this.formRegister.get('circle').value
+        };
+      }
 
       this.usersService.updateUser(params, this.user.objectId).subscribe(res => {
         if (res) {

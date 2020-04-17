@@ -34,11 +34,14 @@ import { LoaderScreenComponent } from './components/loader-screen/loader-screen.
 import { AuthService } from './services/auth.service';
 import { GlobalsService } from './services/globals.service';
 import { UsersService } from './services/users.service';
+import { RolesService } from 'src/app/services/roles.service';
+import { CirclesService } from './services/circles.service';
 
 import { LoaderScreenInterceptorService } from './services/loader-screen-interceptor.service';
 
 import { ServiceRequestScheduleComponent } from './components/service-request-schedule/service-request-schedule.component';
 import { ScheduleEventModalComponent } from './components/schedule-event-modal/schedule-event-modal.component';
+
 
 
 export const interceptorProviders = [
@@ -80,6 +83,8 @@ registerLocaleData(localeEn, 'en');
     AuthService,
     GlobalsService,
     UsersService,
+    RolesService,
+    CirclesService,
     interceptorProviders,
     { provide: LOCALE_ID, useValue: 'es' }
   ],

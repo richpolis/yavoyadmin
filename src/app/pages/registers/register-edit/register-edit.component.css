@@ -12,7 +12,7 @@
 }
 
 .btn-create {
-    background: var(--secondary-color);
+    background: var(--btn-save-color);
     color: #fff;
     width: 100px;
     height: 40px;
@@ -20,8 +20,18 @@
     border-radius: 3px;
 }
 
+.btn.btn-outline-secondary {
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 50px;
+    padding: 10px;
+}
+
 .btn-cancel {
-    background: #fff;
+    background: var(--btn-return-color);
+    color: white;
     border: none;
     height: 40px;
     width: 100px;
@@ -29,12 +39,8 @@
     margin: 0px 10px;
 }
 
-.input80 {
-    width: 80%;
-}
-
 .btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(126, 66, 173, 0.9);
     transition-duration: .3s;
 }
 
@@ -43,12 +49,4 @@
     padding-right: 30px;
     display: flex;
     justify-content: flex-end;
-}
-
-.input100 {
-    width: 80%;
-}
-
-.select100 {
-    width: 80%;
 }
