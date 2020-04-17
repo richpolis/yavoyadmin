@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class RegistersComponent implements OnInit {
 
-  public paramsUsers: any = {status: 'request', q: '', order: 'email', limit: 10, skip: 0};
+  public paramsUsers: any = {status: '', q: '', order: 'email', limit: 10, skip: 0};
   public users: Array<User> = [];
   public page = 1;
   public pages = [];
@@ -63,7 +63,9 @@ export class RegistersComponent implements OnInit {
             { firstName: { $regex: params.q, $options: 'i' } },
             { lastName: { $regex: params.q, $options: 'i' } },
             { phone: { $regex: params.q, $options: 'i' } },
-            { email: { $regex: params.q, $options: 'i' } }
+            { email: { $regex: params.q, $options: 'i' } },
+            { city: { $regex: params.q, $options: 'i' } },
+            { schedule: { $regex: params.q, $options: 'i' } }
         ];
       }
     }

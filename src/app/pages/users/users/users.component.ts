@@ -64,6 +64,7 @@ export class UsersComponent implements OnInit {
             { lastName: { $regex: params.q, $options: 'i' } },
             { phone: { $regex: params.q, $options: 'i' } },
             { email: { $regex: params.q, $options: 'i' } },
+            { city: { $regex: params.q, $options: 'i' } },
             { schedule: { $regex: params.q, $options: 'i' } }
         ];
       }
