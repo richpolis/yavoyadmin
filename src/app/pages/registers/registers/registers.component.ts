@@ -197,6 +197,14 @@ export class RegistersComponent implements OnInit {
     this.router.navigate(['/dashboard/registers/edit', user.objectId]);
   }
 
+  getHorarioString(user: User): string {
+    if (user.schedule !== undefined) {
+      return user.schedule.toUpperCase();
+    } else {
+      return '';
+    }
+  }
+
   public onSearchUsers(event: any): void {
     const search = true;
     this.paramsUsers.skip = 0;

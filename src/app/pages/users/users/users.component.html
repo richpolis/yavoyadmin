@@ -39,8 +39,8 @@
                 <thead>
                     <tr>
                         <!--th scope="col"></th-->
+                        <th scope="col">Foto</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Fecha de nacimiento</th>
                         <th scope="col">Ciudad</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Horario</th>
@@ -51,9 +51,19 @@
                 <tbody>
                     <!-- ARREGLO DE EVENTOS  -->
                     <tr *ngFor="let user of users; let i = index">
+                        <td *ngIf="user.photo !== undefined; else withoutPhoto">
+                            <div class="thumbnail-img" [ngStyle]="{'background-image': 'url(' + user.photo.url + ')'}">
+                                <!--img src="{{user.photo.url}}" alt="Foto de perfil de {{ user.firstName }} {{ user.lastName }}" /-->
+                            </div>
+                        </td>
+                        <ng-template #withoutPhoto>
+                            <td>
+                                <div class="thumbnail-img">
+                                    <!--img src="assets/images/no-image-nike.png" alt="Foto de perfil de {{ user.firstName }} {{ user.lastName }}" /-->
+                                </div>
+                            </td>
+                        </ng-template>
                         <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                        <td *ngIf="user.birthday.iso === undefined ">{{ user.birthday|date: "d MMM y" }}</td>
-                        <td *ngIf="user.birthday.iso !== undefined ">{{ user.birthday.iso|date: "d MMM y" }}</td>
                         <td>{{ user.city }}</td>
                         <td>{{ user.phone }}</td>
                         <td>{{ getHorarioString(user) }}</td>
@@ -62,8 +72,8 @@
                             <img *ngIf="user.status == 'inactive'" src="assets/images/icons/icon_cross.png" class="mx-2 icons" />
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-action mr-1" (click)="onActivate(user)" [disabled]="user.status == 'inactive'? '' : 'disabled'" *ngIf="user.status == 'inactive'">Activar</button>
-                            <button class="btn btn-action mr-1" (click)="onInactivate(user)" [disabled]="user.status == 'active'? '' : 'disabled'" *ngIf="user.status == 'active'">Inactivar</button>
+                            <!--button class="btn btn-action mr-1" (click)="onActivate(user)" [disabled]="user.status == 'inactive'? '' : 'disabled'" *ngIf="user.status == 'inactive'">Activar</button-->
+                            <!--button class="btn btn-action mr-1" (click)="onInactivate(user)" [disabled]="user.status == 'active'? '' : 'disabled'" *ngIf="user.status == 'active'">Inactivar</button-->
                             <button class="btn btn-action" (click)="onEdit(user)">Ver</button>
                         </td>
                     </tr>

@@ -40,33 +40,38 @@
                 <thead>
                     <tr>
                         <!--th scope="col"></th-->
+                        <th scope="col">Foto</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Fecha de nacimiento</th>
                         <th scope="col">Ciudad</th>
-                        <th scope="col">Teléfono</th>
                         <th scope="col">Correo</th>
+                        <th scope="col">Horario</th>
                         <th scope="col">Estatus</th>
-                        <th scope="col">Tipo de afiliación</th>
                         <th class="text-center" scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- ARREGLO DE EVENTOS  -->
                     <tr *ngFor="let user of users; let i = index">
+                        <td *ngIf="user.photo !== undefined; else withoutPhoto">
+                            <div class="thumbnail-img" [ngStyle]="{'background-image': 'url(' + user.photo.url + ')'}">
+                                <!--img src="{{user.photo.url}}" alt="Foto de perfil de {{ user.firstName }} {{ user.lastName }}" /-->
+                            </div>
+                        </td>
+                        <ng-template #withoutPhoto>
+                            <td>
+                                <div class="thumbnail-img">
+                                    <!--img src="assets/images/no-image-nike.png" alt="Foto de perfil de {{ user.firstName }} {{ user.lastName }}" /-->
+                                </div>
+                            </td>
+                        </ng-template>
                         <td>{{ user.firstName }}&nbsp;{{ user.lastName }}</td>
-                        <td *ngIf="user.birthday.iso === undefined ">{{ user.birthday|date: "d MMM y" }}</td>
-                        <td *ngIf="user.birthday.iso !== undefined ">{{ user.birthday.iso|date: "d MMM y" }}</td>
                         <td>{{ user.city }}</td>
-                        <td>{{ user.phone }}</td>
                         <td>{{ user.username }}</td>
+                        <td>{{ getHorarioString(user) }}</td>
                         <td>
                             <span *ngIf="user.status == 'approved'" class="badge badge-success">Aprobado</span>
                             <span *ngIf="user.status == 'request'" class="badge badge-info">Solicitud</span>
                             <span *ngIf="user.status == 'deleted'" class="badge badge-danger">Borrado</span>
-                        </td>
-                        <td>
-                            <span *ngIf="user.circle !== undefined" class="badge badge-success">Circulo</span>
-                            <span *ngIf="user.circle === undefined" class="badge badge-info">Individual</span>
                         </td>
                         <td class="text-center">
                             <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'" *ngIf="user.status == 'request'">Aprobar</button>

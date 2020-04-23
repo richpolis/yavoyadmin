@@ -25,4 +25,7 @@ export interface User {
     description: string;
     schedules: [];
     schedule: string;
+    photo: any;
+    ine: any;
+    gender: string;
 }

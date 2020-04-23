@@ -180,8 +180,30 @@ input[type="password"]:valid {
     width: 100%;
 }
 
+.thumbnail-img {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover;
+    background-image: url("assets/images/no-image-nike.png");
+    background-color: white;
+    border-radius: 5px;
+}
 
-/* TERMINA SELECT PERSONALIZADO */
+
+/*
+.thumbnail-img img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+.thumbnail-img img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+*/
 
 
 /* SLIDE TOGGLE PERSONALIZADO */
