@@ -15,6 +15,18 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
+                                    <label class="hoverable" for="userPhoto">
+                                        <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'" class="img-profile"> 
+                                        <div class="hover-text">Elegir foto de perfil</div>
+                                        <div class="background"></div>
+                                      </label>
+                                    <br/>
+                                    <input id="userPhoto" type='file' (change)="onSelectPhoto($event)">
+                                    <button [disabled]="user?.photo !== undefined && user?.photo !== null ? '' : 'disabled'" (click)="deletePhoto()">Borrar</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
                                     <label for="firstName">Nombre:</label>
                                     <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="firstName" placeholder="Nombre" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.firstName.errors }">
                                     <div *ngIf="formSubmitAttempt && f.firstName.errors" class="invalid-feedback">
@@ -35,21 +47,10 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="firstName">Ciudad:</label>
-                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="city" placeholder="Ciudad" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.city.errors }">
-                                    <div *ngIf="formSubmitAttempt && f.city.errors" class="invalid-feedback">
-                                        <div *ngIf="f.city.errors.required">La ciudad es requerida.</div>
-                                        <div *ngIf="f.city.errors.minlength">La ciudad es muy corta.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="description">Descripción</label>
-                                    <textarea class="form-control textarea-rounded" id="description" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.description.errors }"></textarea>
-                                    <div *ngIf="formSubmitAttempt && f.description.errors" class="invalid-feedback">
-                                        <div *ngIf="f.description.errors.required">La descripción es necesaria.</div>
-                                        <div *ngIf="f.description.errors.minlength">La descripción es demasiado corta.</div>
+                                    <label for="phone">Teléfono:</label>
+                                    <input autocomplete="off" type="tel" class="form-control input-yavoy input-rounded" formControlName="phone" placeholder="Teléfono" maxlength="100" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.phone.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.phone.errors" class="invalid-feedback">
+                                        <div *ngIf="f.phone.errors.required">El teléfono es necesario.</div>
                                     </div>
                                 </div>
                             </div>
@@ -58,6 +59,18 @@
                     </div>
                     <div class="col-lg-4" style="padding-right: 2%;">
                         <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="hoverable hoverable-ine" for="userINE">
+                                        <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'"  class="img-ine"> 
+                                        <div class="hover-text">INE</div>
+                                        <div class="background"></div>
+                                      </label>
+                                    <br/>
+                                    <input id="userINE" type='file' (change)="onSelectINE($event)">
+                                    <button [disabled]="user?.ine !== undefined && user?.ine !== null ? '' : 'disabled'" (click)="deleteINE()">Borrar</button>
+                                </div>
+                            </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="birthday">Fecha de nacimiento:</label>
@@ -75,10 +88,11 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="phone">Teléfono:</label>
-                                    <input autocomplete="off" type="tel" class="form-control input-yavoy input-rounded" formControlName="phone" placeholder="Teléfono" maxlength="100" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.phone.errors }">
-                                    <div *ngIf="formSubmitAttempt && f.phone.errors" class="invalid-feedback">
-                                        <div *ngIf="f.phone.errors.required">El teléfono es necesario.</div>
+                                    <label for="firstName">Ciudad:</label>
+                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="city" placeholder="Ciudad" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.city.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.city.errors" class="invalid-feedback">
+                                        <div *ngIf="f.city.errors.required">La ciudad es requerida.</div>
+                                        <div *ngIf="f.city.errors.minlength">La ciudad es muy corta.</div>
                                     </div>
                                 </div>
                             </div>
@@ -94,6 +108,11 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="col-lg-4" style="padding-right: 2%;">
+                        <div class="row">
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="status">Estatus</label>
@@ -104,10 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4" style="padding-right: 2%;">
-                        <div class="row">
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="schedule">Horario:</label>
@@ -118,6 +134,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="circle">Circulo:</label>
@@ -128,6 +145,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="description">Descripción</label>
+                                    <textarea class="form-control textarea-rounded" id="description" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.description.errors }"></textarea>
+                                    <div *ngIf="formSubmitAttempt && f.description.errors" class="invalid-feedback">
+                                        <div *ngIf="f.description.errors.required">La descripción es necesaria.</div>
+                                        <div *ngIf="f.description.errors.minlength">La descripción es demasiado corta.</div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

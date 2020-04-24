@@ -96,7 +96,10 @@ export class UsersService {
       isRepresentativeCircle: other.isRepresentativeCircle,
       city: other.city,
       phone: other.phone,
-      schedule: other.schedule
+      schedule: other.schedule,
+      photo: other.photo || null,
+      ine: other.ine || null,
+      gender: other.gender
     };
     return this.httpClient.put<any>(`${this.URL_BASE}/users/${other.objectId}`, params, httpOptions)
                                                  .pipe(catchError(this.errorHandler));
@@ -129,6 +132,9 @@ export class UsersService {
       role: other.role,
       contact: other.contact,
       isRepresentativeCircle: other.isRepresentativeCircle || false,
+      photo: other.photo || null,
+      ine: other.ine || null,
+      gender: other.gender
     };
     console.log('parametros');
     console.log(params);

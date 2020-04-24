@@ -139,7 +139,10 @@ export class UserEditComponent implements OnInit {
         location: this.user.location,
         role: this.user.role,
         contact: this.user.contact,
-        isRepresentativeCircle: this.user.isRepresentativeCircle
+        isRepresentativeCircle: this.user.isRepresentativeCircle,
+        gender: this.user.gender,
+        photo: this.user.photo || null,
+        ine: this.user.ine || null
       };
 
       this.usersService.updateUser(params, this.user.objectId).subscribe(res => {
@@ -179,6 +182,62 @@ export class UserEditComponent implements OnInit {
     sBirthdayDate += (birthdayDateStruct.day >= 10 ? birthdayDateStruct.day : '0' + birthdayDateStruct.day);
 
     this._birthdayDate = moment(sBirthdayDate + 'T00:00:00-06:00' ).tz('America/Mexico_City');
+  }
+
+  onSelectPhoto(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      const file = event.target.files[0];
+      const name = file.name;
+      const Parse = this.globalsService.getParseObject();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (e) => { // called once readAsDataURL is completed
+        this.user.photo = {
+          '__type': 'File',
+          'name': name,
+          'url': reader.result
+        };
+        const iconImageFile = new Parse.File(name, file);
+        iconImageFile.save().then( res =>  {
+          this.user.photo.name = res._name;
+          this.user.photo.url = res._url;
+         });
+      };
+    }
+  }
+
+  deletePhoto() {
+    this.user.photo = null;
+  }
+
+  onSelectINE(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      const file = event.target.files[0];
+      const name = file.name;
+      const Parse = this.globalsService.getParseObject();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (e) => { // called once readAsDataURL is completed
+        this.user.ine = {
+          '__type': 'File',
+          'name': name,
+          'url': reader.result
+        };
+        const iconImageFile = new Parse.File(name, file);
+        iconImageFile.save().then( res =>  {
+          this.user.ine.name = res._name;
+          this.user.ine.url = res._url;
+         });
+      };
+    }
+  }
+
+  deleteINE() {
+    this.user.ine = null;
   }
 
 }

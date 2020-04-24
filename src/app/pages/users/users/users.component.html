@@ -51,7 +51,7 @@
                 <tbody>
                     <!-- ARREGLO DE EVENTOS  -->
                     <tr *ngFor="let user of users; let i = index">
-                        <td *ngIf="user.photo !== undefined; else withoutPhoto">
+                        <td *ngIf="user.photo !== undefined && user.photo !== null; else withoutPhoto">
                             <div class="thumbnail-img" [ngStyle]="{'background-image': 'url(' + user.photo.url + ')'}">
                                 <!--img src="{{user.photo.url}}" alt="Foto de perfil de {{ user.firstName }} {{ user.lastName }}" /-->
                             </div>
