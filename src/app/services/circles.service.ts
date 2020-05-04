@@ -20,7 +20,8 @@ export class CirclesService {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'X-Parse-Application-Id': environment.PARSE_APP_ID,
-        'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY
+        'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY,
+        'X-Parse-Master-Key': environment.MASTER_KEY
       })
     };
     // const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');

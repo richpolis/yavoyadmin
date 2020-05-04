@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppBootstrapModule } from 'src/app/app-bootstrap.module';
 import { PaginatorComponent } from './users/paginator/paginator.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 
@@ -13,7 +14,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
   declarations: [
     UsersComponent,
     UserEditComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,

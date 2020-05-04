@@ -193,8 +193,8 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  onEdit(user: User): void {
-    this.router.navigate(['/dashboard/users/edit', user.objectId]);
+  onView(user: User): void {
+    this.router.navigate(['/dashboard/users/detail', user.objectId]);
   }
 
   getHorarioString(user: User): string {

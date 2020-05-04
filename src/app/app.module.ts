@@ -36,6 +36,7 @@ import { GlobalsService } from './services/globals.service';
 import { UsersService } from './services/users.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { CirclesService } from './services/circles.service';
+import { EventsService } from './services/events.service';
 
 import { LoaderScreenInterceptorService } from './services/loader-screen-interceptor.service';
 
@@ -85,6 +86,7 @@ registerLocaleData(localeEn, 'en');
     UsersService,
     RolesService,
     CirclesService,
+    EventsService,
     interceptorProviders,
     { provide: LOCALE_ID, useValue: 'es' }
   ],

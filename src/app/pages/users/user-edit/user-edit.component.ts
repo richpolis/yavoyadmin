@@ -4,9 +4,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { NgbDateStruct, NgbCalendar, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalsService } from 'src/app/services/globals.service';
-import Swal from 'sweetalert2';
 import { UsersService } from '../../../services/users.service';
 import { User } from 'src/app/models/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-edit',
