@@ -39,11 +39,9 @@ import { CirclesService } from './services/circles.service';
 import { EventsService } from './services/events.service';
 
 import { LoaderScreenInterceptorService } from './services/loader-screen-interceptor.service';
-
 import { ServiceRequestScheduleComponent } from './components/service-request-schedule/service-request-schedule.component';
 import { ScheduleEventModalComponent } from './components/schedule-event-modal/schedule-event-modal.component';
-
-
+import { RegisterModalComponent } from './components/register-modal/register-modal.component';
 
 export const interceptorProviders = [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
@@ -65,7 +63,8 @@ registerLocaleData(localeEn, 'en');
     RecoverPasswordModalComponent,
     TimepickerModalComponent,
     ServiceRequestScheduleComponent,
-    ScheduleEventModalComponent
+    ScheduleEventModalComponent,
+    RegisterModalComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +89,7 @@ registerLocaleData(localeEn, 'en');
     interceptorProviders,
     { provide: LOCALE_ID, useValue: 'es' }
   ],
-  entryComponents: [RecoverPasswordModalComponent, TimepickerModalComponent, ServiceRequestScheduleComponent, ScheduleEventModalComponent],
+  entryComponents: [RecoverPasswordModalComponent, RegisterModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

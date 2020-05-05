@@ -12,4 +12,5 @@ export interface EventI {
     schedule: string;
     activity: string;
     status: string;
+    createdAt: any;
 }

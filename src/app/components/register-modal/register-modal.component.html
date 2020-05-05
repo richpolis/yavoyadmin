@@ -1,0 +1,81 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="data">
+                <span class="data-title">Foto:</span>
+                <div class="hoverable">
+                    <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'" class="img-profile">
+                    <div class="background"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">&nbsp;</div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Nombre:</span><br>
+                        <span>{{ user?.firstName }} {{ user?.lastName }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Fecha de nacimiento:</span><br>
+                        <span>{{ user?.birthday.iso|date: "d MMM y" }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Sexo:</span><br>
+                        <span>{{ user?.gender }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Teléfono:</span><br>
+                        <span>{{ user?.phone }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Email:</span><br>
+                        <span>{{ user?.username }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Dirección:</span><br>
+                        <span>{{ getStringAddress(user) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Hobbies:</span><br>
+                        <span>{{ getStringHobbies(user) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="data">
+                        <span class="data-title">Intereses:</span><br>
+                        <span>{{ user?.interests }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">{{ btnLabelAccept }}</button>
+</div>

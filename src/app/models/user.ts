@@ -24,8 +24,10 @@ export interface User {
     location: any;
     description: string;
     schedules: [];
+    activities: [];
     schedule: string;
     photo: any;
     ine: any;
     gender: string;
+    interests: string;
 }

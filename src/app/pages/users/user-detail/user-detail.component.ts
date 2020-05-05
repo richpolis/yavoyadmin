@@ -9,6 +9,7 @@ import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from '../../../services/users.service';
 
 import Swal from 'sweetalert2';
+import { RegisterModalComponent } from '../../../components/register-modal/register-modal.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -19,7 +20,7 @@ export class UserDetailComponent implements OnInit {
 
   public user: User = null;
   public paramsEvent: any = { status: 'request', q: ''};
-  public events: Array<Event>;
+  public events: Array<EventI>;
   public page: number;
   public pages = [];
   public hasNextPage: boolean;
@@ -149,15 +150,8 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
-  onSearchRegisters(event: any): void {
+  onChangeStatus(event: any): void {
     const search = true;
-    /*if (event.target.value.length >= 3) {
-      this.paramsUser.q = event.target.value;
-      search = true;
-    } else if (this.paramsUser.q.length > 0) {
-      this.paramsUser.q = '';
-      search = true;
-    }*/
     if (search) {
       const params  = JSON.parse(JSON.stringify(this.paramsEvent));
       this.getEvents(params);
@@ -170,6 +164,23 @@ export class UserDetailComponent implements OnInit {
 
   onEdit(): void {
     this.router.navigate(['/dashboard/users/edit', this.user.objectId]);
+  }
+
+  showModalRegister(user: User): void {
+    const registerModal = this.modalService.open(RegisterModalComponent, { size: 'lg' });
+    registerModal.componentInstance.user = user;
+    registerModal.result.then( res => {
+      console.log(res);
+    }).catch((error) => {
+      if (error !== undefined && error.message !== undefined) {
+        Swal.fire({
+          title: 'Error',
+          html: error.message,
+          type: 'error'
+        });
+      }
+    });
+
   }
 
 }

@@ -97,21 +97,19 @@
         <div class="row no-gutters">
             <div class="col-lg-6">
                 <div class="row">
-                    <!--div class="col-md-4">
-                            
-                        </div-->
-                    <div class="col-md-6">
+                    <!--div class="col-md-4"> </div-->
+                    <!--div class="col-md-6">
                         <div class="data">
                             <span class="data-title">Invitaciones</span>
                         </div>
-                        <!--div class="data">
+                        <div class="data">
                             <span class="data-count">{{ viewRegister.cientos}}</span>
                             <span class="data-count">{{ viewRegister.decenas}}</span>
                             <span class="data-count">{{ viewRegister.unidades}}</span>
-                        </div-->
-                    </div>
+                        </di>
+                    </div-->
                     <div class="col-md-6 col-select">
-                        <select class="select-nike" [(ngModel)]="paramsEvent.status" name="status" (change)="onChangeView($event)">
+                        <select class="select-nike" [(ngModel)]="paramsEvent.status" name="status" (change)="onChangeStatus($event)">
                             <option value="request" selected>Solicitudes</option>
                             <option value="approved">Aprobadas</option>
                             <option value="cancel">Canceladas</option>
@@ -121,10 +119,10 @@
 
             </div>
             <div class="col-lg-6 col-action">
-                <div class="input-icon">
+                <!--div class="input-icon">
                     <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsEvent.q" name="q" (search)="onSearchRegisters($event)">
                     <img src="assets/images/icons/icon_search.svg" alt="">
-                </div>
+                </div-->
             </div>
         </div>
     </div>
@@ -153,7 +151,11 @@
             <tbody>
                 <!-- ARREGLO DE EVENTOS  -->
                 <tr *ngFor="let event of events; let i = index">
-                    <td>{{ event.voluntary.firstName }} {{ event.voluntary.lastName }}</td>
+                    <td>
+                        <a [routerLink]="" (click)="showModalRegister(event?.voluntary)">
+                            {{ event.voluntary.firstName }} {{ event.voluntary.lastName }}
+                        </a>
+                    </td>
                     <td>{{ event.voluntary.email }}</td>
                     <td>{{ event.startEvent.iso|date: "d MMM y" }}</td>
                     <td>{{ event.createdAt|date: "d MMM y" }}</td>
