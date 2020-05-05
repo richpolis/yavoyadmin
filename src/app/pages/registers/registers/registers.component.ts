@@ -197,6 +197,10 @@ export class RegistersComponent implements OnInit {
     this.router.navigate(['/dashboard/registers/edit', user.objectId]);
   }
 
+  onView(user: User): void {
+    this.router.navigate(['/dashboard/registers/detail', user.objectId]);
+  }
+
   getHorarioString(user: User): string {
     if (user.schedule !== undefined) {
       return user.schedule.toUpperCase();

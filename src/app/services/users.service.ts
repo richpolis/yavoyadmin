@@ -54,7 +54,6 @@ export class UsersService {
 
   changeStatus2(other: User, status: string): any {
     return new Promise((resolve, reject) => {
-      debugger;
       const Parse = this.globalsService.getParseObject();
       const query = new Parse.Query(new Parse.User());
       query.get(other.objectId).then((user) => {
@@ -86,6 +85,7 @@ export class UsersService {
       birthday: other.birthday,
       location: other.location,
       description: other.description,
+      activities: other.activities,
       schedules: other.schedules,
       role: other.role,
       circle: other.circle,
@@ -99,7 +99,9 @@ export class UsersService {
       schedule: other.schedule,
       photo: other.photo || null,
       ine: other.ine || null,
-      gender: other.gender
+      gender: other.gender,
+      interests: other.interests,
+      ACL: other.ACL
     };
     return this.httpClient.put<any>(`${this.URL_BASE}/users/${other.objectId}`, params, httpOptions)
                                                  .pipe(catchError(this.errorHandler));
@@ -128,13 +130,16 @@ export class UsersService {
       status: other.status,
       circle: other.circle || null,
       schedules: other.schedules,
+      activities: other.activities,
       location: other.location,
       role: other.role,
       contact: other.contact,
       isRepresentativeCircle: other.isRepresentativeCircle || false,
       photo: other.photo || null,
       ine: other.ine || null,
-      gender: other.gender
+      gender: other.gender,
+      interests: other.interests,
+      ACL: other.ACL
     };
     console.log('parametros');
     console.log(params);

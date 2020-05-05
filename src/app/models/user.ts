@@ -5,6 +5,7 @@ export interface User {
     lastName: string;
     birthday: any;
     email: string;
+    phone: string;
     password: string;
     sessionToken: string;
     emailVerified: boolean;
@@ -20,7 +21,6 @@ export interface User {
     request: boolean;
     selected: boolean;
     city: string;
-    phone: string;
     location: any;
     description: string;
     schedules: [];

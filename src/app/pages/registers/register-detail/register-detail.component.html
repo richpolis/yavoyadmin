@@ -1,1 +1,204 @@
-<p>register-detail works!</p>
+<div class="container">
+
+    <div class="header">
+        <h3 class="header-title">
+            Detalle Voluntario
+        </h3>
+    </div>
+
+    <!-- ============
+         INICIA INFORMACION DEL MEMBER 
+        ================= -->
+
+    <div class="event-info">
+        <!-- FILA DE DATOS 1  -->
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="row">
+                    <div class="data">
+                        <span class="data-title">Foto:</span>
+                        <div class="hoverable">
+                            <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'" class="img-profile">
+                            <div class="background"></div>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Nombre:</span>
+                        <span>{{ user?.firstName }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Apellidos:</span>
+                        <span>{{ user?.lastName }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Teléfono:</span>
+                        <span>{{ user?.phone }}</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="row medical-record">
+                    <div class="data">
+                        <span class="data-title">INE:</span>
+                        <div class="hoverable hoverable-ine">
+                            <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'" class="img-ine">
+                            <div class="background"></div>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Fecha de nacimiento:</span>
+                        <span>{{ user?.birthday.iso|date: "d MMM y"}}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Ciudad:</span>
+                        <span>{{ user?.city }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Email:</span>
+                        <span>{{ user?.username }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="row">
+                    <div class="data" *ngIf="user?.status">
+                        <span class="data-title">Estatus:</span>
+                        <span>{{ getStringStatus(user) }}</span>
+                    </div>
+                    <div class="data" *ngIf="user?.schedule">
+                        <span class="data-title">Horario:</span>
+                        <span>{{ getStringSchedule(user) }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Circulo:</span>
+                        <span>{{ getStringCircle(user) }}</span>
+                    </div>
+                    <div class="data">
+                        <span class="data-title">Descripción:</span>
+                        <span>{{ user?.description }}</span>
+                    </div>
+                    <div class="data">
+                        <button class="btn btn-search" (click)="onEdit()">Editar</button>
+                    </div>
+                    <div class="data">
+                        <button class="btn btn-search" (click)="onReturn()">Regresar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============
+         TERMINA INFORMACION DEL MEMBER 
+        ================= -->
+
+    <!-- ============
+         INICIA LAS ACCIONES 
+        ================= -->
+    <div class="actions">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <div class="row">
+                    <!--div class="col-md-4"> </div-->
+                    <!--div class="col-md-6">
+                        <div class="data">
+                            <span class="data-title">Invitaciones</span>
+                        </div>
+                        <div class="data">
+                            <span class="data-count">{{ viewRegister.cientos}}</span>
+                            <span class="data-count">{{ viewRegister.decenas}}</span>
+                            <span class="data-count">{{ viewRegister.unidades}}</span>
+                        </di>
+                    </div-->
+                    <div class="col-md-6 col-select">
+                        <select class="select-nike" [(ngModel)]="paramsEvent.status" name="status" (change)="onChangeStatus($event)">
+                            <option value="request" selected>Solicitudes</option>
+                            <option value="approved">Aprobadas</option>
+                            <option value="cancel">Canceladas</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-action">
+                <!--div class="input-icon">
+                    <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsEvent.q" name="q" (search)="onSearchRegisters($event)">
+                    <img src="assets/images/icons/icon_search.svg" alt="">
+                </div-->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============
+         TERMINA LAS ACCIONES 
+        ================= -->
+
+    <!-- ============
+         INICIA LA TABLA DE INVITACIONES 
+        ================= -->
+    <div class="">
+        <table class="table table-event-detail table-responsive-sm">
+            <thead>
+                <tr>
+                    <!--th scope="col"></th-->
+                    <th scope="col">Beneficiario invitado</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Horario</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Actividad a realizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ARREGLO DE EVENTOS  -->
+                <tr *ngFor="let event of events; let i = index">
+                    <td>
+                        <a [routerLink]="" (click)="showModalUser(event?.beneficiary)">
+                            {{ event.beneficiary.firstName }} {{ event.beneficiary.lastName }}
+                        </a>
+                    </td>
+                    <td>{{ event.beneficiary.email }}</td>
+                    <td>{{ event.startEvent.iso|date: "d MMM y" }}</td>
+                    <td>{{ event.createdAt|date: "d MMM y" }}</td>
+                    <td>{{ getStringEventSchedule(event) }}</td>
+                    <td>{{ getStringEventStatus(event) }}</td>
+                    <td>{{ event.activity }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- ============
+         TERMINA LA TABLA DE INVITACIONES 
+        ================= -->
+
+    <!-- ============
+        INICIA PAGINADOR
+       ================= -->
+    <div class="paginator">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" [ngClass]="{isDisabled: !hasPreviousPage}" (click)="loadPage(page-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item" *ngFor="let num of pages" [ngClass]="{active: page===num, isDisabled: page===num}"><a class="page-link" href="javascript:void(0)" (click)="loadPage(num)">{{ num + 1 }}</a></li>
+
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" [ngClass]="{isDisabled: !hasNextPage }" (click)="loadPage(page+1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ============
+            TERMINA EL PAGINADOR 
+           ================= -->
+
+
+</div>

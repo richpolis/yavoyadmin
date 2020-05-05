@@ -1,0 +1,230 @@
+.header {
+    padding-top: 5%;
+    margin-bottom: 3%;
+}
+
+
+/* ESTILO DE INFORMACION DEL EVENTO */
+
+.event-info {
+    margin: 30px 0 10px;
+}
+
+.row .data {
+    margin: 0 15px;
+    width: 100%;
+    padding: 8px
+}
+
+.row .data .data-title {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.row .data span.data-title :nth-child(2) {
+    font-weight: bold;
+    color: #bbb;
+}
+
+.row .data span.data-count {
+    display: inline;
+    padding: 10px;
+    border: 1px solid gray;
+    text-align: center;
+    margin-left: 10px;
+    border-radius: 10%;
+    color: gray;
+}
+
+
+/* ESTILOS DE LAS ACCIONES  */
+
+.actions {
+    margin: 10px 0 20px;
+}
+
+.actions .data {
+    margin: 0px;
+}
+
+.actions .col-select .select-nike {
+    margin-top: 35px;
+}
+
+.col-search {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 10px 0px;
+}
+
+.col-save {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    margin: 10px 0px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.input-group label {
+    font-weight: bold;
+}
+
+.btn-group {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.input-group .input-search {
+    border: 1px solid #bbb;
+    height: 45px;
+    width: 95%;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.btn-search {
+    background: var(--secondary-color);
+    color: #fff;
+    width: 130px;
+    height: 45px;
+}
+
+.btn-cancel {
+    background: #E83A49;
+    border: #E83A49;
+    width: 130px;
+    height: 45px;
+    color: #fff;
+}
+
+.select-nike {
+    border-radius: 0;
+    border: 1px solid #bbbb;
+    height: 45px;
+    width: 319px;
+}
+
+.col-action {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.col-action .input-icon {
+    bottom: -24px;
+}
+
+.img-icon {
+    height: 24px;
+}
+
+
+/* ESTILO PARA LA TABLA */
+
+.table-event-detail {
+    border: 1px solid #bbb;
+}
+
+tbody tr,
+tbody th {
+    line-height: 50px;
+}
+
+.paginator {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page-link {
+    color: #000 !important;
+}
+
+.page-item.active .page-link {
+    background-color: var(--secondary-color) !important;
+    color: #fff !important;
+    border: 1px solid var(--secondary-color);
+}
+
+.input-icon img {
+    position: absolute;
+    left: 18px;
+    top: 25%;
+    width: 18px;
+    height: 18px;
+}
+
+img.img-profile {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+img.img-ine {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.hoverable {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    border: 5px solid #000;
+    border-radius: 5px;
+}
+
+.hoverable.hoverable-ine {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 200px;
+    width: 300px;
+    border: 5px solid #000;
+    border-radius: 5px;
+}
+
+.hoverable .hover-text {
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.hoverable .background {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.hoverable:hover .hover-text {
+    display: block;
+}
+
+.hoverable:hover .background {
+    display: block;
+}
+
+input[type="file"] {
+    display: none;
+}

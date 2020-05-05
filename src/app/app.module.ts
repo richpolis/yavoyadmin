@@ -23,7 +23,6 @@ import { AppBootstrapModule } from './app-bootstrap.module';
 // Componentes compartido
 import { SharedModule } from './shared/shared.module';
 import { RecoverPasswordModalComponent } from './components/recover-password-modal/recover-password-modal.component';
-import { TimepickerModalComponent } from './components/timepicker-modal/timepicker-modal.component';
 
 // Loading router
 import { LoadingBarModule } from '@ngx-loading-bar/core';
@@ -39,9 +38,8 @@ import { CirclesService } from './services/circles.service';
 import { EventsService } from './services/events.service';
 
 import { LoaderScreenInterceptorService } from './services/loader-screen-interceptor.service';
-import { ServiceRequestScheduleComponent } from './components/service-request-schedule/service-request-schedule.component';
-import { ScheduleEventModalComponent } from './components/schedule-event-modal/schedule-event-modal.component';
 import { RegisterModalComponent } from './components/register-modal/register-modal.component';
+import { UserModalComponent } from './components/user-modal/user-modal.component';
 
 export const interceptorProviders = [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
@@ -61,10 +59,8 @@ registerLocaleData(localeEn, 'en');
     PagesComponent,
     LoaderScreenComponent,
     RecoverPasswordModalComponent,
-    TimepickerModalComponent,
-    ServiceRequestScheduleComponent,
-    ScheduleEventModalComponent,
-    RegisterModalComponent
+    RegisterModalComponent,
+    UserModalComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +85,7 @@ registerLocaleData(localeEn, 'en');
     interceptorProviders,
     { provide: LOCALE_ID, useValue: 'es' }
   ],
-  entryComponents: [RecoverPasswordModalComponent, RegisterModalComponent],
+  entryComponents: [RecoverPasswordModalComponent, RegisterModalComponent, UserModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

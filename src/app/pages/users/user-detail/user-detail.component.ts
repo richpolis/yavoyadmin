@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { User } from 'src/app/models/user';
 import { EventI } from '../../../models/event';
-
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from '../../../services/users.service';
-
-import Swal from 'sweetalert2';
 import { RegisterModalComponent } from '../../../components/register-modal/register-modal.component';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-user-detail',
