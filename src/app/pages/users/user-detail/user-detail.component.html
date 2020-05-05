@@ -19,6 +19,7 @@
                         <span class="data-title">Foto:</span>
                         <div class="hoverable">
                             <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'" class="img-profile">
+                            <div class="background"></div>
                         </div>
                     </div>
                     <div class="data">
@@ -41,7 +42,8 @@
                     <div class="data">
                         <span class="data-title">INE:</span>
                         <div class="hoverable hoverable-ine">
-                            <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'" class="img-profile">
+                            <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'" class="img-ine">
+                            <div class="background"></div>
                         </div>
                     </div>
                     <div class="data">
@@ -54,7 +56,7 @@
                     </div>
                     <div class="data">
                         <span class="data-title">Email:</span>
-                        <span>{{ user?.email }}</span>
+                        <span>{{ user?.username }}</span>
                     </div>
                 </div>
             </div>
@@ -62,11 +64,11 @@
                 <div class="row">
                     <div class="data" *ngIf="user?.status">
                         <span class="data-title">Estatus:</span>
-                        <span>{{ getStringStatus() }}</span>
+                        <span>{{ getStringStatus(user) }}</span>
                     </div>
                     <div class="data" *ngIf="user?.schedule">
                         <span class="data-title">Horario:</span>
-                        <span>{{ getStringSchedule() }}</span>
+                        <span>{{ getStringSchedule(user) }}</span>
                     </div>
                     <div class="data">
                         <span class="data-title">Descripción:</span>
@@ -102,17 +104,17 @@
                         <div class="data">
                             <span class="data-title">Invitaciones</span>
                         </div>
-                        <div class="data">
+                        <!--div class="data">
                             <span class="data-count">{{ viewRegister.cientos}}</span>
                             <span class="data-count">{{ viewRegister.decenas}}</span>
                             <span class="data-count">{{ viewRegister.unidades}}</span>
-                        </div>
+                        </div-->
                     </div>
                     <div class="col-md-6 col-select">
-                        <select class="select-nike" [(ngModel)]="view" name="view" (change)="onChangeView($event)">
-                            <option value="events" selected>Eventos registrada</option>
-                            <option value="attendances">Asistencias a eventos</option>
-                            <option value="services-requests">Solicitudes de servicios</option>
+                        <select class="select-nike" [(ngModel)]="paramsEvent.status" name="status" (change)="onChangeView($event)">
+                            <option value="request" selected>Solicitudes</option>
+                            <option value="approved">Aprobadas</option>
+                            <option value="cancel">Canceladas</option>
                         </select>
                     </div>
                 </div>
@@ -120,7 +122,7 @@
             </div>
             <div class="col-lg-6 col-action">
                 <div class="input-icon">
-                    <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsUser.q" name="q" (search)="onSearchRegisters($event)">
+                    <input class="input-search" type="search" placeholder="Buscar" placeholder="Ingresa datos y da ENTER" [(ngModel)]="paramsEvent.q" name="q" (search)="onSearchRegisters($event)">
                     <img src="assets/images/icons/icon_search.svg" alt="">
                 </div>
             </div>

@@ -50,23 +50,26 @@ export class EventsService {
   }
 
 
-  getEventsWithBeneficiarioVoluntario(where: any = null, order: any = null, limit: any = 10, skip: any = 0): Observable<any> {
+  getEventsWithBeneficiarioVoluntario(params: any = {}, limit: any = 10, skip: any = 0): Observable<any> {
     const user = this.globalsService.getUser();
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'X-Parse-Application-Id': environment.PARSE_APP_ID,
         'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY
-      }),
-      params: new HttpParams()
-      .set('where', JSON.stringify(where))
-      .set('count', '1')
-      .set('limit', '' + limit)
-      .set('skip', '' + skip)
-      .set('order', order)
+        //'X-Parse-Master-Key': environment.MASTER_KEY
+      })
+      // ,
+      // params: new HttpParams()
+      // .set('where', JSON.stringify(where))
+      // .set('count', '1')
+      // .set('limit', '' + limit)
+      // .set('skip', '' + skip)
+      // .set('order', order)
     };
-    // const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
-    return this.httpClient.post<any>(`${this.URL_BASE}/functions/getEvents`, httpOptions)
+    params.limit = limit;
+    params.skip = skip;
+    return this.httpClient.post<any>(`${this.URL_BASE}/functions/getEvents`, params, httpOptions)
                                               .pipe(catchError(this.errorHandler));
   }
 

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { User } from 'src/app/models/user';
+import { EventI } from '../../../models/event';
+
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from '../../../services/users.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import Swal from 'sweetalert2';
-import { EventI } from '../../../models/event';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,8 +17,8 @@ import { EventI } from '../../../models/event';
 })
 export class UserDetailComponent implements OnInit {
 
-  public user: User;
-  public paramsEvent: any = { status: 'approved', q: ''};
+  public user: User = null;
+  public paramsEvent: any = { status: 'request', q: ''};
   public events: Array<Event>;
   public page: number;
   public pages = [];
@@ -54,24 +57,40 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  getStringSchedule(): string {
-    const schedule = this.schedules.find(item => item.key === this.user.schedule);
-    return schedule.name;
+  getStringSchedule(user: User): string {
+    if (user !== null && user.schedule !== null && user.schedule.length > 0) {
+      const schedules = this.schedules.filter(item => item.key === user.schedule);
+      return schedules.length > 0 ? schedules[0].name : '';
+    } else {
+      return '';
+    }
   }
 
-  getStringStatus(): string {
-    const status = this.statuses.find(item => item.key === this.user.status);
-    return status.name;
+  getStringStatus(user: User): string {
+    if (this.user !== null && this.user.status !== null && this.user.status.length > 0) {
+      const statuses = this.statuses.filter(item => item.key === this.user.status);
+      return statuses.length > 0 ? statuses[0].name : '';
+    } else {
+      return '';
+    }
   }
 
   getStringEventSchedule(event: EventI): string {
-    const schedule = this.schedules.find(item => item.key === event.schedule);
-    return schedule.name;
+    if (this.user !== null && event.schedule !== null && event.schedule !== undefined && event.schedule.length > 0) {
+      const schedules = this.schedules.filter(item => item.key === event.schedule);
+      return schedules.length > 0 ? schedules[0].name : '';
+    } else {
+      return '';
+    }
   }
 
   getStringEventStatus(event: EventI): string {
-    const status = this.statusEvents.find(item => item.key === event.status);
-    return status.name;
+    if (this.user !== null && event.status !== null && event.status !== undefined  && event.status.length > 0) {
+      const statuses = this.statusEvents.filter(item => item.key === event.status);
+      return statuses.length > 0 ? statuses[0].name : '';
+    } else {
+      return '';
+    }
   }
 
   getUser(userId: string = null): void {
@@ -79,6 +98,7 @@ export class UserDetailComponent implements OnInit {
     this.usersService.getUser(userId).subscribe(res => {
       console.log(res);
       this.user = res;
+      this.getEvents();
     }, error => {
       // show alert to user
       Swal.fire({
@@ -89,32 +109,31 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  getEvents(params:any = null): void {
+  getEvents(params: any = null): void {
     params = params || this.paramsEvent;
-    const where = {role: 'beneficiario'};
+    const where = {beneficiary: this.user.objectId};
     if (params.status.length > 0) {
       if (isNaN(params.status)) {
         where['status'] = params.status;
       }
     }
 
-
-    this.eventsService.getEventsWithBeneficiarioVoluntario(params, this.user).subscribe(res => {
-      console.log(res.data);
-      this.events = res.results;
-      this.page = Math.ceil(res.data.page);
-      const pageCeil = Math.ceil(res.data.pages);
-      this.pages = [];
-      for (let cont = 0; cont < pageCeil; cont++) {
-        this.pages.push(cont);
-      }
-      this.hasNextPage = this.page < this.pages.length - 1;
-      this.hasPreviousPage = this.page > 0;
+    this.eventsService.getEventsWithBeneficiarioVoluntario(where).subscribe(res => {
+      console.log(res);
+      this.events = res.result;
+      // this.page = Math.ceil(res.data.page);
+      // const pageCeil = Math.ceil(res.data.pages);
+      // this.pages = [];
+      // for (let cont = 0; cont < pageCeil; cont++) {
+      //   this.pages.push(cont);
+      // }
+      // this.hasNextPage = this.page < this.pages.length - 1;
+      // this.hasPreviousPage = this.page > 0;
     }, error => {
       // show alert to user
       Swal.fire({
         title: 'Error',
-        html: error.error.message,
+        html: error.message,
         type: 'error'
       });
     });
@@ -131,7 +150,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   onSearchRegisters(event: any): void {
-    let search = true;
+    const search = true;
     /*if (event.target.value.length >= 3) {
       this.paramsUser.q = event.target.value;
       search = true;
@@ -149,8 +168,8 @@ export class UserDetailComponent implements OnInit {
     this.router.navigate(['/dashboard/users']);
   }
 
-  onEdit(user: User): void {
-    this.router.navigate(['/dashboard/users/edit', user.objectId]);
+  onEdit(): void {
+    this.router.navigate(['/dashboard/users/edit', this.user.objectId]);
   }
 
 }
