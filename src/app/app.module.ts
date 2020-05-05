@@ -36,10 +36,12 @@ import { UsersService } from './services/users.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { CirclesService } from './services/circles.service';
 import { EventsService } from './services/events.service';
+import { AddressService } from './services/address.service';
 
 import { LoaderScreenInterceptorService } from './services/loader-screen-interceptor.service';
 import { RegisterModalComponent } from './components/register-modal/register-modal.component';
 import { UserModalComponent } from './components/user-modal/user-modal.component';
+
 
 export const interceptorProviders = [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
@@ -82,6 +84,7 @@ registerLocaleData(localeEn, 'en');
     RolesService,
     CirclesService,
     EventsService,
+    AddressService,
     interceptorProviders,
     { provide: LOCALE_ID, useValue: 'es' }
   ],

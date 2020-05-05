@@ -26,6 +26,13 @@
     text-transform: capitalize;
 }
 
+.btn-cancel {
+    background: var(--primary-color);
+    width: 130px;
+    height: 45px;
+    color: #fff;
+}
+
 .row {
     padding-right: 10px;
 }

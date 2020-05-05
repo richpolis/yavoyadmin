@@ -6,6 +6,7 @@ import { EventI } from '../../../models/event';
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from '../../../services/users.service';
 import { RegisterModalComponent } from '../../../components/register-modal/register-modal.component';
+import { AddressService } from 'src/app/services/address.service';
 import Swal from 'sweetalert2';
 
 
@@ -46,6 +47,7 @@ export class UserDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private eventsService: EventsService,
     private usersService: UsersService,
+    private addressService: AddressService,
     private router: Router,
     private modalService: NgbModal) { }
 
@@ -165,20 +167,45 @@ export class UserDetailComponent implements OnInit {
   }
 
   showModalRegister(user: User): void {
-    const registerModal = this.modalService.open(RegisterModalComponent, { size: 'lg' });
-    registerModal.componentInstance.user = user;
-    registerModal.result.then( res => {
-      console.log(res);
-    }).catch((error) => {
-      if (error !== undefined && error.message !== undefined) {
-        Swal.fire({
-          title: 'Error',
-          html: error.message,
-          type: 'error'
-        });
-      }
-    });
+    const where = {user: {
+      __type: 'Pointer',
+      className: '_User',
+      objectId: user.objectId
+    }};
 
+    let addressString = '';
+
+    this.addressService.getAddresses(where, 'createdAt').subscribe(res => {
+      console.log(res)
+
+      if (res.results.length > 0) {
+        addressString = this.addressService.getStringFromAddress(res.results[0]);
+      }
+
+      const registerModal = this.modalService.open(RegisterModalComponent, { size: 'lg' });
+      registerModal.componentInstance.user = user;
+      registerModal.componentInstance.addressString = addressString;
+      registerModal.result.then( resp => {
+        console.log(resp);
+      }).catch((error) => {
+        if (error !== undefined && error.message !== undefined) {
+          Swal.fire({
+            title: 'Error',
+            html: error.message,
+            type: 'error'
+          });
+        }
+      });
+
+    }, error => {
+      // show alert to user
+      Swal.fire({
+        title: 'Error',
+        html: error.message,
+        type: 'error'
+      });
+      return '';
+    });
   }
 
 }
