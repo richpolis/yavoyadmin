@@ -71,9 +71,42 @@ export class RegisterCreateComponent implements OnInit {
         photo: null,
         ine: null,
         email: '',
-        birthday: null
+        birthday: null, 
+        phone: '',
+        password: '1234',
+        sessionToken: '',
+        emailVerified: true,
+        objectId: '',
+        createdAt: null,
+        updatedAt: null,
+        ACL: null,
+        isRepresentativeCircle: false,
+        contact: null,
+        circle: '',
+        status: 'request',
+        role: 'voluntario',
+        approved: false,
+        request: false,
+        selected: false,
+        city: '',
+        location: null,
+        description: '',
+        schedules: [],
+        activities: [],
+        schedule: 'mañana',
+        gender: '',
+        interests: ''
       };
       const birthdayDate = moment().subtract(18, 'years').tz('America/Mexico_City');
+
+      this.formRegister.get('firstName').setValue(this.user.firstName);
+      this.formRegister.get('lastName').setValue(this.user.lastName);
+      this.formRegister.get('description').setValue(this.user.description);
+      this.formRegister.get('city').setValue(this.user.city);
+      this.formRegister.get('status').setValue(this.user.status);
+      this.formRegister.get('phone').setValue(this.user.phone);
+      this.formRegister.get('email').setValue(this.user.username);
+      this.formRegister.get('schedule').setValue(this.user.schedule);
 
       this.formRegister.get('birthdayDateStruct').setValue({
         year: birthdayDate.year(),
@@ -107,7 +140,7 @@ export class RegisterCreateComponent implements OnInit {
     if (this.formRegister.valid) {
       const params = {
         username: this.formRegister.get('email').value,
-        password: '1234',
+        password: this.user.password,
         email: this.formRegister.get('email').value,
         firstName: this.formRegister.get('firstName').value,
         lastName: this.formRegister.get('lastName').value,
@@ -121,9 +154,9 @@ export class RegisterCreateComponent implements OnInit {
           iso: this._birthdayDate.format(),
         },
         circle: null,
-        role: 'voluntario',
+        role: this.user.role,
         isRepresentativeCircle: false,
-        gender: '',
+        gender: this.user.gender,
         photo: this.user.photo || null,
         ine: this.user.ine || null
       };
