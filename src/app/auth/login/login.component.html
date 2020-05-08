@@ -11,7 +11,7 @@
         <div class="myform form ">
             <form class="login-container" [formGroup]="formLogin" (ngSubmit)="onLogin()">
                 <div class="form-group">
-                    <input type="email" class="form-control input-rounded" formControlName="username" placeholder="Usuario" autocomplete="username" required [ngClass]="{'is-invalid': formSubmitAttempt && f.username.errors}">
+                    <input type="email" class="form-control input-rounded" formControlName="username" placeholder="Correo electrónico" autocomplete="username" required [ngClass]="{'is-invalid': formSubmitAttempt && f.username.errors}">
                     <div *ngIf="formSubmitAttempt && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Usuario es requerido</div>
                         <div *ngIf="f.username.errors.email">Debes de ingresar un email valido</div>
@@ -20,8 +20,8 @@
                 <div class="form-group">
                     <input type="password" class="form-control input-rounded" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="password" placeholder="Contraseña" autocomplete="current-password" required [ngClass]="{'is-invalid': formSubmitAttempt && f.password.errors}">
                     <div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password es requerido</div>
-                        <div *ngIf="f.password.errors.pattern">Debe de ingresar una contraseña valida</div>
+                        <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
+                        <div *ngIf="f.password.errors.pattern">Contraseña invalida</div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-login">Inicia Sesión</button>
