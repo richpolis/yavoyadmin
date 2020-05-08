@@ -69,6 +69,39 @@ export class UsersService {
     });
   }
 
+  createUser(other: any): Observable<any> {
+    const user = this.globalsService.getUser();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'X-Parse-Application-Id': environment.PARSE_APP_ID,
+        'X-Parse-REST-API-Key': environment.PARSE_RESTAPI_KEY,
+        'X-Parse-Session-Token': user.sessionToken
+      })
+    };
+    const params = {
+      username: other.username,
+      password: other.password,
+      email: other.email,
+      firstName: other.firstName,
+      lastName: other.lastName,
+      description: other.description,
+      birthday: other.birthday,
+      city: other.city,
+      phone: other.phone,
+      schedule: other.schedule,
+      status: other.status,
+      circle: other.circle || null,
+      role: other.role,
+      isRepresentativeCircle: other.isRepresentativeCircle || false,
+      photo: other.photo || null,
+      ine: other.ine || null,
+      gender: other.gender
+    };
+    return this.httpClient.post<any>(`${this.URL_BASE}/users/`, params, httpOptions)
+                                                 .pipe(catchError(this.errorHandler));
+  }
+
   changeStatus(other: User, status: string): Observable<any> {
     const user = this.globalsService.getUser();
     const httpOptions = {

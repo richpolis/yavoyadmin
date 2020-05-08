@@ -48,7 +48,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="phone">Teléfono:</label>
-                                    <input autocomplete="off" type="tel" class="form-control input-yavoy input-rounded" formControlName="phone" placeholder="Teléfono" maxlength="100" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.phone.errors }">
+                                    <input autocomplete="off" type="tel" class="form-control input-yavoy input-rounded" formControlName="phone" placeholder="Teléfono" maxlength="10" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.phone.errors }">
                                     <div *ngIf="formSubmitAttempt && f.phone.errors" class="invalid-feedback">
                                         <div *ngIf="f.phone.errors.required">El teléfono es necesario.</div>
                                     </div>

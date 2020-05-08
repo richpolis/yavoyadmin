@@ -1,0 +1,118 @@
+.header {
+    padding-top: 4%;
+    margin-bottom: 3%;
+}
+
+.col-form {
+    padding-top: 5px !important;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.btn-create {
+    background: var(--btn-save-color);
+    color: #fff;
+    width: 100px;
+    height: 40px;
+    font-size: 90%;
+    border-radius: 3px;
+}
+
+.btn.btn-outline-secondary {
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 50px;
+    padding: 10px;
+}
+
+.btn-cancel {
+    background: var(--btn-return-color);
+    color: white;
+    border: none;
+    height: 40px;
+    width: 100px;
+    font-size: 90%;
+    margin: 0px 10px;
+}
+
+.btn-cancel:hover {
+    background: rgba(126, 66, 173, 0.9);
+    transition-duration: .3s;
+}
+
+.col-btns {
+    margin: 30px 0px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+img.img-profile {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+img.img-ine {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.hoverable {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    border: 5px solid #000;
+    border-radius: 5px;
+}
+
+.hoverable.hoverable-ine {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 200px;
+    width: 300px;
+    border: 5px solid #000;
+    border-radius: 5px;
+}
+
+.hoverable .hover-text {
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.hoverable .background {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.hoverable:hover .hover-text {
+    display: block;
+}
+
+.hoverable:hover .background {
+    display: block;
+}
+
+input[type="file"] {
+    display: none;
+}

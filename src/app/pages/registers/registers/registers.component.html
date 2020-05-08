@@ -12,12 +12,19 @@
 
     <div class="actions row no-gutters rw-reverse">
         <div class="col-lg-6 col-sm-12">
-            <select class="select-yavoy" [(ngModel)]="paramsUsers.status" name="status" (change)="onSearchUsers($event)">
-                    <option value="">Todas</option>
-                    <option value="request">Sin aprobar</option>
-                    <option value="approved">Aprobados</option>
-                    <option value="denied">Denegados</option>
-                </select>
+            <div class="row">
+                <div class="col-lg-8 col-sm-12 my-2">
+                    <select class="select-yavoy" [(ngModel)]="paramsUsers.status" name="status" (change)="onSearchUsers($event)">
+                        <option value="">Todas</option>
+                        <option value="request">Sin aprobar</option>
+                        <option value="approved">Aprobados</option>
+                        <option value="denied">Denegados</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-sm-12 my-2">
+                    <button [routerLink]="['/dashboard/registers/create']" class="btn btn-action">Registrar voluntario</button>
+                </div>
+            </div>
         </div>
         <div class="col-lg-6 col-sm-12 col-action">
             <div class="input-icon">

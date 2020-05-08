@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class RegistersComponent implements OnInit {
 
-  public paramsUsers: any = {status: '', q: '', order: 'email', limit: 10, skip: 0};
+  public paramsUsers: any = {status: '', q: '', order: '-createdAt', limit: 10, skip: 0};
   public users: Array<User> = [];
   public page = 1;
   public pages = [];

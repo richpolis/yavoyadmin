@@ -14,7 +14,7 @@ import { RolesService } from 'src/app/services/roles.service';
 })
 export class UsersComponent implements OnInit {
 
-  public paramsUsers: any = {status: '', q: '', order: 'birthday', limit: 10, skip: 0};
+  public paramsUsers: any = {status: '', q: '', order: '-createdAt', limit: 10, skip: 0};
   public users: Array<User> = [];
   public page = 1;
   public pages = [];
