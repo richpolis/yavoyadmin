@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
+import { UserModalComponent } from '../../../components/user-modal/user-modal.component';
+import { CircleI } from 'src/app/models/circle';
 import { EventI } from '../../../models/event';
+import { User } from 'src/app/models/user';
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from '../../../services/users.service';
-import { UserModalComponent } from '../../../components/user-modal/user-modal.component';
-import Swal from 'sweetalert2';
 import { CirclesService } from '../../../services/circles.service';
-import { CircleI } from 'src/app/models/circle';
+import { AddressService } from 'src/app/services/address.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-register-detail',
@@ -50,6 +52,7 @@ export class RegisterDetailComponent implements OnInit {
     private eventsService: EventsService,
     private usersService: UsersService,
     private circlesService: CirclesService,
+    private addressService: AddressService,
     private router: Router,
     private modalService: NgbModal) { }
 
@@ -181,18 +184,44 @@ export class RegisterDetailComponent implements OnInit {
   }
 
   showModalUser(user: User): void {
-    const registerModal = this.modalService.open(UserModalComponent, { size: 'lg' });
-    registerModal.componentInstance.user = user;
-    registerModal.result.then( res => {
+    const where = {user: {
+      __type: 'Pointer',
+      className: '_User',
+      objectId: user.objectId
+    }};
+
+    let addressString = '';
+
+    this.addressService.getAddresses(where, 'createdAt').subscribe(res => {
       console.log(res);
-    }).catch((error) => {
-      if (error !== undefined && error.message !== undefined) {
-        Swal.fire({
-          title: 'Error',
-          html: error.message,
-          type: 'error'
-        });
+
+      if (res.results.length > 0) {
+        addressString = this.addressService.getStringFromAddress(res.results[0]);
       }
+
+      const registerModal = this.modalService.open(UserModalComponent, { size: 'lg' });
+      registerModal.componentInstance.user = user;
+      registerModal.componentInstance.addressString = addressString;
+      registerModal.result.then( resp => {
+        console.log(resp);
+      }).catch((error) => {
+        if (error !== undefined && error.message !== undefined) {
+          Swal.fire({
+            title: 'Error',
+            html: error.message,
+            type: 'error'
+          });
+        }
+      });
+
+    }, error => {
+      // show alert to user
+      Swal.fire({
+        title: 'Error',
+        html: error.message,
+        type: 'error'
+      });
+      return '';
     });
   }
 }

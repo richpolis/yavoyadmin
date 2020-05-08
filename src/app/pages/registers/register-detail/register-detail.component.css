@@ -98,8 +98,7 @@
 }
 
 .btn-cancel {
-    background: #E83A49;
-    border: #E83A49;
+    background: var(--primary-color);
     width: 130px;
     height: 45px;
     color: #fff;

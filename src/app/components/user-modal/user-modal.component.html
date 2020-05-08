@@ -55,7 +55,7 @@
                 <div class="col-md-6">
                     <div class="data">
                         <span class="data-title">Dirección:</span><br>
-                        <span>{{ getStringAddress(user) }}</span>
+                        <span>{{ addressString }}</span>
                     </div>
                 </div>
             </div>
@@ -77,5 +77,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">{{ btnLabelAccept }}</button>
+    <button type="button" class="btn btn-cancel" (click)="activeModal.close('Close click')">{{ btnLabelAccept }}</button>
 </div>

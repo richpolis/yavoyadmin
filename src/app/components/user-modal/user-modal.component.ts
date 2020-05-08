@@ -14,6 +14,7 @@ export class UserModalComponent implements OnInit {
   @Input() title = 'Detalle de beneficiario';
   @Input() btnLabelAccept = 'Cerrar';
   @Input() user: User;
+  @Input() addressString = '';
 
   constructor(
     public activeModal: NgbActiveModal,

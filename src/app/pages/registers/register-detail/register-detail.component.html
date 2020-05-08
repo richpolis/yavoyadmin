@@ -82,7 +82,7 @@
                         <button class="btn btn-search" (click)="onEdit()">Editar</button>
                     </div>
                     <div class="data">
-                        <button class="btn btn-search" (click)="onReturn()">Regresar</button>
+                        <button class="btn btn-cancel" (click)="onReturn()">Regresar</button>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,6 @@
                     </td>
                     <td>{{ event.beneficiary.email }}</td>
                     <td>{{ event.startEvent.iso|date: "d MMM y" }}</td>
-                    <td>{{ event.createdAt|date: "d MMM y" }}</td>
                     <td>{{ getStringEventSchedule(event) }}</td>
                     <td>{{ getStringEventStatus(event) }}</td>
                     <td>{{ event.activity }}</td>
