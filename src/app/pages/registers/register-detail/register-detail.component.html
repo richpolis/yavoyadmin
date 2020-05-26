@@ -162,7 +162,14 @@
                     <td>{{ event.beneficiary.email }}</td>
                     <td>{{ event.startEvent.iso|date: "d MMM y" }}</td>
                     <td>{{ getStringEventSchedule(event) }}</td>
-                    <td>{{ getStringEventStatus(event) }}</td>
+                    <!--td>
+                        {{ getStringEventStatus(event) }}
+                    </td-->
+                    <td>
+                        <span *ngIf="event.isConfirm" class="badge badge-success">Confirmada</span>
+                        <!--span *ngIf="user. == 'request'" class="badge badge-info">Solicitud</span-->
+                        <span *ngIf="event.isCancel" class="badge badge-danger">Cancelada</span>
+                    </td>
                     <td>{{ event.activity }}</td>
                 </tr>
             </tbody>
