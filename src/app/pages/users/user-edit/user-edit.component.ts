@@ -52,7 +52,7 @@ export class UserEditComponent implements OnInit {
       status: new FormControl('', [Validators.required, Validators.minLength(3)]),
       circle: new FormControl(null),
       birthdayDateStruct: new FormControl(this.calendar.getToday(), Validators.required),
-      phone: new FormControl(''),
+      phone: new FormControl('', [Validators.minLength(10), Validators.pattern('[0-9]{10}')]),
       email: new FormControl('', [Validators.email]),
       schedule: new FormControl('', [Validators.required, Validators.minLength(3)])
     });

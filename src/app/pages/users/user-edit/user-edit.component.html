@@ -38,7 +38,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="firstName">Apellidos:</label>
-                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="lastName" placeholder="Apellidos" required [ngClass]="{ 'is-invalid': f.lastName.errors }">
+                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" minlength="3" formControlName="lastName" placeholder="Apellidos" required [ngClass]="{ 'is-invalid': f.lastName.errors }">
                                     <div *ngIf="formSubmitAttempt && f.lastName.errors" class="invalid-feedback">
                                         <div *ngIf="f.lastName.errors.required">El apellido es requerido.</div>
                                         <div *ngIf="f.lastName.errors.minlength">El apellido es muy corto.</div>
@@ -48,9 +48,10 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="phone">Teléfono:</label>
-                                    <input autocomplete="off" type="tel" class="form-control input-nike input-rounded" formControlName="phone" placeholder="Teléfono" required maxlength="10" [ngClass]="{ 'is-invalid':  f.phone.errors }">
+                                    <input autocomplete="off" type="tel" class="form-control input-nike input-rounded" minlength="10" pattern="[0-9]{10}" oninput="this.value=this.value.replace(/[^0-9]/g,'');" formControlName="phone" placeholder="Teléfono" maxlength="10" [ngClass]="{ 'is-invalid':  f.phone.errors }">
                                     <div *ngIf="formSubmitAttempt && f.phone.errors" class="invalid-feedback">
-                                        <div *ngIf="f.phone.errors.required">El teléfono es necesario.</div>
+                                        <div *ngIf="f.phone.errors.minlength">El teléfono es muy corto.</div>
+                                        <div *ngIf="f.phone.errors.pattern">El teléfono es invalido.</div>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +101,7 @@
                                     <label for="email">Correo electrónico:</label>
                                     <input autocomplete="off" type="email" class="form-control input-nike input-rounded" formControlName="email" placeholder="Email" maxlength="100" [ngClass]="{ 'is-invalid': f.email.errors }">
                                     <div *ngIf="formSubmitAttempt && f.email.errors" class="invalid-feedback">
-                                        <div *ngIf="f.email.errors.required">El email es necesario.</div>
+                                        <div *ngIf="f.email.errors.required">El email es requerido.</div>
                                         <div *ngIf="f.email.errors.email">Debes de ingresar un email valido.</div>
                                     </div>
                                 </div>
@@ -134,9 +135,9 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="description">Descripción</label>
-                                    <textarea class="form-control textarea-rounded" id="description" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid':  f.description.errors }"></textarea>
+                                    <textarea class="form-control textarea-rounded" id="description" minlength="3" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid':  f.description.errors }"></textarea>
                                     <div *ngIf="formSubmitAttempt && f.description.errors" class="invalid-feedback">
-                                        <div *ngIf="f.description.errors.required">La descripción es necesaria.</div>
+                                        <div *ngIf="f.description.errors.required">La descripción es requerida.</div>
                                         <div *ngIf="f.description.errors.minlength">La descripción es demasiado corta.</div>
                                     </div>
                                 </div>

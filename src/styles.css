@@ -81,7 +81,9 @@ textarea.form-control.textarea-rounded {
 
 form input[type="text"]:focus,
 form input[type="email"]:focus,
-form input[type="password"]:focus {
+form input[type="password"]:focus,
+form input[type="number"]:focus,
+textarea:focus {
     outline: 0;
     background: white;
 }
@@ -90,6 +92,7 @@ input[type="text"]:invalid.is-invalid,
 input[type="email"]:invalid.is-invalid,
 input[type="tel"]:invalid.is-invalid,
 input[type="password"]:invalid.is-invalid,
+input[type="number"]:invalid.is-invalid,
 textarea:invalid.is-invalid {
     /*background: #efdee0 url(/assets/images/icons/icon_incorrect.png) no-repeat center right;*/
     background-image: url(/assets/images/icons/icon_incorrect.png);
@@ -105,6 +108,7 @@ input[type="text"]:valid,
 input[type="email"]:valid,
 input[type="tel"]:valid,
 input[type="password"]:valid,
+input[type="number"]:valid,
 textarea:valid {
     /*background: #f3f8ed url(/assets/images/icons/icon_correct.png) no-repeat center right;*/
     background-image: url(/assets/images/icons/icon_correct.png);
