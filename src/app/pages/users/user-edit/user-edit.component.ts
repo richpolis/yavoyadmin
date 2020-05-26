@@ -30,6 +30,8 @@ export class UserEditComponent implements OnInit {
     {key: 'noche', name: 'Noche'}
   ]
 
+  public max_date: NgbDateStruct;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -38,11 +40,13 @@ export class UserEditComponent implements OnInit {
     private globalsService: GlobalsService,
     private usersService: UsersService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+    const valid_date = moment().subtract(18, 'years').tz('America/Mexico_City');
+    this.max_date = {year: valid_date.year(), month: valid_date.month(), day: valid_date.date()};
+   }
 
   ngOnInit() {
-    const tomorrow = moment().tz('America/Mexico_City').add(1, 'days');
-    const tomorrow1h = moment().tz('America/Mexico_City').add(25, 'hours');
+
 
     this.formRegister = this.fb.group({
       firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),

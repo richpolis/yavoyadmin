@@ -77,7 +77,7 @@
                                 <div class="form-group">
                                     <label for="birthday">Fecha de nacimiento:</label>
                                     <div class="input-group">
-                                        <input class="form-control input-rounded" placeholder="yyyy-mm-dd" name="dp" formControlName="birthdayDateStruct" required ngbDatepicker #d="ngbDatepicker" (dateSelect)="onChangeDate($event)" readonly="readonly">
+                                        <input class="form-control input-rounded" placeholder="yyyy-mm-dd" name="dp" formControlName="birthdayDateStruct" [maxDate]="max_date" required ngbDatepicker #d="ngbDatepicker" (dateSelect)="onChangeDate($event)" readonly="readonly">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                                                 <img class="mx-2 cursor" src="assets/images/icons/icon_calendar.png"
@@ -151,7 +151,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="description">Descripción</label>
-                                    <textarea class="form-control textarea-rounded" id="description" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.description.errors }"></textarea>
+                                    <textarea class="form-control textarea-rounded" minlength="3" id="description" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid': f.description.errors }"></textarea>
                                     <div *ngIf="formSubmitAttempt && f.description.errors" class="invalid-feedback">
                                         <div *ngIf="f.description.errors.required">La descripción es requerida.</div>
                                         <div *ngIf="f.description.errors.minlength">La descripción es demasiado corta.</div>
