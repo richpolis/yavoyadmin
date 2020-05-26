@@ -15,6 +15,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
+                                    <label for="userPhoto">Foto de perfil:</label>
                                     <label class="hoverable" for="userPhoto">
                                         <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'" class="img-profile"> 
                                         <div class="hover-text">Elegir foto de perfil</div>
@@ -61,6 +62,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
+                                    <label for="userINE">INE:</label>
                                     <label class="hoverable hoverable-ine" for="userINE">
                                         <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'" class="img-ine"> 
                                         <div class="hover-text">Elegir foto de INE</div>

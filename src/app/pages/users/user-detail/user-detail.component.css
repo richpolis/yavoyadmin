@@ -180,7 +180,7 @@ img.img-ine {
     cursor: pointer;
     height: 200px;
     width: 200px;
-    border: 5px solid #000;
+    border: 1px solid #4a4a4a;
     border-radius: 5px;
 }
 
@@ -190,7 +190,7 @@ img.img-ine {
     cursor: pointer;
     height: 200px;
     width: 300px;
-    border: 5px solid #000;
+    border: 1px solid #4a4a4a;
     border-radius: 5px;
 }
 
