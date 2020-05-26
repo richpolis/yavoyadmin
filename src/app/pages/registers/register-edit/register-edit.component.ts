@@ -117,7 +117,7 @@ export class RegisterEditComponent implements OnInit {
   get f() { return this.formRegister.controls; }
 
   onCancel(): void {
-    this.router.navigate(['/dashboard/registers']);
+    this.router.navigate(['/dashboard/registers/detail', this.user.objectId]);
   }
 
   onEditUser(): void {
@@ -169,7 +169,7 @@ export class RegisterEditComponent implements OnInit {
             html: 'Se ha actualizado el usuario',
             type: 'success'
           }).then(() => {
-            this.router.navigate(['/dashboard/registers/edit', this.user.objectId]);
+            this.router.navigate(['/dashboard/registers/detail', this.user.objectId]);
           });
         } else {
           // show alert to user

@@ -18,11 +18,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control input-rounded" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="password" placeholder="Contraseña" autocomplete="current-password" required [ngClass]="{'is-invalid': formSubmitAttempt && f.password.errors}">
-                    <div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
-                        <div *ngIf="f.password.errors.pattern">Contraseña invalida</div>
-                    </div>
+                        <input type="password" class="form-control input-rounded" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="password" placeholder="Contraseña" autocomplete="current-password" required [ngClass]="{'is-invalid': formSubmitAttempt && f.password.errors}">
+                        <div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
+                            <div *ngIf="f.password.errors.pattern">Contraseña invalida</div>
+                        </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-login">Inicia Sesión</button>
                 <div class="forgot">
