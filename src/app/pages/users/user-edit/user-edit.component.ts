@@ -122,6 +122,7 @@ export class UserEditComponent implements OnInit {
       });
       return;
     }
+    debugger;
 
 
     if (this.formRegister.valid) {

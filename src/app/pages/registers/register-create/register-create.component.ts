@@ -47,7 +47,7 @@ export class RegisterCreateComponent implements OnInit {
     private config: NgbInputDatepickerConfig
   ) { 
     const valid_date = moment().subtract(18, 'years').tz('America/Mexico_City');
-    this.max_date = {year: valid_date.year(), month: valid_date.month(), day: valid_date.date()};
+    this.max_date = {year: valid_date.year(), month: valid_date.month() + 1, day: valid_date.date()};
   }
 
   ngOnInit() {
@@ -56,12 +56,12 @@ export class RegisterCreateComponent implements OnInit {
       lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(3)]),
       city: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      status: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      status: new FormControl('request', [Validators.required, Validators.minLength(3)]),
       circle: new FormControl(''),
-      birthdayDateStruct: new FormControl(this.calendar.getToday(), Validators.required),
+      birthdayDateStruct: new FormControl(this.calendar.getToday()),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]{10}')]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      schedule: new FormControl('', [Validators.required, Validators.minLength(3)])
+      schedule: new FormControl('mañana', [Validators.required, Validators.minLength(3)])
     });
 
     this.circlesService.getCircles().subscribe(circles => {
