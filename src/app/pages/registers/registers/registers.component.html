@@ -78,7 +78,7 @@
                         <td>
                             <span *ngIf="user.status == 'approved'" class="badge badge-success">Aprobado</span>
                             <span *ngIf="user.status == 'request'" class="badge badge-info">Solicitud</span>
-                            <span *ngIf="user.status == 'deleted'" class="badge badge-danger">Borrado</span>
+                            <span *ngIf="user.status == 'denied'" class="badge badge-danger">Denegado</span>
                         </td>
                         <td class="text-center">
                             <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'" *ngIf="user.status == 'request'">Aprobar</button>
