@@ -164,9 +164,9 @@
                         {{ getStringEventStatus(event) }}
                     </td-->
                     <td>
-                        <span *ngIf="event.isConfirm" class="badge badge-success">Confirmada</span>
-                        <!--span *ngIf="user. == 'request'" class="badge badge-info">Solicitud</span-->
-                        <span *ngIf="event.isCancel" class="badge badge-danger">Cancelada</span>
+                        <span *ngIf="event.status === 'approved'" class="badge badge-success">Aprobada</span>
+                        <span *ngIf="event.status === 'request'" class="badge badge-info">Solicitud</span>
+                        <span *ngIf="event.status === 'cancel'" class="badge badge-danger">Cancelada</span>
                     </td>
                     <td>{{ event.activity }}</td>
                 </tr>
