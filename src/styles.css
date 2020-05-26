@@ -89,7 +89,8 @@ form input[type="password"]:focus {
 input[type="text"]:invalid.is-invalid,
 input[type="email"]:invalid.is-invalid,
 input[type="tel"]:invalid.is-invalid,
-input[type="password"]:invalid.is-invalid {
+input[type="password"]:invalid.is-invalid,
+textarea:invalid.is-invalid {
     /*background: #efdee0 url(/assets/images/icons/icon_incorrect.png) no-repeat center right;*/
     background-image: url(/assets/images/icons/icon_incorrect.png);
     background-position-x: 95%;
@@ -103,7 +104,8 @@ input[type="password"]:invalid.is-invalid {
 input[type="text"]:valid,
 input[type="email"]:valid,
 input[type="tel"]:valid,
-input[type="password"]:valid {
+input[type="password"]:valid,
+textarea:valid {
     /*background: #f3f8ed url(/assets/images/icons/icon_correct.png) no-repeat center right;*/
     background-image: url(/assets/images/icons/icon_correct.png);
     background-position-x: 95%;
