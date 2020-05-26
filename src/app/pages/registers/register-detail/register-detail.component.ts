@@ -47,6 +47,8 @@ export class RegisterDetailComponent implements OnInit {
     { key: 'noche', name: 'Noche' }
   ];
 
+  public noFoundData: boolean;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private eventsService: EventsService,
@@ -147,6 +149,7 @@ export class RegisterDetailComponent implements OnInit {
       // }
       // this.hasNextPage = this.page < this.pages.length - 1;
       // this.hasPreviousPage = this.page > 0;
+      this.noFoundData = this.events.length === 0;
     }, error => {
       // show alert to user
       Swal.fire({
