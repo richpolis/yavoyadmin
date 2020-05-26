@@ -69,13 +69,22 @@ export class LoginComponent implements OnInit {
           this.globalsService.cleanUser();
         }
       }, error => {
+        console.log(error);
         // show alert to user
         if (error !== undefined && error.message !== undefined) {
-          Swal.fire({
-            title: 'Error',
-            html: error.message,
-            type: 'error'
-          });
+          if (error.error && error.error.code && error.error.code === 101) {
+            Swal.fire({
+              title: 'Error',
+              html: 'El usuario no fue encontrado con estas credenciales',
+              type: 'error'
+            });
+          } else {
+            Swal.fire({
+              title: 'Error',
+              html: error.message,
+              type: 'error'
+            });
+          }
         }
       });
     }
