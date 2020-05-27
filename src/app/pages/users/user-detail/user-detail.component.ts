@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 export class UserDetailComponent implements OnInit {
 
   public user: User = null;
-  public paramsEvent: any = { status: 'request', q: ''};
+  public paramsEvent: any = { status: '', q: ''};
   public events: Array<EventI>;
   public page: number;
   public pages = [];

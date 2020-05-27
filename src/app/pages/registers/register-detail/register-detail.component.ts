@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 export class RegisterDetailComponent implements OnInit {
 
   public user: User = null;
-  public paramsEvent: any = { status: 'request', q: ''};
+  public paramsEvent: any = { status: '', q: ''};
   public events: Array<EventI>;
   public circles: Array<CircleI>;
   public page: number;

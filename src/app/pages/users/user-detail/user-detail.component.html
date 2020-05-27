@@ -110,7 +110,8 @@
                     </div-->
                     <div class="col-md-6 col-select">
                         <select class="select-nike" [(ngModel)]="paramsEvent.status" name="status" (change)="onChangeStatus($event)">
-                            <option value="request" selected>Solicitudes</option>
+                            <option value="" selected>Todas</option>
+                            <option value="request">Solicitudes</option>
                             <option value="approved">Aprobadas</option>
                             <option value="cancel">Canceladas</option>
                         </select>
