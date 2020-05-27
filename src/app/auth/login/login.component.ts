@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
           } else {
             Swal.fire({
               title: 'Error',
-              html: error.message,
+              html: error.error.message,
               type: 'error'
             });
           }
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
       if (error !== undefined && error.message !== undefined) {
         Swal.fire({
           title: 'Error',
-          html: error.message,
+          html: error.error.message,
           type: 'error'
         });
       }

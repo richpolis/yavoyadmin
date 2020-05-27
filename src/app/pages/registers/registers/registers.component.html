@@ -11,6 +11,9 @@
    ================= -->
 
     <div class="actions row no-gutters rw-reverse">
+        <div class="col-lg-12 col-sm-12 my-2">
+            <button [routerLink]="['/dashboard/registers/create']" class="btn btn-action">Registrar voluntario</button>
+        </div>
         <div class="col-lg-6 col-sm-12">
             <div class="row">
                 <div class="col-lg-8 col-sm-12 my-2">
@@ -20,9 +23,6 @@
                         <option value="approved">Aprobados</option>
                         <option value="denied">Denegados</option>
                     </select>
-                </div>
-                <div class="col-lg-4 col-sm-12 my-2">
-                    <button [routerLink]="['/dashboard/registers/create']" class="btn btn-action">Registrar voluntario</button>
                 </div>
             </div>
         </div>
