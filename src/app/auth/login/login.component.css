@@ -1,16 +1,17 @@
-.header-title {
+/*.header-title {
     margin-top: 25%;
-}
+}*/
 
 .logo {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-bottom: 5%;
+    
 }
 
 .logo img {
-    width: 50%;
+    max-height: calc(100vh - 500px);
 }
 
 .header-title .wv-heading--title {
