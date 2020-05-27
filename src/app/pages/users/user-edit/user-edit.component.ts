@@ -150,6 +150,15 @@ export class UserEditComponent implements OnInit {
         ine: this.user.ine || null
       };
 
+      if (params.photo === null || params.ine === null){
+        Swal.fire({
+          title: 'Error',
+          html: 'La imagen de perfil y la foto de INE son requeridos.',
+          type: 'error'
+        });
+        return;
+      }
+
       this.usersService.updateUser(params, this.user.objectId).subscribe(res => {
         if (res) {
           Swal.fire({

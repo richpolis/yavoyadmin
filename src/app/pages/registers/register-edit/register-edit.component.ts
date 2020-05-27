@@ -156,6 +156,15 @@ export class RegisterEditComponent implements OnInit {
         ine: this.user.ine || null
       };
 
+      if (params.photo === null || params.ine === null){
+        Swal.fire({
+          title: 'Error',
+          html: 'La imagen de perfil y la foto de INE son requeridos.',
+          type: 'error'
+        });
+        return;
+      }
+
       if (this.formRegister.get('circle').value.length > 0) {
         params.circle = {
           __type: 'Pointer',
