@@ -96,7 +96,8 @@ export class UsersService {
       isRepresentativeCircle: other.isRepresentativeCircle || false,
       photo: other.photo || null,
       ine: other.ine || null,
-      gender: other.gender
+      gender: other.gender,
+      ACL: other.ACL
     };
     return this.httpClient.post<any>(`${this.URL_BASE}/users/`, params, httpOptions)
                                                  .pipe(catchError(this.errorHandler));

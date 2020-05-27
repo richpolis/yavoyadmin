@@ -81,7 +81,15 @@ export class RegisterCreateComponent implements OnInit {
         objectId: '',
         createdAt: null,
         updatedAt: null,
-        ACL: null,
+        ACL: {
+          '*': {
+              'read': true
+          },
+          'role:Admin': {
+              'read': true,
+              'write': true
+          }
+        },
         isRepresentativeCircle: false,
         contact: null,
         circle: '',
@@ -154,6 +162,15 @@ export class RegisterCreateComponent implements OnInit {
         birthday: {
           __type: 'Date',
           iso: this._birthdayDate.format(),
+        },
+        ACL: {
+          '*': {
+              'read': true
+          },
+          'role:Admin': {
+              'read': true,
+              'write': true
+          }
         },
         circle: null,
         role: this.user.role,

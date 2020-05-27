@@ -46,7 +46,7 @@ export class RegisterEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     const valid_date = moment().subtract(18, 'years').tz('America/Mexico_City');
-    this.max_date = {year: valid_date.year(), month: valid_date.month(), day: valid_date.date()};
+    this.max_date = {year: valid_date.year(), month: valid_date.month() + 1, day: valid_date.date()};
    }
 
   ngOnInit() {
@@ -103,6 +103,7 @@ export class RegisterEditComponent implements OnInit {
           }
         }, error => {
           // show alert to user
+          console.log(error);
           Swal.fire({
             title: 'Error',
             html: error.message,
