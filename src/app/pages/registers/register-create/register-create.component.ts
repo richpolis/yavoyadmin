@@ -61,8 +61,11 @@ export class RegisterCreateComponent implements OnInit {
       birthdayDateStruct: new FormControl(this.calendar.getToday()),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]{10}')]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      schedule: new FormControl('mañana', [Validators.required, Validators.minLength(3)])
-    });
+      schedule: new FormControl('mañana', [Validators.required, Validators.minLength(3)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), 
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z]|[^ ]){6,16}$/)]),
+      repeatPassword: new FormControl('', [])
+    }, { validator: this.checkPasswords });
 
     this.circlesService.getCircles().subscribe(circles => {
       this.circles = circles.results;
@@ -133,6 +136,13 @@ export class RegisterCreateComponent implements OnInit {
 
   }
 
+  checkPasswords(group: FormGroup) {
+    const pass = group.get('password').value;
+    const confirmPass = group.get('repeatPassword').value;
+
+    return pass === confirmPass ? null : { notSame: true }
+  }
+
   get f() { return this.formRegister.controls; }
 
   onCancel(): void {
@@ -150,7 +160,7 @@ export class RegisterCreateComponent implements OnInit {
     if (this.formRegister.valid) {
       const params = {
         username: this.formRegister.get('email').value,
-        password: this.user.password,
+        password: this.formRegister.get('password').value,
         email: this.formRegister.get('email').value,
         firstName: this.formRegister.get('firstName').value,
         lastName: this.formRegister.get('lastName').value,
