@@ -98,14 +98,14 @@
 }
 
 .btn-active {
-    background: green;
+    background: #5DAA0C;
     color: #fff;
     width: 130px;
     height: 45px;
 }
 
 .btn-inactive {
-    background: red;
+    background: #D72424;
     color: #fff;
     width: 130px;
     height: 45px;
