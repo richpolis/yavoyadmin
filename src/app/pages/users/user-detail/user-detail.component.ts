@@ -211,4 +211,72 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  onActivate(): void {
+    if ( this.user.status !== 'active') {
+      Swal.fire({
+        title: '¿Está seguro?',
+        text: `Favor de confirmar que se reactiva el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.email}.`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, activar acceso',
+        cancelButtonText: 'No, cancelar',
+      }).then((result) => {
+        if (result.value) {
+          this.usersService.changeStatus(this.user, 'active').subscribe(res => {
+            Swal.fire({
+              title: 'Listo',
+              html: 'Se ha procesado la solicitud',
+              type: 'success'
+            }).then( () => {
+              this.getUser();
+            });
+          }, error => {
+            // show alert to user
+            Swal.fire({
+              title: 'Error',
+              html: error.error.message,
+              type: 'error'
+            });
+          });
+        }
+      });
+    }
+  }
+
+  onInactivate(): void {
+    if ( this.user.status !== 'inactive') {
+      Swal.fire({
+        title: '¿Está seguro?',
+        text: `Favor de confirmar que se inactiva el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.email}.`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deactivar acceso',
+        cancelButtonText: 'No, cancelar',
+      }).then((result) => {
+        if (result.value) {
+          this.usersService.changeStatus(this.user, 'inactive').subscribe(res => {
+            Swal.fire({
+              title: 'Listo',
+              html: 'Se ha procesado la solicitud',
+              type: 'success'
+            }).then( () => {
+              this.getUser();
+            });
+          }, error => {
+            // show alert to user
+            Swal.fire({
+              title: 'Error',
+              html: error.error.message,
+              type: 'error'
+            });
+          });
+        }
+      });
+    }
+  }
+
 }

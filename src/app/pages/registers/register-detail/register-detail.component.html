@@ -79,6 +79,12 @@
                         <span>{{ user?.description }}</span>
                     </div>
                     <div class="data">
+                        <button class="btn btn-approved" (click)="onApproved()" *ngIf="user.status == 'request' || user.status == 'denied'">Aprobar</button>
+                    </div>
+                    <div class="data">
+                        <button class="btn btn-denied" (click)="onDenied()" *ngIf="user.status == 'request' || user.status == 'approved'">Rechazar</button>
+                    </div>
+                    <div class="data">
                         <button class="btn btn-search" (click)="onEdit()">Editar</button>
                     </div>
                     <div class="data">

@@ -97,6 +97,20 @@
     height: 45px;
 }
 
+.btn-approved {
+    background: green;
+    color: #fff;
+    width: 130px;
+    height: 45px;
+}
+
+.btn-denied {
+    background: red;
+    color: #fff;
+    width: 130px;
+    height: 45px;
+}
+
 .btn-cancel {
     background: var(--primary-color);
     width: 130px;

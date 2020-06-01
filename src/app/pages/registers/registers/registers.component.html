@@ -81,8 +81,8 @@
                             <span *ngIf="user.status == 'denied'" class="badge badge-danger">Denegado</span>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'" *ngIf="user.status == 'request'">Aprobar</button>
-                            <button class="btn btn-action mr-1" (click)="onDelete(user)" [disabled]="user.status == 'denied'? 'disabled' : ''" *ngIf="user.status == 'approved'">Rechazar</button>
+                            <!-- <button class="btn btn-action mr-1" (click)="onApproved(user)" [disabled]="user.status == 'request' || user.status == 'denied'? '' : 'disabled'" *ngIf="user.status == 'request'">Aprobar</button> -->
+                            <!-- <button class="btn btn-action mr-1" (click)="onDelete(user)" [disabled]="user.status == 'denied'? 'disabled' : ''" *ngIf="user.status == 'approved'">Rechazar</button> -->
                             <button class="btn btn-action" (click)="onView(user)">Ver</button>
                         </td>
                     </tr>
