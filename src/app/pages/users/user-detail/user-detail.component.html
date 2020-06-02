@@ -74,15 +74,19 @@
                         <span class="data-title">Descripción:</span>
                         <span>{{ user?.description }}</span>
                     </div>
-                    <div class="data">
-                        <button class="btn btn-active" (click)="onActivate()" *ngIf="user.status == 'inactive'">Aprobar</button>
+                    
+                    <div class="data" *ngIf="user.status == 'inactive'">
+                        <button class="btn btn-active" (click)="onActivate()">Habilitar</button>
                     </div>
-                    <div class="data">
-                        <button class="btn btn-inactive" (click)="onInactivate()" *ngIf="user.status == 'active'">Rechazar</button>
+                    
+                    <div class="data" *ngIf="user.status == 'active'">
+                        <button class="btn btn-inactive" (click)="onInactivate()">Desactivar</button>
                     </div>
+
                     <div class="data">
                         <button class="btn btn-search" (click)="onEdit()">Editar</button>
                     </div>
+                    
                     <div class="data">
                         <button class="btn btn-cancel" (click)="onReturn()">Regresar</button>
                     </div>

@@ -53,7 +53,7 @@ export class UserEditComponent implements OnInit {
       lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(3)]),
       city: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      status: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      status: new FormControl('active', [Validators.required, Validators.minLength(3)]),
       circle: new FormControl(null),
       birthdayDateStruct: new FormControl(this.calendar.getToday(), Validators.required),
       phone: new FormControl('', [Validators.minLength(10), Validators.pattern('[0-9]{10}')]),
@@ -66,6 +66,15 @@ export class UserEditComponent implements OnInit {
         console.log(res);
         if (res) {
           this.user = res;
+          if(this.user.status !== undefined && this.user.status !== null){
+            if (this.user.status === 'active') {
+              this.user.status = 'active';
+            } else if(this.user.status === 'inactive') {
+              this.user.status = 'inactive';
+            } else {
+              this.user.status = 'active';
+            }
+          }
           this.formRegister.get('firstName').setValue(this.user.firstName);
           this.formRegister.get('lastName').setValue(this.user.lastName);
           this.formRegister.get('description').setValue(this.user.description);
@@ -122,9 +131,6 @@ export class UserEditComponent implements OnInit {
       });
       return;
     }
-    debugger;
-
-
     if (this.formRegister.valid) {
       const params = {
         username: this.formRegister.get('email').value,

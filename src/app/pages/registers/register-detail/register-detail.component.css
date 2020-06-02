@@ -98,14 +98,14 @@
 }
 
 .btn-approved {
-    background: 5DAA0C;
+    background: #5DAA0C;
     color: #fff;
     width: 130px;
     height: 45px;
 }
 
 .btn-denied {
-    background: red;
+    background: #D72424;
     color: #fff;
     width: 130px;
     height: 45px;
