@@ -10,6 +10,8 @@ import { User } from 'src/app/models/user';
 import { CirclesService } from '../../../services/circles.service';
 import { CircleI } from 'src/app/models/circle';
 
+import { MustMatch } from '../../../helpers/must-match.validator';
+
 @Component({
   selector: 'app-register-create',
   templateUrl: './register-create.component.html',
@@ -64,8 +66,8 @@ export class RegisterCreateComponent implements OnInit {
       schedule: new FormControl('mañana', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), 
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z]|[^ ]){6,16}$/)]),
-      repeatPassword: new FormControl('', [])
-    }, { validator: this.checkPasswords });
+      confirmPassword: new FormControl('', [])
+    }, { validator: MustMatch('password', 'confirmPassword') });
 
     this.circlesService.getCircles().subscribe(circles => {
       this.circles = circles.results;
@@ -138,7 +140,7 @@ export class RegisterCreateComponent implements OnInit {
 
   checkPasswords(group: FormGroup) {
     const pass = group.get('password').value;
-    const confirmPass = group.get('repeatPassword').value;
+    const confirmPass = group.get('confirmPassword').value;
 
     return pass === confirmPass ? null : { notSame: true }
   }

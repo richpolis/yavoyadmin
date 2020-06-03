@@ -127,13 +127,13 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="repeatPassword">Confirmar contraseña:</label>
-                                    <input autocomplete="off" type="password" class="form-control input-yavoy input-rounded" minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="repeatPassword" placeholder="Confirmar contraseña"  required [ngClass]="{ 'is-invalid':  f.repeatPassword.errors }">
-                                    <div *ngIf="formSubmitAttempt && f.repeatPassword.errors" class="invalid-feedback">
-                                        <div *ngIf="f.repeatPassword.errors.required">La contraseña es requerida.</div>
-                                        <div *ngIf="f.repeatPassword.errors.minlength">La contraseña es muy corta.</div>
-                                        <div *ngIf="f.repeatPassword.errors.pattern">La contraseña es invalida.</div>
-                                        <div *ngIf="formRegister.hasError('notSame', 'passwords')">La contraseñas no son iguales.</div>
+                                    <label for="confirmPassword">Confirmar contraseña:</label>
+                                    <input autocomplete="off" type="password" class="form-control input-yavoy input-rounded" minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="confirmPassword" placeholder="Confirmar contraseña"  required [ngClass]="{ 'is-invalid':  f.confirmPassword.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.confirmPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="f.confirmPassword.errors.required">La contraseña es requerida.</div>
+                                        <div *ngIf="f.confirmPassword.errors.minlength">La contraseña es muy corta.</div>
+                                        <div *ngIf="f.confirmPassword.errors.pattern">La contraseña es invalida.</div>
+                                        <div *ngIf="f.confirmPassword.errors.mustMatch">La contraseñas no son iguales.</div>
                                     </div>
                                 </div>
                             </div>
