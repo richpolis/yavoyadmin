@@ -70,6 +70,7 @@ export class RegisterEditComponent implements OnInit {
           console.log(res);
           if (res) {
             this.user = res;
+            this.user.status = this.getCorrectStatus();
             const circle = this.user.circle || { objectId: '' };
             this.formRegister.get('firstName').setValue(this.user.firstName);
             this.formRegister.get('lastName').setValue(this.user.lastName);
@@ -210,6 +211,15 @@ export class RegisterEditComponent implements OnInit {
     sBirthdayDate += (birthdayDateStruct.day >= 10 ? birthdayDateStruct.day : '0' + birthdayDateStruct.day);
 
     this._birthdayDate = moment(sBirthdayDate + 'T00:00:00-06:00' ).tz('America/Mexico_City');
+  }
+
+  getCorrectStatus(): string {
+    if (this.user !== null && this.user.status !== null && this.user.status.length > 0) {
+      const statuses = this.statuses.filter(item => item.key === this.user.status);
+      return statuses.length > 0 ? statuses[0].key : 'request';
+    } else {
+      return 'request';
+    }
   }
 
 

@@ -78,6 +78,15 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
+  getCorrectStatus(): string {
+    if (this.user !== null && this.user.status !== null && this.user.status.length > 0) {
+      const statuses = this.statuses.filter(item => item.key === this.user.status);
+      return statuses.length > 0 ? statuses[0].key : 'inactive';
+    } else {
+      return 'inactive';
+    }
+  }
+
   getStringEventSchedule(event: EventI): string {
     if (this.user !== null && event.schedule !== null && event.schedule !== undefined && event.schedule.length > 0) {
       const schedules = this.schedules.filter(item => item.key === event.schedule);
@@ -101,6 +110,7 @@ export class UserDetailComponent implements OnInit {
     this.usersService.getUser(userId).subscribe(res => {
       console.log(res);
       this.user = res;
+      this.user.status = this.getCorrectStatus();
       this.getEvents();
     }, error => {
       // show alert to user

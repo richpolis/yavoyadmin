@@ -66,15 +66,7 @@ export class UserEditComponent implements OnInit {
         console.log(res);
         if (res) {
           this.user = res;
-          if(this.user.status !== undefined && this.user.status !== null){
-            if (this.user.status === 'active') {
-              this.user.status = 'active';
-            } else if(this.user.status === 'inactive') {
-              this.user.status = 'inactive';
-            } else {
-              this.user.status = 'active';
-            }
-          }
+          this.user.status = this.getCorrectStatus();
           this.formRegister.get('firstName').setValue(this.user.firstName);
           this.formRegister.get('lastName').setValue(this.user.lastName);
           this.formRegister.get('description').setValue(this.user.description);
@@ -192,6 +184,15 @@ export class UserEditComponent implements OnInit {
       });
     }
     this.formSubmitAttempt = true;
+  }
+
+  getCorrectStatus(): string {
+    if (this.user !== null && this.user.status !== null && this.user.status.length > 0) {
+      const statuses = this.statuses.filter(item => item.key === this.user.status);
+      return statuses.length > 0 ? statuses[0].key : 'inactive';
+    } else {
+      return 'inactive';
+    }
   }
 
   onChangeDate(event: any): void {
