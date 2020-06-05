@@ -232,7 +232,7 @@ export class RegisterDetailComponent implements OnInit {
     if ( this.user.status !== 'approved') {
       Swal.fire({
         title: '¿Está seguro?',
-        text: `Favor de confirmar que se aprueba el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.email}.`,
+        text: `Favor de confirmar que se aprueba el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.username}.`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -266,7 +266,7 @@ export class RegisterDetailComponent implements OnInit {
     if ( this.user.status !== 'denied') {
       Swal.fire({
         title: '¿Está seguro?',
-        text: `Favor de confirmar que se niega el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.email}.`,
+        text: `Favor de confirmar que se niega el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.username}.`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

@@ -215,7 +215,7 @@ export class UserDetailComponent implements OnInit {
     if ( this.user.status !== 'active') {
       Swal.fire({
         title: '¿Está seguro?',
-        text: `Favor de confirmar que se reactiva el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.email}.`,
+        text: `Favor de confirmar que se reactiva el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.username}.`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -249,7 +249,7 @@ export class UserDetailComponent implements OnInit {
     if ( this.user.status !== 'inactive') {
       Swal.fire({
         title: '¿Está seguro?',
-        text: `Favor de confirmar que se inactiva el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.email}.`,
+        text: `Favor de confirmar que se inactiva el acceso a: ${this.user.firstName} ${this.user.lastName} - ${this.user.username}.`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
