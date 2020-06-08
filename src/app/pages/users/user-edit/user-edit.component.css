@@ -124,3 +124,11 @@ img.img-ine {
 input[type="file"] {
     display: none;
 }
+
+.invalid-date {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}

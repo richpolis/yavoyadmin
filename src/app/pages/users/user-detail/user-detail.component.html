@@ -75,11 +75,11 @@
                         <span>{{ user?.description }}</span>
                     </div>
                     
-                    <div class="data" *ngIf="user.status == 'inactive'">
+                    <div class="data" *ngIf="user?.status == 'inactive'">
                         <button class="btn btn-active" (click)="onActivate()">Habilitar</button>
                     </div>
                     
-                    <div class="data" *ngIf="user.status == 'active'">
+                    <div class="data" *ngIf="user?.status == 'active'">
                         <button class="btn btn-inactive" (click)="onInactivate()">Desactivar</button>
                     </div>
 

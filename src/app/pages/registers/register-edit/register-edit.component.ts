@@ -22,6 +22,7 @@ export class RegisterEditComponent implements OnInit {
   public user: User;
   private _birthdayDate: any;
   public userEnabled = false;
+  public is_valid_date = false;
   public statuses = [
     {key: 'request', name: 'Solicitud'},
     {key: 'approved', name: 'Aprobado'},
@@ -107,7 +108,7 @@ export class RegisterEditComponent implements OnInit {
           console.log(error);
           Swal.fire({
             title: 'Error',
-            html: error.message,
+            html: error.error.message,
             type: 'error'
           });
           this.userEnabled = false;
@@ -193,9 +194,15 @@ export class RegisterEditComponent implements OnInit {
         }
       }, error => {
         // show alert to user
+        let message = '';
+        if(error.error !== undefined && error.error.code === 202){
+          message = "Existe un usuario registrado con el mismo email";
+        } else{
+          message = error.error.error;
+        }
         Swal.fire({
           title: 'Error',
-          html: error.message,
+          html: message,
           type: 'error'
         });
       });
@@ -211,7 +218,23 @@ export class RegisterEditComponent implements OnInit {
     sBirthdayDate += (birthdayDateStruct.day >= 10 ? birthdayDateStruct.day : '0' + birthdayDateStruct.day);
 
     this._birthdayDate = moment(sBirthdayDate + 'T00:00:00-06:00' ).tz('America/Mexico_City');
+    
+    this.validateBirthday();
+
   }
+
+  validateBirthday(): void {
+    const valid_date = moment().subtract(18, 'years').tz('America/Mexico_City');
+    const minutes = valid_date.diff(this._birthdayDate, 'minutes');
+
+    if ( valid_date > this._birthdayDate ) {
+      this.is_valid_date = false;
+    } else {
+      this.is_valid_date = true;
+    }
+
+  }
+
 
   getCorrectStatus(): string {
     if (this.user !== null && this.user.status !== null && this.user.status.length > 0) {
