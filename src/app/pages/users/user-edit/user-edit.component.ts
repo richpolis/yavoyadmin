@@ -20,6 +20,7 @@ export class UserEditComponent implements OnInit {
   public user: User;
   private _birthdayDate: any;
   public userEnabled = false;
+  public is_valid_date = false;
   public statuses = [
     {key: 'active', name: 'Activo'},
     {key: 'inactive', name: 'Inactivo'}
@@ -101,7 +102,7 @@ export class UserEditComponent implements OnInit {
         // show alert to user
         Swal.fire({
           title: 'Error',
-          html: error.message,
+          html: error.error.error,
           type: 'error'
         });
         this.userEnabled = false;
@@ -148,16 +149,17 @@ export class UserEditComponent implements OnInit {
         ine: this.user.ine || null
       };
 
-      if (params.photo === null || params.ine === null){
-        Swal.fire({
-          title: 'Error',
-          html: 'La imagen de perfil y la foto de INE son requeridos.',
-          type: 'error'
-        });
-        return;
-      }
+      // if (params.photo === null || params.ine === null){
+      //   Swal.fire({
+      //     title: 'Error',
+      //     html: 'La imagen de perfil y la foto de INE son requeridos.',
+      //     type: 'error'
+      //   });
+      //   return;
+      // }
 
       this.usersService.updateUser(params, this.user.objectId).subscribe(res => {
+        console.log(res);
         if (res) {
           Swal.fire({
             title: 'Listo',
@@ -176,9 +178,16 @@ export class UserEditComponent implements OnInit {
         }
       }, error => {
         // show alert to user
+        let message = '';
+        console.log(error);
+        if(error.error !== undefined && error.error.code === 202){
+          message = "Existe un usuario registrado con el mismo email";
+        } else{
+          message = error.error.error;
+        }
         Swal.fire({
           title: 'Error',
-          html: error.message,
+          html: message,
           type: 'error'
         });
       });
@@ -203,6 +212,21 @@ export class UserEditComponent implements OnInit {
     sBirthdayDate += (birthdayDateStruct.day >= 10 ? birthdayDateStruct.day : '0' + birthdayDateStruct.day);
 
     this._birthdayDate = moment(sBirthdayDate + 'T00:00:00-06:00' ).tz('America/Mexico_City');
+
+    this.validateBirthday();
+
+  }
+
+  validateBirthday(): void {
+    const valid_date = moment().subtract(18, 'years').tz('America/Mexico_City');
+    const minutes = valid_date.diff(this._birthdayDate, 'minutes');
+
+    if ( valid_date > this._birthdayDate ) {
+      this.is_valid_date = false;
+    } else {
+      this.is_valid_date = true;
+    }
+
   }
 
   onSelectPhoto(event: any) {

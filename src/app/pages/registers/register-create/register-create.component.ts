@@ -24,6 +24,7 @@ export class RegisterCreateComponent implements OnInit {
   public user: User;
   private _birthdayDate: any;
   public userEnabled = false;
+  public is_valid_date = false;
   public statuses = [
     {key: 'request', name: 'Solicitud'},
     {key: 'approved', name: 'Aprobado'},
@@ -66,7 +67,8 @@ export class RegisterCreateComponent implements OnInit {
       schedule: new FormControl('mañana', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), 
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z]|[^ ]){6,16}$/)]),
-      confirmPassword: new FormControl('', [])
+      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), 
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z]|[^ ]){6,16}$/)])
     }, { validator: MustMatch('password', 'confirmPassword') });
 
     this.circlesService.getCircles().subscribe(circles => {
@@ -220,6 +222,7 @@ export class RegisterCreateComponent implements OnInit {
           });
         } else {
           // show alert to user
+          console.log(res);
           Swal.fire({
             title: 'Error',
             html: 'Error al crear el registro',
@@ -228,9 +231,15 @@ export class RegisterCreateComponent implements OnInit {
         }
       }, error => {
         // show alert to user
+        let message = '';
+        if(error.error !== undefined && error.error.code === 202){
+          message = "Existe un usuario registrado con el mismo email";
+        } else{
+          message = error.error.error;
+        }
         Swal.fire({
           title: 'Error',
-          html: error.message,
+          html: message,
           type: 'error'
         });
       });
@@ -246,6 +255,14 @@ export class RegisterCreateComponent implements OnInit {
     sBirthdayDate += (birthdayDateStruct.day >= 10 ? birthdayDateStruct.day : '0' + birthdayDateStruct.day);
 
     this._birthdayDate = moment(sBirthdayDate + 'T00:00:00-06:00' ).tz('America/Mexico_City');
+    
+    this.validateBirthday();
+
+  }
+
+  validateBirthday(): void {
+    const valid_date = moment().subtract(18, 'years').tz('America/Mexico_City');
+    this.is_valid_date = !(this._birthdayDate >= valid_date);
   }
 
 
