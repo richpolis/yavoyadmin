@@ -93,30 +93,35 @@
 .btn-search {
     background: var(--secondary-color);
     color: #fff;
-    width: 130px;
+    min-width: 130px;
     height: 45px;
 }
 
 .btn-approved {
     background: #5DAA0C;
     color: #fff;
-    width: 130px;
+    min-width: 130px;
     height: 45px;
 }
 
 .btn-denied {
     background: #D72424;
     color: #fff;
-    width: 130px;
+    min-width: 130px;
     height: 45px;
 }
 
 .btn-cancel {
     background: var(--primary-color);
-    width: 130px;
+    min-width: 130px;
     height: 45px;
     color: #fff;
 }
+
+.btn-action-space{
+    margin-right: 10px;
+}
+
 
 .select-nike {
     border-radius: 0;

@@ -14,7 +14,7 @@
 .btn-create {
     background: var(--btn-save-color);
     color: #fff;
-    width: 100px;
+    min-width: 130px;
     height: 40px;
     font-size: 90%;
     border-radius: 3px;
@@ -34,7 +34,7 @@
     color: white;
     border: none;
     height: 40px;
-    width: 100px;
+    min-width: 130px;
     font-size: 90%;
     margin: 0px 10px;
 }

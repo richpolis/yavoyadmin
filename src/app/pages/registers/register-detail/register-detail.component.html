@@ -15,6 +15,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="row">
+                    
                     <div class="data">
                         <span class="data-title">Foto:</span>
                         <div class="hoverable">
@@ -22,23 +23,27 @@
                             <div class="background"></div>
                         </div>
                     </div>
+                    
                     <div class="data">
                         <span class="data-title">Nombre:</span>
                         <span>{{ user?.firstName }}</span>
                     </div>
+                    
                     <div class="data">
                         <span class="data-title">Apellidos:</span>
                         <span>{{ user?.lastName }}</span>
                     </div>
-                    <div class="data">
-                        <span class="data-title">Teléfono:</span>
-                        <span>{{ user?.phone }}</span>
-                    </div>
 
+                    <div class="data">
+                        <span class="data-title">Correo electrónico:</span>
+                        <span>{{ user?.username }}</span>
+                    </div>
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="row medical-record">
+                    
                     <div class="data">
                         <span class="data-title">INE:</span>
                         <div class="hoverable hoverable-ine">
@@ -46,50 +51,77 @@
                             <div class="background"></div>
                         </div>
                     </div>
+                    
                     <div class="data">
                         <span class="data-title">Fecha de nacimiento:</span>
                         <span>{{ user?.birthday.iso|date: "d MMM y"}}</span>
                     </div>
+                    
+                    <div class="data">
+                        <span class="data-title">Teléfono:</span>
+                        <span>{{ user?.phone }}</span>
+                    </div>
+                    
+                    <!--
                     <div class="data">
                         <span class="data-title">Ciudad:</span>
                         <span>{{ user?.city }}</span>
                     </div>
-                    <div class="data">
-                        <span class="data-title">Correo electrónico:</span>
-                        <span>{{ user?.username }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="row">
+                    -->
+
                     <div class="data" *ngIf="user?.status">
                         <span class="data-title">Estatus:</span>
                         <span>{{ getStringStatus(user) }}</span>
                     </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="row">
+                    
                     <div class="data" *ngIf="user?.schedule">
                         <span class="data-title">Horario:</span>
                         <span>{{ getStringSchedule(user) }}</span>
                     </div>
-                    <!--div class="data">
+                    
+                    <!--
+                    <div class="data">
                         <span class="data-title">Circulo:</span>
                         <span>{{ getStringCircle(user) }}</span>
-                    </div-->
+                    </div>
+                    -->
+                    
                     <div class="data">
                         <span class="data-title">Descripción:</span>
                         <span>{{ user?.description }}</span>
                     </div>
-                    <div class="data" *ngIf="user?.status === 'request' || user?.status === 'denied'">
-                        <button class="btn btn-approved" (click)="onApproved()">Aprobar</button>
+                    
+                    <!-- only screen <= sm -->
+                    <div class="data d-none d-sm-block d-md-none" *ngIf="user?.status === 'request' || user?.status === 'denied'">
+                        <button class="btn btn-block btn-approved" (click)="onApproved()">Aprobar</button>
                     </div>
-                    <div class="data" *ngIf="user?.status === 'request' || user?.status === 'approved'">
-                        <button class="btn btn-denied" (click)="onDenied()">Rechazar</button>
+                    <div class="data d-none d-sm-block d-md-none" *ngIf="user?.status === 'request' || user?.status === 'approved'">
+                        <button class="btn btn-block btn-denied" (click)="onDenied()">Rechazar</button>
                     </div>
-                    <div class="data">
-                        <button class="btn btn-search" (click)="onEdit()">Editar</button>
+                    <div class="data d-none d-sm-block d-md-none">
+                        <button class="btn btn-block btn-search" (click)="onEdit()">Editar</button>
                     </div>
-                    <div class="data">
-                        <button class="btn btn-cancel" (click)="onReturn()">Regresar</button>
+                    <div class="data d-none d-sm-block d-md-none">
+                        <button class="btn btn-block btn-cancel" (click)="onReturn()">Regresar</button>
                     </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- only screen >= md -->
+        <div class="row no-gutters d-block d-sm-none d-md-block">
+            <div class="col-lg-12 col-btns">
+                <div class="float-md-right">
+                    <button class="btn btn-approved btn-action-space" *ngIf="user?.status === 'request' || user?.status === 'denied'" (click)="onApproved()">Aprobar</button>
+                    <button class="btn btn-denied btn-action-space"  *ngIf="user?.status === 'request' || user?.status === 'approved'" (click)="onDenied()">Rechazar</button>
+                    <button class="btn btn-search btn-action-space" (click)="onEdit()">Editar</button>
+                    <button class="btn btn-cancel" (click)="onReturn()">Regresar</button>
                 </div>
             </div>
         </div>

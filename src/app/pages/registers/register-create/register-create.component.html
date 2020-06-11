@@ -17,50 +17,67 @@
                                 <div class="form-group">
                                     <label for="userPhoto">Foto de perfil:</label>
                                     <label class="hoverable" for="userPhoto">
-                                        <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'" class="img-profile"> 
+                                        <img [src]="user?.photo !== undefined && user?.photo !== null ? user?.photo.url : 'assets/images/no-image-nike.png'"
+                                            class="img-profile">
                                         <div class="hover-text">Elegir foto de perfil</div>
                                         <div class="background"></div>
                                     </label>
-                                    <br/>
+                                    <br />
                                     <input id="userPhoto" type='file' (change)="onSelectPhoto($event)">
-                                    <button [disabled]="user?.photo !== undefined && user?.photo !== null ? '' : 'disabled'" (click)="deletePhoto()">Borrar</button>
+                                    <button
+                                        [disabled]="user?.photo !== undefined && user?.photo !== null ? '' : 'disabled'"
+                                        (click)="deletePhoto()">Borrar</button>
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="firstName">Nombre:</label>
-                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="firstName" placeholder="Nombre" required [ngClass]="{ 'is-invalid': f.firstName.errors }">
+                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded"
+                                        formControlName="firstName" placeholder="Nombre" required
+                                        [ngClass]="{ 'is-invalid': f.firstName.errors }">
                                     <div *ngIf="formSubmitAttempt && f.firstName.errors" class="invalid-feedback">
                                         <div *ngIf="f.firstName.errors.required">El nombre es requerido.</div>
                                         <div *ngIf="f.firstName.errors.minlength">El nombre es muy corto.</div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="firstName">Apellidos:</label>
-                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="lastName" placeholder="Apellidos" required [ngClass]="{ 'is-invalid':  f.lastName.errors }">
+                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded"
+                                        formControlName="lastName" placeholder="Apellidos" required
+                                        [ngClass]="{ 'is-invalid':  f.lastName.errors }">
                                     <div *ngIf="formSubmitAttempt && f.lastName.errors" class="invalid-feedback">
                                         <div *ngIf="f.lastName.errors.required">El apellido es requerido.</div>
                                         <div *ngIf="f.lastName.errors.minlength">El apellido es muy corto.</div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="phone">Teléfono:</label>
-                                    <input autocomplete="off" type="tel" class="form-control input-yavoy input-rounded" minlength="10" pattern="[0-9]{10}" oninput="this.value=this.value.replace(/[^0-9]/g,'');" formControlName="phone" placeholder="Teléfono" maxlength="10" required [ngClass]="{ 'is-invalid':  f.phone.errors }">
-                                    <div *ngIf="formSubmitAttempt && f.phone.errors" class="invalid-feedback">
-                                        <div *ngIf="f.phone.errors.required">El teléfono es requerido.</div>
-                                        <div *ngIf="f.phone.errors.minlength">El teléfono es muy corto.</div>
-                                        <div *ngIf="f.phone.errors.pattern">El teléfono es invalido.</div>
+                                    <label for="email">Correo electrónico:</label>
+                                    <input autocomplete="off" type="email"
+                                        class="form-control input-yavoy input-rounded" formControlName="email"
+                                        placeholder="Email" maxlength="100" required
+                                        [ngClass]="{ 'is-invalid':  f.email.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">El email es requerido.</div>
+                                        <div *ngIf="f.email.errors.email">Debes de ingresar un email valido.</div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="password">Contraseña:</label>
-                                    <input autocomplete="off" type="password" class="form-control input-yavoy input-rounded" minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="password" placeholder="Contraseña"  required [ngClass]="{ 'is-invalid':  f.password.errors }">
+                                    <input autocomplete="off" type="password"
+                                        class="form-control input-yavoy input-rounded" minlength="6"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="password"
+                                        placeholder="Contraseña" required
+                                        [ngClass]="{ 'is-invalid':  f.password.errors }">
                                     <div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
                                         <div *ngIf="f.password.errors.required">La contraseña es requerida.</div>
                                         <div *ngIf="f.password.errors.minlength">La contraseña es muy corta.</div>
@@ -77,50 +94,77 @@
                                 <div class="form-group">
                                     <label for="userINE">INE:</label>
                                     <label class="hoverable hoverable-ine" for="userINE">
-                                        <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'"  class="img-ine"> 
+                                        <img [src]="user?.ine !== undefined && user?.ine !== null ? user?.ine.url : 'assets/images/no-image-nike.png'"
+                                            class="img-ine">
                                         <div class="hover-text">INE</div>
                                         <div class="background"></div>
-                                      </label>
-                                    <br/>
+                                    </label>
+                                    <br />
                                     <input id="userINE" type='file' (change)="onSelectINE($event)">
-                                    <button [disabled]="user?.ine !== undefined && user?.ine !== null ? '' : 'disabled'" (click)="deleteINE()">Borrar</button>
+                                    <button [disabled]="user?.ine !== undefined && user?.ine !== null ? '' : 'disabled'"
+                                        (click)="deleteINE()">Borrar</button>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="birthday">Fecha de nacimiento:</label>
                                     <div class="input-group">
-                                        <input class="form-control input-rounded" placeholder="yyyy-mm-dd" name="dp" formControlName="birthdayDateStruct" [maxDate]="max_date" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onChangeDate($event)" readonly="readonly">
+                                        <input class="form-control input-rounded" placeholder="yyyy-mm-dd" name="dp"
+                                            formControlName="birthdayDateStruct" [maxDate]="max_date" ngbDatepicker
+                                            #d="ngbDatepicker" (dateSelect)="onChangeDate($event)" readonly="readonly">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                                                <img class="mx-2 cursor" src="assets/images/icons/icon_calendar.png" alt="" />
+                                            <button class="btn btn-outline-secondary" (click)="d.toggle()"
+                                                type="button">
+                                                <img class="mx-2 cursor" src="assets/images/icons/icon_calendar.png"
+                                                    alt="" />
                                             </button>
                                         </div>
                                     </div>
-                                    <div *ngIf="formSubmitAttempt && f.birthdayDateStruct.errors" class="invalid-feedback">
-                                        <div *ngIf="f.birthdayDateStruct.errors.required">La fecha de nacimiento es requerida.</div>
+                                    <div *ngIf="formSubmitAttempt && f.birthdayDateStruct.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.birthdayDateStruct.errors.required">La fecha de nacimiento es
+                                            requerida.</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
+                                    <label for="phone">Teléfono:</label>
+                                    <input autocomplete="off" type="tel" class="form-control input-yavoy input-rounded"
+                                        minlength="10" pattern="[0-9]{10}"
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');" formControlName="phone"
+                                        placeholder="Teléfono" maxlength="10" required
+                                        [ngClass]="{ 'is-invalid':  f.phone.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.phone.errors" class="invalid-feedback">
+                                        <div *ngIf="f.phone.errors.required">El teléfono es requerido.</div>
+                                        <div *ngIf="f.phone.errors.minlength">El teléfono es muy corto.</div>
+                                        <div *ngIf="f.phone.errors.pattern">El teléfono es invalido.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--
+                            <div class="col-lg-12">
+                                <div class="form-group">
                                     <label for="firstName">Ciudad:</label>
-                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="city" placeholder="Ciudad" required [ngClass]="{ 'is-invalid':  f.city.errors }">
+                                    <input autocomplete="off" type="text" class="form-control input-yavoy input-rounded" formControlName="city" placeholder="Ciudad" [ngClass]="{ 'is-invalid':  f.city.errors }">
                                     <div *ngIf="formSubmitAttempt && f.city.errors" class="invalid-feedback">
                                         <div *ngIf="f.city.errors.required">La ciudad es requerida.</div>
                                         <div *ngIf="f.city.errors.minlength">La ciudad es muy corta.</div>
                                     </div>
                                 </div>
                             </div>
+                            -->
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="email">Correo electrónico:</label>
-                                    <input autocomplete="off" type="email" class="form-control input-yavoy input-rounded" formControlName="email" placeholder="Email" maxlength="100" required [ngClass]="{ 'is-invalid':  f.email.errors }">
-                                    <div *ngIf="formSubmitAttempt && f.email.errors" class="invalid-feedback">
-                                        <div *ngIf="f.email.errors.required">El email es requerido.</div>
-                                        <div *ngIf="f.email.errors.email">Debes de ingresar un email valido.</div>
+                                    <label for="schedule">Horario:</label>
+                                    <div class="select-wrapper">
+                                        <select class="form-control select-rounded" required formControlName="schedule">
+                                            <option *ngFor="let item of schedules" [ngValue]="item.key">{{item.name}}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -128,12 +172,18 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="confirmPassword">Confirmar contraseña:</label>
-                                    <input autocomplete="off" type="password" class="form-control input-yavoy input-rounded" minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="confirmPassword" placeholder="Confirmar contraseña"  required [ngClass]="{ 'is-invalid':  f.confirmPassword.errors }">
+                                    <input autocomplete="off" type="password"
+                                        class="form-control input-yavoy input-rounded" minlength="6"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" formControlName="confirmPassword"
+                                        placeholder="Confirmar contraseña" required
+                                        [ngClass]="{ 'is-invalid':  f.confirmPassword.errors }">
                                     <div *ngIf="formSubmitAttempt && f.confirmPassword.errors" class="invalid-feedback">
                                         <div *ngIf="f.confirmPassword.errors.required">La contraseña es requerida.</div>
-                                        <div *ngIf="f.confirmPassword.errors.minlength">La contraseña es muy corta.</div>
+                                        <div *ngIf="f.confirmPassword.errors.minlength">La contraseña es muy corta.
+                                        </div>
                                         <div *ngIf="f.confirmPassword.errors.pattern">La contraseña es invalida.</div>
-                                        <div *ngIf="f.confirmPassword.errors.mustMatch">La contraseñas no son iguales.</div>
+                                        <div *ngIf="f.confirmPassword.errors.mustMatch">La contraseñas no son iguales.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -147,23 +197,12 @@
                                 <div class="form-group">
                                     <label for="status">Estatus</label>
                                     <div class="select-wrapper">
-                                        <select class="form-control select-rounded" required formControlName="status">
+                                        <select class="form-control select-rounded" formControlName="status">
                                             <option *ngFor="let item of statuses" [ngValue]="item.key">{{item.name}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div-->
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="schedule">Horario:</label>
-                                    <div class="select-wrapper">
-                                        <select class="form-control select-rounded" required formControlName="schedule">
-                                            <option *ngFor="let item of schedules" [ngValue]="item.key">{{item.name}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
 
                             <!--div class="col-lg-12">
                                 <div class="form-group">
@@ -179,10 +218,13 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="description">Descripción</label>
-                                    <textarea class="form-control textarea-rounded" minlength="3" id="description" formControlName="description" rows="3" placeholder="Descripción" required [ngClass]="{ 'is-invalid': f.description.errors }"></textarea>
+                                    <textarea class="form-control textarea-rounded" minlength="3" id="description"
+                                        formControlName="description" rows="3" placeholder="Descripción" required
+                                        [ngClass]="{ 'is-invalid': f.description.errors }"></textarea>
                                     <div *ngIf="formSubmitAttempt && f.description.errors" class="invalid-feedback">
                                         <div *ngIf="f.description.errors.required">La descripción es requerida.</div>
-                                        <div *ngIf="f.description.errors.minlength">La descripción es demasiado corta.</div>
+                                        <div *ngIf="f.description.errors.minlength">La descripción es demasiado corta.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +235,7 @@
                 <div class="row no-gutters">
                     <div class="col-lg-12 col-btns">
                         <button class="btn btn-cancel" (click)="onCancel()">Regresar</button> &nbsp;
-                        <!--button type="submit" class="btn btn-create" [disabled]="formRegister.valid ? '' : 'disabled'">Registrar</button-->
+                        <!-- <button type="submit" class="btn btn-create" [disabled]="formRegister.valid ? '' : 'disabled'">Registrar</button> -->
                         <button type="submit" class="btn btn-create">Registrar</button>
                     </div>
                 </div>

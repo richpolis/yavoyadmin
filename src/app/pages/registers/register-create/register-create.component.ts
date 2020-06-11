@@ -57,7 +57,7 @@ export class RegisterCreateComponent implements OnInit {
       firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      city: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      city: new FormControl(''),
       status: new FormControl('approved', [Validators.required, Validators.minLength(3)]),
       circle: new FormControl(''),
       birthdayDateStruct: new FormControl(this.calendar.getToday()),

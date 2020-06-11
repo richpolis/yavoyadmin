@@ -93,28 +93,28 @@
 .btn-search {
     background: var(--secondary-color);
     color: #fff;
-    width: 130px;
+    min-width: 130px;
     height: 45px;
 }
 
 .btn-active {
     background: #5DAA0C;
     color: #fff;
-    width: 130px;
+    min-width: 130px;
     height: 45px;
 }
 
 .btn-inactive {
     background: #D72424;
     color: #fff;
-    width: 130px;
+    min-width: 130px;
     height: 45px;
 }
 
 
 .btn-cancel {
     background: var(--primary-color);
-    width: 130px;
+    min-width: 130px;
     height: 45px;
     color: #fff;
 }
@@ -124,6 +124,10 @@
     border: 1px solid #bbbb;
     height: 45px;
     width: 319px;
+}
+
+.btn-action-space{
+    margin-right: 10px;
 }
 
 .col-action {
