@@ -25,8 +25,9 @@
                                     <br />
                                     <input id="userPhoto" type='file' (change)="onSelectPhoto($event)">
                                     <button
-                                        [disabled]="user?.photo !== undefined && user?.photo !== null ? '' : 'disabled'"
-                                        (click)="deletePhoto()">Borrar</button>
+                                        [disabled]="user?.photo !== undefined && user?.photo !== null ? '' : 'disabled'" 
+                                        class="btn btn-sm btn-danger" 
+                                        (click)="deletePhoto()">Borrar imagen</button>
                                 </div>
                             </div>
 
@@ -101,8 +102,9 @@
                                     </label>
                                     <br />
                                     <input id="userINE" type='file' (change)="onSelectINE($event)">
-                                    <button [disabled]="user?.ine !== undefined && user?.ine !== null ? '' : 'disabled'"
-                                        (click)="deleteINE()">Borrar</button>
+                                    <button [disabled]="user?.ine !== undefined && user?.ine !== null ? '' : 'disabled'" 
+                                        class="btn btn-sm btn-danger" 
+                                        (click)="deleteINE()">Borrar imagen</button>
                                 </div>
                             </div>
                             <div class="col-lg-12">
