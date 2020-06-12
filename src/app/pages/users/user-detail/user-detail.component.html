@@ -87,19 +87,19 @@
                     </div>
                     
                     <!-- only screen <= sm -->
-                    <div class="data d-none d-sm-block d-md-none" *ngIf="user?.status === 'inactive'">
+                    <div class="data d-block d-xl-none" *ngIf="user?.status === 'inactive'">
                         <button class="btn btn-block btn-active" (click)="onActivate()">Habilitar</button>
                     </div>
                     
-                    <div class="data d-none d-sm-block d-md-none" *ngIf="user?.status === 'active'">
+                    <div class="data d-block d-xl-none" *ngIf="user?.status === 'active'">
                         <button class="btn btn-block btn-inactive" (click)="onInactivate()">Desactivar</button>
                     </div>
 
-                    <div class="data d-none d-sm-block d-md-none">
+                    <div class="data d-block d-xl-none">
                         <button class="btn btn-block btn-search" (click)="onEdit()">Editar</button>
                     </div>
                     
-                    <div class="data d-none d-sm-block d-md-none">
+                    <div class="data d-block d-xl-none">
                         <button class="btn btn-block btn-cancel" (click)="onReturn()">Regresar</button>
                     </div>
 
@@ -107,7 +107,7 @@
             </div>
         </div>
         <!-- only screen >= md -->
-        <div class="row no-gutters d-block d-sm-none d-md-block">
+        <div class="row no-gutters d-none d-xl-block">
             <div class="col-lg-12 col-btns">
                 <div class="float-md-right">
                     <button class="btn btn-active btn-action-space" *ngIf="user?.status === 'inactive'" (click)="onActivate()">Habilitar</button>
